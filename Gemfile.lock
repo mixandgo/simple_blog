@@ -97,6 +97,8 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    shoulda-matchers (2.4.0)
+      activesupport (>= 3.0.0)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -127,5 +129,6 @@ DEPENDENCIES
   factory_girl_rails (= 4.3.0)
   launchy
   rspec-rails (= 2.14.0)
+  shoulda-matchers
   simple_blog!
   sqlite3

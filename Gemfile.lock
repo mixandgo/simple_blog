@@ -50,6 +50,11 @@ GEM
     debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
+    factory_girl (4.3.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.3.0)
+      factory_girl (~> 4.3.0)
+      railties (>= 3.0.0)
     hike (1.2.3)
     i18n (0.6.5)
     launchy (2.3.0)
@@ -119,6 +124,7 @@ PLATFORMS
 DEPENDENCIES
   capybara (= 2.1.0)
   debugger
+  factory_girl_rails (= 4.3.0)
   launchy
   rspec-rails (= 2.14.0)
   simple_blog!

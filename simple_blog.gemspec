@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Halmagean Cezar"]
   s.email       = ["cezar@halmagean.ro"]
   s.homepage    = "http://cezar.halmagean.ro"
-  s.summary     = "Simple rails engine that you can plug into any app"
-  s.description = "I needed a blog engine that I could use for every new site I'm building."
+  s.summary     = "Simple rails engine that you can plug into your app"
+  s.description = "I needed a blog engine that I could use for every new site I'm building so I've decided to build my own."
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]

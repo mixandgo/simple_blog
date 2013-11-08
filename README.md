@@ -1,4 +1,6 @@
-# SimpleBlog: Simple rails engine that you can plug into any app
+# SimpleBlog
+
+Is a blogging engine that you can plug into your rails app
 
 ## Getting started
 

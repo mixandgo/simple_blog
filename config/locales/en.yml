@@ -1,0 +1,5 @@
+en:
+  helpers:
+    submit:
+      post:
+        submit: "Create post"

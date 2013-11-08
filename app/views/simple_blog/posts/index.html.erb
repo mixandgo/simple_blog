@@ -1,0 +1,8 @@
+<h1>Blog</h1>
+
+<%= @posts.each do |post| %>
+  <div class="blog-post">
+    <h2><%= link_to post.title.titleize, simple_blog.post_path(post) %></h2>
+    <p><%= post.body %></p>
+  </div>
+<% end %>

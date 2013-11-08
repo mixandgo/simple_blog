@@ -1,0 +1,5 @@
+ro:
+  helpers:
+    submit:
+      post:
+        submit: "Adaugă articol"

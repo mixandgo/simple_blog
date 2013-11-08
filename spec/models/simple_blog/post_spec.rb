@@ -12,5 +12,12 @@ module SimpleBlog
         Post.published.should == [published]
       end
     end
+
+    describe "#to_param" do
+      it "returns the name converted to a slug" do
+        post = FactoryGirl.build(:post, :title => "A cool title")
+        expect(post.to_param).to eq("a-cool-title")
+      end
+    end
   end
 end

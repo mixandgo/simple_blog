@@ -6,6 +6,8 @@ Is a blogging engine that you can plug into your rails app
 
 SimpleBlog works with Rails 4.0 onwards. You can add it to your Gemfile with:
 
+It's worth mentioning that the default views provide a basic structure and style which you should override. You can also use the default views and just add some styling of your own (by overriding the default styling).
+
 ```ruby
 gem 'simple_blog'
 ```

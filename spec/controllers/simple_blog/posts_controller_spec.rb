@@ -46,7 +46,7 @@ module SimpleBlog
       let(:post) { FactoryGirl.create(:post) }
 
       before :each do
-        get :show, :id => post.id, :use_route => :simple_blog
+        get :show, :id => post.slug, :use_route => :simple_blog
       end
 
       it "assigns @post" do

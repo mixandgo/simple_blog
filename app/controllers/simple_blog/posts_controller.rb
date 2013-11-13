@@ -14,7 +14,7 @@ module SimpleBlog
     end
 
     def show
-      @post = Post.find(params[:id])
+      @post = Post.where(:slug => params[:id]).first
     end
 
     private

@@ -1,5 +1,5 @@
 <div class="simple-blog-posts-new">
-  <%= form_for :post, :url => simple_blog.posts_path do |f| %>
+  <%= form_for @post, :url => simple_blog.posts_path do |f| %>
     <div class="simple-blog-new-post-row">
       <%= f.label :title %>
       <%= f.text_field :title %>

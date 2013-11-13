@@ -8,3 +8,8 @@ en:
       index:
         page_heading: "Blog"
         no_published_posts: "There are no published posts available."
+  activerecord:
+    attributes:
+      simple_blog/post:
+        title: "Title"
+        body: "Body"

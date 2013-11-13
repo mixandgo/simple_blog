@@ -13,3 +13,4 @@ en:
       simple_blog/post:
         title: "Title"
         body: "Body"
+        published_at: "Published at"

@@ -13,3 +13,4 @@ ro:
       simple_blog/post:
         title: "Titlu"
         body: "Conţinut"
+        published_at: "Publicat în"

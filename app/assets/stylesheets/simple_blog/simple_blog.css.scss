@@ -1,0 +1,17 @@
+/* New post form */
+.simple-blog-posts-new {
+  label {
+    float: left;
+    width: 150px;
+  }
+
+  textarea {
+    height: 100px;
+    width: 200px;
+  }
+
+  .simple-blog-new-post-row {
+    margin-top: 10px;
+    clear: both;
+  }
+}

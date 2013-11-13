@@ -1,12 +1,14 @@
-<h1><%= t('.page_heading') %></h1>
+<div class="simple-blog-posts-index">
+  <h1 class="simple-blog-title"><%= t('.page_heading') %></h1>
 
-<% if @posts.present? %>
-  <% @posts.each do |post| %>
-    <div class="blog-post">
-      <h2><%= link_to post.title.titleize, simple_blog.post_path(post) %></h2>
-      <p><%= post.body %></p>
-    </div>
+  <% if @posts.present? %>
+    <% @posts.each do |post| %>
+      <div class="simple-blog-post">
+        <h2 class="simple-blog-post-title"><%= link_to post.title.titleize, simple_blog.post_path(post) %></h2>
+        <p class="simple-blog-post-body"><%= post.body %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="simple-blog-posts-missing"><%= t('.no_published_posts') %></p>
   <% end %>
-<% else %>
-  <p><%= t('.no_published_posts') %></p>
-<% end %>
+</div>

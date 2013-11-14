@@ -16,9 +16,14 @@ module SimpleBlog
     end
 
     describe "#create" do
-      context "attributes are valid" do
-        let(:params) { FactoryGirl.attributes_for(:post) }
+      let(:params) { FactoryGirl.attributes_for(:post) }
 
+      it "assigns to @post" do
+        post :create, :post => params, :use_route => :simple_blog
+        assigns(:post).should_not be_nil
+      end
+
+      context "attributes are valid" do
         it "creates a new record" do
           expect {
             post :create, :post => params, :use_route => :simple_blog
@@ -48,9 +53,9 @@ module SimpleBlog
           expect(flash[:alert]).not_to be_nil
         end
 
-        it "redirects to the post details page" do
-          post :create, :post => params, :use_route => :simple_blog
-          expect(response).to redirect_to(Post.last)
+        it "redirects back to the new post form" do
+          post :create, :post => {:foo => :bar}, :use_route => :simple_blog
+          expect(response).to render_template('posts/new')
         end
       end
     end

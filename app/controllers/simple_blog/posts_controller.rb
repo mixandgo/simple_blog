@@ -5,13 +5,13 @@ module SimpleBlog
     end
 
     def create
-      post = Post.new(post_params)
-      if post.save
+      @post = Post.new(post_params)
+      if @post.save
         flash.notice = t('.flash_notice')
-        redirect_to post
+        redirect_to @post
       else
-        flash.notice = t('.flash_alert')
-        redirect_to post
+        flash.alert = t('.flash_alert')
+        render :action => :new
       end
     end
 

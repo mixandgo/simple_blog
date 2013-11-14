@@ -1,16 +1,21 @@
 <div class="simple-blog-posts-new">
   <%= form_for @post, :url => simple_blog.posts_path do |f| %>
     <div class="simple-blog-new-post-row">
-      <%= f.label :title %>
+      <%= f.label :title, :class => "left-side-label" %>
       <%= f.text_field :title %>
+      <div class="clearfix"></div>
     </div>
     <div class="simple-blog-new-post-row">
       <%= f.label :body %>
-      <%= f.text_area :body %>
+      <div class="clearfix"></div>
     </div>
     <div class="simple-blog-new-post-row">
-      <%= f.label :published_at %>
+      <%= f.text_area :body, :class => "ckeditor" %>
+    </div>
+    <div class="simple-blog-new-post-row">
+      <%= f.label :published_at, :class => "left-side-label" %>
       <%= f.text_field :published_at %>
+      <div class="clearfix"></div>
     </div>
     <div class="simple-blog-new-post-row">
       <%= f.submit %>

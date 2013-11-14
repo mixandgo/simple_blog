@@ -1,17 +1,18 @@
+/* Global */
+.clearfix {
+  clear: both;
+}
+
 /* New post form */
 .simple-blog-posts-new {
-  label {
+  label.left-side-label {
     float: left;
-    width: 150px;
-  }
-
-  textarea {
-    height: 100px;
-    width: 200px;
+    width: 120px;
   }
 
   .simple-blog-new-post-row {
     margin-top: 10px;
+    margin-bottom: 10px;
     clear: both;
   }
 }

@@ -6,6 +6,9 @@ en:
         prompt_select_day: "Select day"
         prompt_select_month: "Select month"
         prompt_select_year: "Select year"
+      create:
+        flash_notice: "Post was succesfully created."
+        flash_alert: "Post wasn't created."
       index:
         page_heading: "Blog"
         no_published_posts: "There are no published posts available."

@@ -5,9 +5,14 @@ module SimpleBlog
     end
 
     def create
-      post = Post.create(post_params)
-      flash.notice = "\"#{post.title}\" has been created"
-      redirect_to post
+      post = Post.new(post_params)
+      if post.save
+        flash.notice = t('.flash_notice')
+        redirect_to post
+      else
+        flash.notice = t('.flash_alert')
+        redirect_to post
+      end
     end
 
     def index

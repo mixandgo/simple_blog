@@ -1,8 +1,4 @@
 ro:
-  helpers:
-    submit:
-      posts:
-        new:
   simple_blog:
     posts:
       new:
@@ -10,6 +6,9 @@ ro:
         prompt_select_day: "Alege ziua"
         prompt_select_month: "Alege luna"
         prompt_select_year: "Alege anul"
+      create:
+        flash_notice: "Articolul a fost creeat cu succes."
+        flash_alert: "Articolul nu a putut fi creeat."
       index:
         page_heading: "Articole"
         no_published_posts: "Nu există incă nici un articol publicat."

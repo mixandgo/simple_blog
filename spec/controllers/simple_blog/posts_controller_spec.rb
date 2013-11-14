@@ -16,22 +16,42 @@ module SimpleBlog
     end
 
     describe "#create" do
-      let(:params) { FactoryGirl.attributes_for(:post) }
+      context "attributes are valid" do
+        let(:params) { FactoryGirl.attributes_for(:post) }
 
-      it "creates a new record" do
-        expect {
+        it "creates a new record" do
+          expect {
+            post :create, :post => params, :use_route => :simple_blog
+          }.to change(Post, :count).by(1)
+        end
+
+        it "sets a flash notice" do
           post :create, :post => params, :use_route => :simple_blog
-        }.to change(Post, :count).by(1)
+          expect(flash[:notice]).not_to be_nil
+        end
+
+        it "redirects to the post details page" do
+          post :create, :post => params, :use_route => :simple_blog
+          expect(response).to redirect_to(Post.last)
+        end
       end
 
-      it "sets a flash notice" do
-        post :create, :post => params, :use_route => :simple_blog
-        expect(flash[:notice]).not_to be_nil
-      end
+      context "attributes are invalid" do
+        it "doesn't create a new record" do
+          expect {
+            post :create, :post => {:foo => :bar}, :use_route => :simple_blog
+          }.to_not change(Post, :count)
+        end
 
-      it "redirects to the post details page" do
-        post :create, :post => params, :use_route => :simple_blog
-        expect(response).to redirect_to(Post.last)
+        it "sets a flash alert" do
+          post :create, :post => {:foo => :bar}, :use_route => :simple_blog
+          expect(flash[:alert]).not_to be_nil
+        end
+
+        it "redirects to the post details page" do
+          post :create, :post => params, :use_route => :simple_blog
+          expect(response).to redirect_to(Post.last)
+        end
       end
     end
 

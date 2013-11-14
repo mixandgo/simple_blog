@@ -5,8 +5,14 @@
 
 /* New post form */
 .simple-blog-posts-new {
+  input.textfield {
+    width: 200px;
+    padding: 5px;
+  }
+
   label.left-side-label {
     float: left;
+    line-height: 30px;
     width: 120px;
   }
 
@@ -14,5 +20,12 @@
     margin-top: 10px;
     margin-bottom: 10px;
     clear: both;
+  }
+  .simple-blog-new-post-submit {
+    background: #1ab1ff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
   }
 }

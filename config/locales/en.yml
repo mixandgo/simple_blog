@@ -1,11 +1,8 @@
 en:
-  helpers:
-    submit:
-      post:
-        submit: "Create post"
   simple_blog:
     posts:
       new:
+        submit: "Add post"
         prompt_select_day: "Select day"
         prompt_select_month: "Select month"
         prompt_select_year: "Select year"

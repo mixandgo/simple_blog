@@ -1,11 +1,12 @@
 ro:
   helpers:
     submit:
-      post:
-        submit: "Adaugă articol"
+      posts:
+        new:
   simple_blog:
     posts:
       new:
+        submit: "Adaugă articol"
         prompt_select_day: "Alege ziua"
         prompt_select_month: "Alege luna"
         prompt_select_year: "Alege anul"

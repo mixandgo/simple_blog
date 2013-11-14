@@ -5,6 +5,10 @@ ro:
         submit: "Adaugă articol"
   simple_blog:
     posts:
+      new:
+        prompt_select_day: "Alege ziua"
+        prompt_select_month: "Alege luna"
+        prompt_select_year: "Alege anul"
       index:
         page_heading: "Articole"
         no_published_posts: "Nu există incă nici un articol publicat."

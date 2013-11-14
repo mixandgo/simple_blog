@@ -14,7 +14,7 @@
     </div>
     <div class="simple-blog-new-post-row">
       <%= f.label :published_at, :class => "left-side-label" %>
-      <%= f.text_field :published_at %>
+      <%= f.date_select :published_at, :prompt => { day: t('.prompt_select_day'), month: t('.prompt_select_month'), year: t('.prompt_select_year') } %>
       <div class="clearfix"></div>
     </div>
     <div class="simple-blog-new-post-row">

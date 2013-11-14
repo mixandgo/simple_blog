@@ -5,6 +5,10 @@ en:
         submit: "Create post"
   simple_blog:
     posts:
+      new:
+        prompt_select_day: "Select day"
+        prompt_select_month: "Select month"
+        prompt_select_year: "Select year"
       index:
         page_heading: "Blog"
         no_published_posts: "There are no published posts available."

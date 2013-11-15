@@ -3,8 +3,9 @@ require 'spec_helper'
 module SimpleBlog
   describe PostsController do
     describe "#index" do
-      it "assigns @posts" do
+      it "assigns published posts to @posts" do
         post = FactoryGirl.create(:post)
+        FactoryGirl.create(:post, :published_at => nil)
         get :index, :use_route => :simple_blog
         expect(assigns(:posts)).to eq([post])
       end

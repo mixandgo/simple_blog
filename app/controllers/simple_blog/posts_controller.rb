@@ -1,5 +1,9 @@
 module SimpleBlog
   class PostsController < ApplicationController
+    def index
+      @posts = Post.published
+    end
+
     def new
       @post = Post.new
     end
@@ -13,10 +17,6 @@ module SimpleBlog
         flash.alert = t('.flash_alert')
         render :action => :new
       end
-    end
-
-    def index
-      @posts = Post.all
     end
 
     def show

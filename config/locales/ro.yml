@@ -12,7 +12,7 @@ ro:
       index:
         new_post: "New post"
         page_heading: "Articole"
-        no_published_posts: "Nu există incă nici un articol publicat."
+        no_published_posts: "Nu există nici un articol publicat."
   activerecord:
     attributes:
       simple_blog/post:

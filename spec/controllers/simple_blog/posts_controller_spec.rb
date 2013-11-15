@@ -61,6 +61,11 @@ module SimpleBlog
     end
 
     describe "#new" do
+      it "assigns a new Post to @post" do
+        get :new, :use_route => :simple_blog
+        expect(assigns[:post]).to be_a_new(Post)
+      end
+
       it "renders the new template" do
         get :new, :use_route => :simple_blog
         expect(response).to render_template('posts/new')

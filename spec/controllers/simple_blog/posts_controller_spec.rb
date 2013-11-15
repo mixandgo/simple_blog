@@ -16,11 +16,11 @@ module SimpleBlog
     end
 
     describe "#create" do
-      let(:params) { FactoryGirl.attributes_for(:post) }
+      let(:params) { FactoryGirl.attributes_for(:post, :title => "Cool post") }
 
       it "assigns to @post" do
         post :create, :post => params, :use_route => :simple_blog
-        assigns(:post).should_not be_nil
+        expect(assigns(:post)).to be_a(Post)
       end
 
       context "attributes are valid" do

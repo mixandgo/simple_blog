@@ -5,6 +5,7 @@ PATH
       ckeditor_rails
       jquery-rails
       rails (~> 4.0.0)
+      sass-rails (~> 4.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -104,6 +105,11 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    sass (3.2.12)
+    sass-rails (4.0.1)
+      railties (>= 4.0.0, < 5.0)
+      sass (>= 3.1.10)
+      sprockets-rails (~> 2.0.0)
     shoulda-matchers (2.4.0)
       activesupport (>= 3.0.0)
     sprockets (2.10.0)
@@ -132,8 +138,10 @@ PLATFORMS
 
 DEPENDENCIES
   capybara (= 2.1.0)
+  ckeditor_rails
   debugger
   factory_girl_rails (= 4.3.0)
+  jquery-rails
   launchy
   rspec-rails (= 2.14.0)
   shoulda-matchers

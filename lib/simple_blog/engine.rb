@@ -1,3 +1,6 @@
+require 'jquery-rails'
+require 'ckeditor_rails'
+
 module SimpleBlog
   class Engine < ::Rails::Engine
     isolate_namespace SimpleBlog

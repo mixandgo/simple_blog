@@ -12,7 +12,3 @@ gemspec
 
 # To use debugger
 gem 'debugger'
-
-# jquery-rails is used by the dummy application
-gem 'jquery-rails'
-gem 'ckeditor_rails'

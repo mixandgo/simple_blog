@@ -10,6 +10,7 @@ en:
         flash_notice: "Post was succesfully created."
         flash_alert: "Post wasn't created."
       index:
+        new_post: "New post"
         page_heading: "Blog"
         no_published_posts: "There are no published posts available."
   activerecord:

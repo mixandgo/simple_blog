@@ -11,4 +11,5 @@
   <% else %>
     <p class="simple-blog-posts-missing"><%= t('.no_published_posts') %></p>
   <% end %>
+  <%= link_to t('.new_post'), simple_blog.new_post_path %>
 </div>

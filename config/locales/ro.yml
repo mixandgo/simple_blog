@@ -10,6 +10,7 @@ ro:
         flash_notice: "Articolul a fost creeat cu succes."
         flash_alert: "Articolul nu a putut fi creeat."
       index:
+        new_post: "New post"
         page_heading: "Articole"
         no_published_posts: "Nu există incă nici un articol publicat."
   activerecord:

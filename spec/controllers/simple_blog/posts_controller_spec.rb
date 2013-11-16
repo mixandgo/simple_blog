@@ -54,7 +54,7 @@ module SimpleBlog
           expect(flash[:alert]).not_to be_nil
         end
 
-        it "redirects back to the new post form" do
+        it "renders the new post form" do
           post :create, :post => {:foo => :bar}, :use_route => :simple_blog
           expect(response).to render_template('posts/new')
         end

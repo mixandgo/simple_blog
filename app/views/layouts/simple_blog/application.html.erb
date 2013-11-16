@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>SimpleBlog</title>
-  <%= stylesheet_link_tag    "simple_blog/application", media: "all" %>
-  <%= javascript_include_tag "simple_blog/application" %>
-  <%= csrf_meta_tags %>
-</head>
+  <head>
+    <title>SimpleBlog</title>
+    <%= stylesheet_link_tag    "simple_blog/application", media: "all" %>
+    <%= javascript_include_tag "simple_blog/application" %>
+    <%= csrf_meta_tags %>
+  </head>
 <body>
-<%= flash[:notice] if flash[:notice] %>
-<%= flash[:alert] if flash[:alert] %>
-<%= yield %>
+
+  <div class="container">
+    <%= render 'layouts/flash' %>
+    <div class="main-content">
+      <%= yield %>
+    </div>
+    <div class="sidebar">
+      <%= yield :sidebar %>
+    </div>
+    <div class="clearfix"></div>
+  </div>
 
 </body>
 </html>

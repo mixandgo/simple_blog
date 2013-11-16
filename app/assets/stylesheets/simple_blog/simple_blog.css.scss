@@ -3,6 +3,22 @@
   clear: both;
 }
 
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.main-content {
+  width: 600px;
+  float: left;
+}
+
+.sidebar {
+  margin-left: 30px;
+  width: 230px;
+  float: left;
+}
+
 /* New post form */
 .simple-blog-posts-new {
   input.textfield {

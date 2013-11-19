@@ -20,7 +20,7 @@ module SimpleBlog
     end
 
     def show
-      @post = Post.where(:slug => params[:id]).first
+      @post = Post.find_by!(:slug => params[:slug])
     end
 
     private

@@ -76,16 +76,20 @@ module SimpleBlog
     describe "#show" do
       let(:post) { FactoryGirl.create(:post) }
 
-      before :each do
-        get :show, :id => post.slug, :use_route => :simple_blog
-      end
-
       it "assigns @post" do
+        get :show, :slug => post.slug, :use_route => :simple_blog
         expect(assigns(:post)).to eq(post)
       end
 
       it "renders the show template" do
+        get :show, :slug => post.slug, :use_route => :simple_blog
         expect(response).to render_template('posts/show')
+      end
+
+      it "renders a 404 if the post can't be found" do
+        expect {
+          get :show, :slug => "invalid-slug", :use_route => :simple_blog
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

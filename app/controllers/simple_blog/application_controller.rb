@@ -1,9 +1,7 @@
-module SimpleBlog
-  class ApplicationController < ActionController::Base
-    private
+class SimpleBlog::ApplicationController < ApplicationController
+  private
 
-      def not_found
-        raise ActionController::RoutingError.new('Not Found')
-      end
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
   end
 end

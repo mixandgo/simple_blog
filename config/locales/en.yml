@@ -1,6 +1,6 @@
 en:
-  simple_blog:
-    posts:
+  admin:
+    blog_posts:
       new:
         submit: "Create post"
         prompt_select_day: "Select day"
@@ -13,9 +13,13 @@ en:
         new_post: "New post"
         page_heading: "Blog"
         no_published_posts: "There are no published posts available."
+  blog_posts:
+    index:
+      page_heading: "Blog"
+      no_published_posts: "There are no published posts available."
   activerecord:
     attributes:
-      simple_blog/post:
+      blog_post:
         title: "Title"
         body: "Body"
         published_at: "Published at"

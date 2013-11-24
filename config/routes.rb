@@ -1,5 +1,8 @@
-SimpleBlog::Engine.routes.draw do
-  root 'posts#index'
-  resources :posts, :only => [:index, :create, :new]
-  get "*slug" => "posts#show", as:  "post"
+Rails.application.routes.draw do
+  get "/blog" => "blog_posts#index", :as => :blog_posts
+  get "/blog/:slug" => "blog_posts#show", :as => :blog_post
+
+  namespace :admin do
+    resources :blog_posts
+  end
 end

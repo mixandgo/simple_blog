@@ -1,6 +1,6 @@
 ro:
-  simple_blog:
-    posts:
+  admin:
+    blog_posts:
       new:
         submit: "Adaugă articol"
         prompt_select_day: "Alege ziua"
@@ -10,12 +10,16 @@ ro:
         flash_notice: "Articolul a fost creeat cu succes."
         flash_alert: "Articolul nu a putut fi creeat."
       index:
-        new_post: "New post"
+        new_post: "Articol nou"
         page_heading: "Articole"
         no_published_posts: "Nu există nici un articol publicat."
+  blog_posts:
+    index:
+      page_heading: "Articole"
+      no_published_posts: "Nu există nici un articol publicat."
   activerecord:
     attributes:
-      simple_blog/post:
+      blog_post:
         title: "Titlu"
         body: "Conţinut"
         published_at: "Publicat în"

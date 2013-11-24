@@ -1,0 +1,5 @@
+{
+  "app/controllers/simple_blog/*_controller.rb": {
+    "alternate": "spec/controllers/simple_blog/%s_controller_spec.rb"
+  }
+}

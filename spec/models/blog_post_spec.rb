@@ -22,6 +22,18 @@ describe BlogPost do
     end
   end
 
+  describe "#published?" do
+    it "returns true if published_at is not nil" do
+      post = FactoryGirl.build(:blog_post)
+      expect(post.published?).to be_true
+    end
+
+    it "returns false if published_at is nil" do
+      post = FactoryGirl.build(:blog_post, :published_at => nil)
+      expect(post.published?).to be_false
+    end
+  end
+
   describe "#to_param" do
     it "returns the name converted to a slug" do
       post = FactoryGirl.build(:blog_post, :title => "A cool title")

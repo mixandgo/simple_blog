@@ -11,6 +11,10 @@ class BlogPost < ActiveRecord::Base
     title_to_slug
   end
 
+  def published?
+    !!published_at
+  end
+
   private
 
   def set_slug

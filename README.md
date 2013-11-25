@@ -1,15 +1,15 @@
 # SimpleBlog
 
-Is a blogging engine that you can plug into your rails app
+Is a blogging engine that you can plug into your rails app. It's not a mountable engine (so it's not namespaced), it's designed to be pluggable into your app and not mounted as a sepparate one.
 
 ## Getting started
 
-SimpleBlog works with Rails 4.0 onwards. You can add it to your Gemfile with:
-
 It's worth mentioning that the default views provide a basic structure and style which you should override. You can also use the default views and just add some styling of your own (by overriding the default styling).
 
+SimpleBlog works with Rails 4.0 onwards. You can add it to your Gemfile with:
+
 ```ruby
-gem 'simple_blog'
+gem 'simple_blog', :git => 'git@github.com:mixandgo/simple_blog.git'
 ```
 
 # License

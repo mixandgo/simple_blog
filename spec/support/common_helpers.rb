@@ -1,11 +1,19 @@
 def create_a_blog_post(options={})
   visit new_admin_blog_post_path
   fill_in 'Title', :with => options[:title] || 'My new post'
-  fill_in 'Body', :with => options[:body] || 'The post body'
+  fill_in 'simple-blog-post-form-body', :with => options[:body] || 'The post body'
   unless options.has_key?(:unpublished)
     select '1', :from => 'blog_post_published_at_3i'
     select 'January', :from => 'blog_post_published_at_2i'
     select '2013', :from => 'blog_post_published_at_1i'
   end
   click_button 'Create post'
+end
+
+def expect_url_to_contain(string)
+  expect(URI.parse(current_url).to_s).to match(string)
+end
+
+def expect_url_not_to_contain(string)
+  expect(URI.parse(current_url).to_s).not_to match(string)
 end

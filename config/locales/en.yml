@@ -1,6 +1,8 @@
 en:
   admin:
     blog_posts:
+      edit:
+        submit: "Update post"
       new:
         submit: "Create post"
         prompt_select_day: "Select day"
@@ -8,7 +10,10 @@ en:
         prompt_select_year: "Select year"
       create:
         flash_notice: "Post was succesfully created."
-        flash_alert: "Post wasn't created."
+        flash_alert: "Post was not created."
+      update:
+        flash_notice: "Post was succesfully updated."
+        flash_alert: "Post was not updated."
       index:
         new_post: "New post"
         page_heading: "Blog"

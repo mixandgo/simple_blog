@@ -4,12 +4,12 @@
   <% if @blog_posts.present? %>
     <% @blog_posts.each do |post| %>
       <div class="simple-blog-post">
-        <h2 class="simple-blog-post-title"><%= link_to post.title.titleize, simple_blog.post_path(post) %></h2>
+        <h2 class="simple-blog-post-title"><%= link_to post.title.titleize, edit_admin_blog_post_path(post) %></h2>
         <p class="simple-blog-post-body"><%= post.body %></p>
       </div>
     <% end %>
   <% else %>
     <p class="simple-blog-posts-missing"><%= t('.no_published_posts') %></p>
   <% end %>
-  <%= link_to t('.new_post'), simple_blog_admin_new_post_path %>
+  <%= link_to t('.new_post'), new_admin_blog_post_path %>
 </div>

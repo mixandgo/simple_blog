@@ -1,6 +1,8 @@
 ro:
   admin:
     blog_posts:
+      edit:
+        submit: "Actualizează articolul"
       new:
         submit: "Adaugă articol"
         prompt_select_day: "Alege ziua"
@@ -8,7 +10,10 @@ ro:
         prompt_select_year: "Alege anul"
       create:
         flash_notice: "Articolul a fost creeat cu succes."
-        flash_alert: "Articolul nu a putut fi creeat."
+        flash_alert: "Articolul nu a putut fi creat."
+      update:
+        flash_notice: "Articolul a fost actualizat."
+        flash_alert: "Articolul nu a putut fi actualizat."
       index:
         new_post: "Articol nou"
         page_heading: "Articole"

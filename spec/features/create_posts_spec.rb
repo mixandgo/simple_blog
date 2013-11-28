@@ -10,6 +10,6 @@ feature 'Create posts' do
   scenario 'titles have to be unique' do
     create_a_blog_post
     create_a_blog_post
-    expect(page).to have_content("Post wasn't created")
+    expect(page).to have_content("Post was not created.")
   end
 end

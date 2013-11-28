@@ -2,6 +2,54 @@ require 'spec_helper'
 
 module Admin
   describe BlogPostsController do
+    describe "#update" do
+      let(:post) { FactoryGirl.create(:blog_post) }
+
+      it "assigns to @blog_post" do
+        patch :update, :id => post.slug, :blog_post => {:title => "UhHa"}
+        expect(assigns(:blog_post)).to eq(post)
+      end
+
+      context "attributes are valid" do
+        it "updates the record attributes" do
+          patch :update, :id => post.slug, :blog_post => {:title => "UhHa"}
+          expect(post.reload.title).to eq("UhHa")
+        end
+
+        it "sets a flash notice" do
+          patch :update, :id => post.slug, :blog_post => {:title => "UhHa"}
+          expect(flash[:notice]).not_to be_nil
+        end
+
+        it "redirects to the posts list page" do
+          patch :update, :id => post.slug, :blog_post => {:title => "UhHa"}
+          expect(response).to redirect_to(admin_blog_posts_path)
+        end
+      end
+
+      context "attributes ar invalid" do
+        let(:post) { FactoryGirl.create(:blog_post, :title => "Initial title") }
+
+        it "doesn't update the record" do
+          invalid_title = "a" * 100 # too long
+          patch :update, :id => post.slug, :blog_post => {:title => invalid_title}
+          expect(post.reload.title).to eq("Initial title")
+        end
+
+        it "sets the alert flash" do
+          invalid_title = "a" * 100 # too long
+          patch :update, :id => post.slug, :blog_post => {:title => invalid_title}
+          expect(flash[:alert]).not_to be_nil
+        end
+
+        it "renders the edit template" do
+          invalid_title = "a" * 100 # too long
+          patch :update, :id => post.slug, :blog_post => {:title => invalid_title}
+          expect(response).to render_template('blog_posts/edit')
+        end
+      end
+    end
+
     describe "#create" do
       let(:params) { FactoryGirl.attributes_for(:blog_post, :title => "Cool post") }
 
@@ -48,6 +96,7 @@ module Admin
     end
 
     describe "#new" do
+
       it "assigns a new Post to @blog_post" do
         get :new
         expect(assigns[:blog_post]).to be_a_new(BlogPost)

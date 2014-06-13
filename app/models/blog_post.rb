@@ -2,8 +2,8 @@ class BlogPost < ActiveRecord::Base
   before_save :set_slug
   validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}
 
-  has_many :taggings
-  has_many :blog_tags,through: :taggings
+  has_many :blog_taggings
+  has_many :blog_tags, through: :blog_taggings
 
   scope :published, -> { where("published_at IS NOT NULL") }
 

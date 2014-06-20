@@ -2,64 +2,64 @@ module SimpleBlog
   module Generators
     class InstallGenerator < Rails::Generators::Base
       desc "Integrate SimpleBlog with your application"
-      source_root File.expand_path('../templates', __FILE__)
+      source_root File.expand_path("../templates", __FILE__)
 
       def install_public_javascript
-        js_path = "app/assets/javascripts/application.js"
-        original_js = File.binread(js_path) if File.exists?(js_path)
+        folder = "app/assets/javascripts"
+        file = "application.js"
 
-        if original_js.include?("simple_blog")
-          say_status("skipped", "insert into #{js_path}", :yellow)
-        else
-          append_to_file js_path do
-            "\n//= require simple_blog\n"
-          end
-        end
+        text = "\n//= require simple_blog\n"
+        install_libraries(folder, file, text)
       end
 
       def install_admin_javascript
-        js_path = "app/assets/javascripts/admin.js"
-        if File.exists?(js_path)
-          original_js = File.binread(js_path)
+        folder = "app/assets/javascripts"
+        file = "admin.js"
 
-          if original_js.include?("simple_blog_admin")
-            say_status("skipped", "insert into #{js_path}", :yellow)
-          else
-            append_to_file js_path do
-              "\n//= require simple_blog_admin\n"
-            end
-          end
-        end
+        text = "\n//= require simple_blog\n"
+        install_libraries(folder, file, text)
       end
 
-      def install_public_stylesheets
-        # if it's a css file
-        css_path = "app/assets/stylesheets/application.css"
-        if File.exists?(css_path)
-          original_css = File.binread(css_path)
-          # if it's a sass file
-          css_path = "app/assets/stylesheets/application.scss"
-          if File.exists?(css_path)
-            original_scss = File.binread(css_path)
+      def install_css_file
+        folder = "app/assets/stylesheets"
+        file = "application.css"
 
-            if original_css
-              if original_css.include?("simple_blog")
-                say_status("skipped", "insert into #{css_path}", :yellow)
-              else
-                insert_into_file css_path, :before => "*/" do
-                  "\n * require simple_blog\n"
-                end
-              end
-            elsif original_scss
-              if original_scss.include?("simple_blog")
-                say_status("skipped", "insert into #{css_path}", :yellow)
-              else
-                append_to_file css_path do
-                  "\n@import \"simple_blog\";\n"
-                end
-              end
-            end
+        text = "\n * require simple_blog\n"
+        install_libraries(folder, file, text)
+      end
+
+      def install_migrations
+        copy_migration "create_blog_posts.rb"
+      end
+
+      private
+
+      def copy_migration(file)
+        copy_file file, "db/migrate/#{migration_number}_#{file}" unless migration_exists?(file)
+      end
+
+      def migration_exists?(file)
+        file_exists = false
+        inside "db/migrate/" do
+          exists_exists = Dir.glob("*.rb").each do |existing_file|
+            return true if existing_file =~ Regexp.new(file)
           end
+        end
+        file_exists
+      end
+
+      def migration_number
+        Time.now.utc.strftime("%Y%m%d%H%M%S").to_s
+      end
+
+      def install_libraries(folder, file, text)
+        inside folder do
+          File.open(file, "w") unless File.exists?(file)
+
+          append_to_file file do
+            text
+          end
+
         end
       end
     end

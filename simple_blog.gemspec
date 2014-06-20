@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "factory_girl_rails", "4.3.0"
   s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "launchy"
+  s.add_development_dependency "generator_spec"
 end

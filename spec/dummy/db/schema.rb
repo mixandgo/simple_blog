@@ -22,20 +22,4 @@ ActiveRecord::Schema.define(version: 20131124183119) do
     t.datetime "updated_at"
   end
 
-  create_table "blog_taggings", force: true do |t|
-    t.integer  "blog_post_id"
-    t.integer  "blog_tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "blog_taggings", ["blog_post_id"], name: "index_blog_taggings_on_blog_post_id"
-  add_index "blog_taggings", ["blog_tag_id"], name: "index_blog_taggings_on_blog_tag_id"
-
-  create_table "blog_tags", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
 end

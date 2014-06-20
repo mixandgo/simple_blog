@@ -5,6 +5,7 @@ describe BlogPost do
   it { should validate_uniqueness_of(:title) }
   it { should ensure_length_of(:title).is_at_most(72) }
   it { should have_many(:blog_tags) }
+  it { should have_many(:blog_taggings) }
 
   describe "before_save" do
     it "sets the slug" do

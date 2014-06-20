@@ -10,5 +10,6 @@ module SimpleBlog
     initializer "simple_blog.assets.precompile" do |app|
       app.config.assets.precompile += %w(admin.js)
     end
+
   end
 end

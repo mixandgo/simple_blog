@@ -33,16 +33,16 @@ describe SimpleBlog::Generators::InstallGenerator do
 
   describe "#install_admin_javascript" do
 
-    it "creates the file and appends 'simple_blog' when file not present" do
+    it "creates the file and appends 'simple_blog_admin' when file not present" do
       run_generator
-      assert_file "app/assets/javascripts/admin.js", "\n//= require simple_blog\n"
+      assert_file "app/assets/javascripts/admin.js", "\n//= require simple_blog_admin\n"
     end
 
     it "appends 'simple_blog' to admin.js when file is present" do
       FileUtils.mkdir_p("spec/tmp/app/assets/javascripts/")
       File.open("spec/tmp/app/assets/javascripts/admin.js", "w")
       run_generator
-      assert_file "app/assets/javascripts/admin.js", "\n//= require simple_blog\n"
+      assert_file "app/assets/javascripts/admin.js", "\n//= require simple_blog_admin\n"
     end
 
   end

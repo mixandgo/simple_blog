@@ -16,7 +16,7 @@ module SimpleBlog
         folder = "app/assets/javascripts"
         file = "admin.js"
 
-        text = "\n//= require simple_blog\n"
+        text = "\n//= require simple_blog_admin\n"
         install_libraries(folder, file, text)
       end
 

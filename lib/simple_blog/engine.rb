@@ -1,5 +1,6 @@
 require 'jquery-rails'
 require 'ckeditor_rails'
+require 'acts-as-taggable-on'
 
 module SimpleBlog
   class Engine < ::Rails::Engine

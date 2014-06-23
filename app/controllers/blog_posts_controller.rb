@@ -1,6 +1,10 @@
 class BlogPostsController < ApplicationController
   def index
-    @blog_posts = BlogPost.published
+    if params[:tag]
+      @blog_posts = BlogPost.tagged_with(params[:tag])
+    else
+      @blog_posts = BlogPost.published
+    end
   end
 
   def show

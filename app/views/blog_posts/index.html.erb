@@ -5,7 +5,10 @@
     <% @blog_posts.each do |post| %>
       <div class="simple-blog-post">
         <h2 class="simple-blog-post-title"><%= link_to post.title.titleize, blog_post_path(post) %></h2>
-        <p class="simple-blog-post-body"><%= post.body %></p>
+        <p class="simple-blog-post-body"><%= post.body.html_safe %></p>
+        <div class="simple-blog-post-tags">
+          Tags: <%= blog_post_tags(post) %>
+        </div>
       </div>
     <% end %>
   <% else %>

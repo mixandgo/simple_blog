@@ -1,5 +1,8 @@
 <div class="simple-blog-posts-show">
   <h1 class="simple-blog-post-title"><%= @blog_post.title.titleize %></h1>
+  <p class="simple-blog-post-tags">
+    <%= @blog_post.tag_list %>
+  </p>
   <div class="simple-blog-post-body">
     <%= @blog_post.body %>
   </div>

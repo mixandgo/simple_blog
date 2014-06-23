@@ -1,5 +1,6 @@
 class BlogPost < ActiveRecord::Base
   before_save :set_slug
+  acts_as_taggable
   validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}
 
   scope :published, -> { where("published_at IS NOT NULL") }

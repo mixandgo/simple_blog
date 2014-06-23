@@ -7,6 +7,7 @@ def create_a_blog_post(options={})
     select 'January', :from => 'blog_post_published_at_2i'
     select '2013', :from => 'blog_post_published_at_1i'
   end
+  fill_in 'blog_post_tag_list', :with => options[:tags] || 'tag1, tag2'
   click_button 'Create post'
 end
 

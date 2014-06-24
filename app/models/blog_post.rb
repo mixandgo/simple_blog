@@ -3,7 +3,7 @@ class BlogPost < ActiveRecord::Base
   acts_as_taggable
   validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}
 
-  scope :published, -> { where("published_at IS NOT NULL") }
+  default_scope { where("published_at IS NOT NULL") }
 
   def to_param
     title_to_slug

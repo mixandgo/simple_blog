@@ -13,11 +13,11 @@ describe BlogPost do
     end
   end
 
-  describe ".published" do
+  describe "default_scope" do
     it "finds all the published records" do
       published = FactoryGirl.create(:blog_post)
       FactoryGirl.create(:blog_post, :published_at => nil) # unpublished
-      BlogPost.published.should == [published]
+      BlogPost.all.should == [published]
     end
   end
 

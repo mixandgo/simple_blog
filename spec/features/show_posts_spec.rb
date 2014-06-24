@@ -13,8 +13,8 @@ feature 'Show posts' do
     expect(page).to have_content('first_tag, second_tag')
   end
 
-  scenario 'clicking on tag sends you to tag posts page' do
-    click_on "first_tag"
-    expect(current_url).to match(tag_path("first_tag"))
+  scenario 'clicking on a tag adds the tag as a filter in the url' do
+    click_on 'first_tag'
+    expect(current_url).to match(tag_path('first_tag'))
   end
 end

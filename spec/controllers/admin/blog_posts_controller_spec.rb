@@ -3,7 +3,7 @@ require 'spec_helper'
 module Admin
   describe BlogPostsController do
     describe "#update" do
-      let(:post) { FactoryGirl.create(:blog_post) }
+      let(:post) { create(:blog_post) }
 
       it "assigns to @blog_post" do
         patch :update, :id => post.slug, :blog_post => {:title => "UhHa"}
@@ -28,7 +28,7 @@ module Admin
       end
 
       context "attributes ar invalid" do
-        let(:post) { FactoryGirl.create(:blog_post, :title => "Initial title") }
+        let(:post) { create(:blog_post, :title => "Initial title") }
 
         it "doesn't update the record" do
           invalid_title = "a" * 100 # too long
@@ -48,10 +48,18 @@ module Admin
           expect(response).to render_template('blog_posts/edit')
         end
       end
+
+      context "can update an unpublished post" do
+        it "renders the edit template" do
+          unpublished_at_value = nil
+          patch :update, :id => post.slug, :blog_post => {:published_at => nil}
+          expect(response).to redirect_to(admin_blog_posts_path)
+        end
+      end
     end
 
     describe "#create" do
-      let(:params) { FactoryGirl.attributes_for(:blog_post, :title => "Cool post") }
+      let(:params) { attributes_for(:blog_post, :title => "Cool post") }
 
       it "assigns to @blog_post" do
         post :create, :blog_post => params
@@ -108,5 +116,13 @@ module Admin
       end
     end
 
+    describe "#index" do
+      it "returns all published and unpublished posts" do
+        published_post = create(:blog_post)
+        unpublished_post = create(:blog_post, :published_at => nil)
+        get :index
+        expect(assigns(:blog_posts)).to eq([published_post, unpublished_post])
+      end
+    end
   end
 end

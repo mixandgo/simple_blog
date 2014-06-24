@@ -10,12 +10,8 @@ describe BlogPostsController do
     end
 
     it "returns posts tagged with specified tag" do
-      tagged_post = FactoryGirl.create(:blog_post)
-      tagged_post.tag_list.add("tag")
-      tagged_post.save()
-      untagged_post = FactoryGirl.create(:blog_post)
+      BlogPost.should_receive(:tagged_with)
       get :index, :tag => "tag"
-      expect(assigns(:blog_posts)).to eq([tagged_post])
     end
 
     it "renders the index template" do

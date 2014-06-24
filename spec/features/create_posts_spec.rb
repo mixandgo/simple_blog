@@ -10,12 +10,12 @@ feature 'Create posts' do
   scenario 'titles have to be unique' do
     create_a_blog_post
     create_a_blog_post
-    expect(page).to have_content("Post was not created.")
+    expect(page).to have_content('Post was not created.')
   end
 
   scenario 'user can add tags' do
-    create_a_blog_post(:tags => "first_tag, second_tag")
+    create_a_blog_post(:tags => 'first_tag, second_tag')
     visit admin_blog_posts_path
-    expect(page).to have_content("Tags: first_tag, second_tag")
+    expect(page).to have_content('Tags: first_tag, second_tag')
   end
 end

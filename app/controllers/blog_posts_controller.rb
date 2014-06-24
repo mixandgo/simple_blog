@@ -1,4 +1,7 @@
 class BlogPostsController < ApplicationController
+
+  before_filter :find_blog_post!, :only => :show
+
   def index
     @blog_posts = BlogPost.all
   end
@@ -9,7 +12,6 @@ class BlogPostsController < ApplicationController
   end
 
   def show
-    @blog_post = find_blog_post!
   end
 
   private
@@ -19,6 +21,6 @@ class BlogPostsController < ApplicationController
     end
 
     def find_blog_post!
-      BlogPost.find_by!(blog_post_params)
+      @blog_post = BlogPost.find_by!(blog_post_params)
     end
 end

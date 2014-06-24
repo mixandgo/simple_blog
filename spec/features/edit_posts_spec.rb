@@ -20,4 +20,14 @@ feature 'Edit posts' do
     click_on 'Update post'
     expect(page).to have_content('Post was not updated.')
   end
+
+  scenario 'update tags' do
+    create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body', :tags => 'First Tag, Second Tag')
+    visit admin_blog_posts_path
+    click_on 'Cool Stuff'
+    fill_in 'blog_post_tag_list', :with => 'Edited_tag'
+    click_on 'Update post'
+    visit admin_blog_posts_path
+    expect(page).to have_content('Tags: Edited_tag')
+  end
 end

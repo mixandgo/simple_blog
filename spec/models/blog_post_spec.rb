@@ -4,8 +4,6 @@ describe BlogPost do
   it { should validate_presence_of(:title) }
   it { should validate_uniqueness_of(:title) }
   it { should ensure_length_of(:title).is_at_most(72) }
-  it { should have_many(:blog_tags) }
-  it { should have_many(:blog_taggings) }
 
   describe "before_save" do
     it "sets the slug" do
@@ -15,11 +13,11 @@ describe BlogPost do
     end
   end
 
-  describe ".published" do
+  describe "default_scope" do
     it "finds all the published records" do
       published = FactoryGirl.create(:blog_post)
       FactoryGirl.create(:blog_post, :published_at => nil) # unpublished
-      BlogPost.published.should == [published]
+      BlogPost.all.should == [published]
     end
   end
 

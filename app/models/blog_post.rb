@@ -1,11 +1,9 @@
 class BlogPost < ActiveRecord::Base
   before_save :set_slug
+  acts_as_taggable
   validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}
 
-  has_many :blog_taggings
-  has_many :blog_tags, through: :blog_taggings
-
-  scope :published, -> { where("published_at IS NOT NULL") }
+  default_scope { where("published_at IS NOT NULL") }
 
   def to_param
     title_to_slug
@@ -24,4 +22,5 @@ class BlogPost < ActiveRecord::Base
   def title_to_slug
     title.parameterize
   end
+
 end

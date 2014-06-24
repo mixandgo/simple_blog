@@ -1,6 +1,9 @@
 class Admin::BlogPostsController < Admin::BaseController
+
+  before_filter :find_blog_post!, :only => [:edit, :update]
+
   def index
-    @blog_posts = BlogPost.all
+    @blog_posts = BlogPost.unscoped
   end
 
   def new
@@ -8,7 +11,6 @@ class Admin::BlogPostsController < Admin::BaseController
   end
 
   def edit
-    @blog_post = BlogPost.find_by!(:slug => params[:id])
   end
 
   def create
@@ -23,7 +25,6 @@ class Admin::BlogPostsController < Admin::BaseController
   end
 
   def update
-    @blog_post = BlogPost.find_by(:slug => params[:id])
     if @blog_post.update(blog_post_params)
       flash[:notice] = t('.flash_notice')
       redirect_to admin_blog_posts_path
@@ -36,6 +37,10 @@ class Admin::BlogPostsController < Admin::BaseController
   private
 
     def blog_post_params
-      params.require(:blog_post).permit(:title, :body, :published_at)
+      params.require(:blog_post).permit(:title, :body, :published_at, :tag_list)
+    end
+
+    def find_blog_post!
+      @blog_post = BlogPost.unscoped.find_by!(params.permit(:slug))
     end
 end

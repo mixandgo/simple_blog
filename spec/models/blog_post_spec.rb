@@ -39,17 +39,4 @@ describe BlogPost do
       expect(post.to_param).to eq("a-cool-title")
     end
   end
-
-  describe ".find_blog_post!" do
-    it "returns the blog post by slug" do
-      blog_post = create(:blog_post, :title => "A cool title")
-      expect(BlogPost.find_blog_post!("a-cool-title")).to eq(blog_post)
-    end
-
-    it "raises a 404 if post can't be found" do
-      expect {
-        BlogPost.find_blog_post!("some_slug")
-      }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-  end
 end

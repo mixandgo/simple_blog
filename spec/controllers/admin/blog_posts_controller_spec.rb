@@ -51,7 +51,6 @@ module Admin
 
       context "can update an unpublished post" do
         it "redirects to the posts list page" do
-          unpublished_at_value = nil
           patch :update, :slug => post.slug, :blog_post => {:published_at => nil}
           expect(response).to redirect_to(admin_blog_posts_path)
         end

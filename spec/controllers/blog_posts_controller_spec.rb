@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe BlogPostsController do
   describe "#index" do
+    let(:post) { double("post") }
+
     it "should assign all blog_posts" do
-      BlogPost.should_receive(:all)
+      expect(BlogPost).to receive(:all).and_return [post]
       get :index
+      expect(assigns(:blog_posts)).to eq([post])
     end
 
     it "renders the index template" do
@@ -15,10 +18,12 @@ describe BlogPostsController do
 
   describe "#filter" do
     let(:tag) { "cool tag" }
+    let(:post) { double("post") }
 
     it "assigns tagged posts to @blog_posts" do
-      BlogPost.should_receive(:tagged_with).with(tag)
+      expect(BlogPost).to receive(:tagged_with).with(tag).and_return [post]
       get :filter, :tag => tag
+      expect(assigns(:blog_posts)).to eq([post])
     end
 
     it "renders the index template" do
@@ -30,10 +35,13 @@ describe BlogPostsController do
 
   describe "#show" do
     let(:slug) { "cool slug" }
+    let(:post) { double("post") }
 
     it "assigns @blog_post" do
-      BlogPost.should_receive(:find_by!).with("slug" => slug)
+      expect(BlogPost).to receive(:find_by!).with("slug" => slug).and_return post
+
       get :show, :slug => slug
+      expect(assigns(:blog_post)).to eq(post)
     end
 
     it "renders the show template" do

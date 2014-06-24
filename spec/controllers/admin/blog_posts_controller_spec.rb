@@ -50,7 +50,7 @@ module Admin
       end
 
       context "can update an unpublished post" do
-        it "renders the edit template" do
+        it "redirects to the posts list page" do
           unpublished_at_value = nil
           patch :update, :id => post.slug, :blog_post => {:published_at => nil}
           expect(response).to redirect_to(admin_blog_posts_path)
@@ -117,11 +117,9 @@ module Admin
     end
 
     describe "#index" do
-      it "returns all published and unpublished posts" do
-        published_post = create(:blog_post)
-        unpublished_post = create(:blog_post, :published_at => nil)
+      it "returns all unscoped blog posts" do
+        BlogPost.should_receive(:unscoped)
         get :index
-        expect(assigns(:blog_posts)).to eq([published_post, unpublished_post])
       end
     end
   end

@@ -22,4 +22,8 @@ class BlogPost < ActiveRecord::Base
   def title_to_slug
     title.parameterize
   end
+
+  def self.find_blog_post!(slug)
+    where(:slug => slug).first!
+  end
 end

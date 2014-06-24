@@ -1,19 +1,16 @@
 class BlogPostsController < ApplicationController
   def index
-    if params[:tag]
-      @blog_posts = BlogPost.tagged_with(params[:tag])
-    else
-      @blog_posts = BlogPost.all
-    end
+    permitted = blog_post_params
+    @blog_posts = permitted.has_key?(:tag) ? BlogPost.tagged_with(permitted.fetch(:tag)) : BlogPost.all
   end
 
   def show
-    @blog_post = BlogPost.find_by!(:slug => params[:slug])
+    @blog_post = BlogPost.find_blog_post!(blog_post_params.fetch(:slug))
   end
 
   private
 
-  def blog_posts_params
-    params.require(:blog_post).permit(:tag, :slug)
+  def blog_post_params
+    params.permit(:tag, :slug)
   end
 end

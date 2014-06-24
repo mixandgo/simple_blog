@@ -8,7 +8,7 @@ class Admin::BlogPostsController < Admin::BaseController
   end
 
   def edit
-    @blog_post = find_blog_post!(params)
+    @blog_post = find_blog_post!
   end
 
   def create
@@ -23,7 +23,7 @@ class Admin::BlogPostsController < Admin::BaseController
   end
 
   def update
-    @blog_post = find_blog_post!(params)
+    @blog_post = find_blog_post!
     if @blog_post.update(blog_post_params)
       flash[:notice] = t('.flash_notice')
       redirect_to admin_blog_posts_path
@@ -39,7 +39,7 @@ class Admin::BlogPostsController < Admin::BaseController
       params.require(:blog_post).permit(:title, :body, :published_at, :tag_list)
     end
 
-    def find_blog_post!(params)
+    def find_blog_post!
       BlogPost.unscoped.find_by!(params.permit(:slug))
     end
 end

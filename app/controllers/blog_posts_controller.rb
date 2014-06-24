@@ -9,7 +9,7 @@ class BlogPostsController < ApplicationController
   end
 
   def show
-    @blog_post = find_blog_post!(params)
+    @blog_post = find_blog_post!
   end
 
   private
@@ -18,7 +18,7 @@ class BlogPostsController < ApplicationController
       params.permit(:tag, :slug)
     end
 
-    def find_blog_post!(params)
+    def find_blog_post!
       BlogPost.find_by!(blog_post_params)
     end
 end

@@ -2,16 +2,9 @@ require 'spec_helper'
 
 describe BlogPostsController do
   describe "#index" do
-    it "assigns published posts to @blog_posts" do
-      post = FactoryGirl.create(:blog_post)
-      FactoryGirl.create(:blog_post, :published_at => nil)
+    it "should assign all blog_posts" do
+      BlogPost.should_receive(:all)
       get :index
-      expect(assigns(:blog_posts)).to eq([post])
-    end
-
-    it "returns posts tagged with specified tag" do
-      BlogPost.should_receive(:tagged_with)
-      get :index, :tag => "tag"
     end
 
     it "renders the index template" do
@@ -20,16 +13,32 @@ describe BlogPostsController do
     end
   end
 
+  describe "#filter" do
+    let(:tag) { "cool tag" }
+
+    it "assigns tagged posts to @blog_posts" do
+      BlogPost.should_receive(:tagged_with).with(tag)
+      get :filter, :tag => tag
+    end
+
+    it "renders the index template" do
+      get :filter, :tag => tag
+      expect(response).to render_template('blog_posts/index')
+    end
+
+  end
+
   describe "#show" do
-    let(:post) { FactoryGirl.create(:blog_post) }
+    let(:slug) { "cool slug" }
 
     it "assigns @blog_post" do
-      get :show, :slug => post.slug
-      expect(assigns(:blog_post)).to eq(post)
+      BlogPost.should_receive(:find_by!).with("slug" => slug)
+      get :show, :slug => slug
     end
 
     it "renders the show template" do
-      get :show, :slug => post.slug
+      BlogPost.should_receive(:find_by!).with("slug" => slug)
+      get :show, :slug => slug
       expect(response).to render_template('blog_posts/show')
     end
 

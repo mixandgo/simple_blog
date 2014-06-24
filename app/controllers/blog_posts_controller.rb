@@ -1,6 +1,11 @@
 class BlogPostsController < ApplicationController
   def index
-    @blog_posts = blog_post_params.has_key?(:tag) ? BlogPost.tagged_with(blog_post_params.fetch(:tag)) : BlogPost.all
+    @blog_posts = BlogPost.all
+  end
+
+  def filter
+    @blog_posts = BlogPost.tagged_with(blog_post_params[:tag])
+    render :index
   end
 
   def show
@@ -9,11 +14,11 @@ class BlogPostsController < ApplicationController
 
   private
 
-  def blog_post_params
-    params.permit(:tag, :slug)
-  end
+    def blog_post_params
+      params.permit(:tag, :slug)
+    end
 
-  def find_blog_post!(params)
-    BlogPost.where(blog_post_params).first!
-  end
+    def find_blog_post!(params)
+      BlogPost.find_by!(blog_post_params)
+    end
 end

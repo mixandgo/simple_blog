@@ -40,6 +40,6 @@ class Admin::BlogPostsController < Admin::BaseController
     end
 
     def find_blog_post!(params)
-      BlogPost.unscoped.where(params.permit(:slug)).first!
+      BlogPost.unscoped.find_by!(params.permit(:slug))
     end
 end

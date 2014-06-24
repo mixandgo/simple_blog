@@ -15,6 +15,6 @@ feature 'Show posts' do
 
   scenario 'clicking on a tag adds the tag as a filter in the url' do
     click_on 'first_tag'
-    expect(current_url).to match(tag_path('first_tag'))
+    expect(current_url).to match(filter_posts_path('first_tag'))
   end
 end

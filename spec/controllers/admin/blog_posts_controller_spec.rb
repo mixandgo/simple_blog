@@ -116,9 +116,12 @@ module Admin
     end
 
     describe "#index" do
+      let(:post) { double("post") }
+
       it "returns all unscoped blog posts" do
-        BlogPost.should_receive(:unscoped)
+        expect(BlogPost).to receive(:unscoped).and_return [post]
         get :index
+        expect(assigns(:blog_posts)).to eq([post])
       end
     end
   end

@@ -18,17 +18,18 @@ Install migrations
 
 ```shell
 #For simple blog migrations
-rake simple_blog:install:migrations
+rake simple_blog_engine:install:migrations
 
 #For simple blog tags migrations
 rake acts_as_taggable_on_engine:install:migrations
 ```
 
-Install assets
+Installing assets
 
 ```shell
 rails generate simple_blog:install
 ```
+
 
 
 # License

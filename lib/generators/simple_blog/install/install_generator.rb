@@ -20,37 +20,7 @@ module SimpleBlog
         install_libraries(folder, file, text)
       end
 
-      def install_css_file
-        folder = "app/assets/stylesheets"
-        file = "application.css"
-
-        text = "\n * require simple_blog\n"
-        install_libraries(folder, file, text)
-      end
-
-      def install_migrations
-        copy_migration "create_blog_posts.rb"
-      end
-
       private
-
-      def copy_migration(file)
-        copy_file file, "db/migrate/#{migration_number}_#{file}" unless migration_exists?(file)
-      end
-
-      def migration_exists?(file)
-        file_exists = false
-        inside "db/migrate/" do
-          exists_exists = Dir.glob("*.rb").each do |existing_file|
-            return true if existing_file =~ Regexp.new(file)
-          end
-        end
-        file_exists
-      end
-
-      def migration_number
-        Time.now.utc.strftime("%Y%m%d%H%M%S").to_s
-      end
 
       def install_libraries(folder, file, text)
         inside folder do

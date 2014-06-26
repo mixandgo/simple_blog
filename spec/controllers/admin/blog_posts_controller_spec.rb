@@ -11,11 +11,6 @@ module Admin
       end
 
       context "attributes are valid" do
-        it "updates the record attributes" do
-          patch :update, :slug => post.slug, :blog_post => {:title => "UhHa"}
-          expect(post.reload.title).to eq("UhHa")
-        end
-
         it "sets a flash notice" do
           patch :update, :slug => post.slug, :blog_post => {:title => "UhHa"}
           expect(flash[:notice]).not_to be_nil
@@ -29,18 +24,6 @@ module Admin
 
       context "attributes ar invalid" do
         let(:post) { create(:blog_post, :title => "Initial title", :body => "Initial body") }
-
-        it "doesn't update the record if title is invalid" do
-          invalid_title = "a" * 100 # too long
-          patch :update, :slug => post.slug, :blog_post => {:title => invalid_title}
-          expect(post.reload.title).to eq("Initial title")
-        end
-
-        it "doesn't update the record if body is missing" do
-          invalid_body = ""
-          patch :update, :slug => post.slug, :blog_post => {:body => invalid_body}
-          expect(post.reload.body).to eq("Initial body")
-        end
 
         it "sets the alert flash" do
           invalid_title = "a" * 100 # too long

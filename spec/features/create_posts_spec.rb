@@ -14,7 +14,7 @@ feature 'Create posts' do
     expect(page).to have_content("Title has already been taken")
   end
 
-  scenario 'body and description has to be present' do
+  scenario 'body and description have to be present' do
     create_a_blog_post(:body => '', :description => '')
     expect(page).to have_content('Post was not created')
     expect(page).to have_content("Body can't be blank")

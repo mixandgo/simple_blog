@@ -1,0 +1,12 @@
+<% if obj.errors.any? %>
+  <div class="simple-blog-form-errors">
+    <h4>
+      <%= t('.flash_alert') %>
+    </h4>
+    <ul>
+      <% obj.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

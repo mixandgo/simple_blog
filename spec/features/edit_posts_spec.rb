@@ -11,34 +11,20 @@ feature 'Edit posts' do
     expect(page).to have_content('Post was succesfully updated.')
   end
 
-  scenario 'editing a post with an invalid title does not update the post' do
+  scenario 'handle validations' do
     create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body')
     visit admin_blog_posts_path
     click_on 'Cool Stuff'
     invalid_title = "a" * 80 # triggers a validation error
+    invalid_body = invalid_description = ""
     fill_in :blog_post_title, :with => invalid_title
-    click_on 'Update post'
-    expect(page).to have_content('Post was not updated.')
-  end
-
-  scenario 'editing a post with an invalid body does not update the post' do
-    create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body')
-    visit admin_blog_posts_path
-    click_on 'Cool Stuff'
-    invalid_body = '' # triggers a validation error
     add_text_to('body', invalid_body)
-    click_on 'Update post'
-    expect(page).to have_content('Post was not updated.')
-  end
-
-  scenario 'editing a post with an invalid description does not update the post' do
-    create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body')
-    visit admin_blog_posts_path
-    click_on 'Cool Stuff'
-    invalid_description = '' # triggers a validation error
     add_text_to('description', invalid_description)
     click_on 'Update post'
     expect(page).to have_content('Post was not updated.')
+    expect(page).to have_content('Title is too long')
+    expect(page).to have_content("Body can't be blank")
+    expect(page).to have_content("Description can't be blank")
   end
 
   scenario 'update tags' do

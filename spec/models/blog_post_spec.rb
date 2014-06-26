@@ -3,6 +3,8 @@ require 'spec_helper'
 describe BlogPost do
   it { should validate_presence_of(:title) }
   it { should validate_uniqueness_of(:title) }
+  it { should validate_presence_of(:description) }
+  it { should validate_presence_of(:body) }
   it { should ensure_length_of(:title).is_at_most(72) }
 
   describe "before_save" do

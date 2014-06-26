@@ -28,12 +28,18 @@ module Admin
       end
 
       context "attributes ar invalid" do
-        let(:post) { create(:blog_post, :title => "Initial title") }
+        let(:post) { create(:blog_post, :title => "Initial title", :body => "Initial body") }
 
-        it "doesn't update the record" do
+        it "doesn't update the record if title is invalid" do
           invalid_title = "a" * 100 # too long
           patch :update, :slug => post.slug, :blog_post => {:title => invalid_title}
           expect(post.reload.title).to eq("Initial title")
+        end
+
+        it "doesn't update the record if body is missing" do
+          invalid_body = ""
+          patch :update, :slug => post.slug, :blog_post => {:body => invalid_body}
+          expect(post.reload.body).to eq("Initial body")
         end
 
         it "sets the alert flash" do
@@ -58,7 +64,9 @@ module Admin
     end
 
     describe "#create" do
-      let(:params) { attributes_for(:blog_post, :title => "Cool post") }
+      let(:params) { attributes_for(:blog_post, :title => "Cool post",
+                                    :body => "Cool post body",
+                                    :description => "Cool post description") }
 
       it "assigns to @blog_post" do
         post :create, :blog_post => params

@@ -37,7 +37,7 @@ class Admin::BlogPostsController < Admin::BaseController
   private
 
     def blog_post_params
-      params.require(:blog_post).permit(:title, :body, :published_at, :tag_list)
+      params.require(:blog_post).permit(:title, :body, :description, :keywords, :published_at, :tag_list)
     end
 
     def find_blog_post!

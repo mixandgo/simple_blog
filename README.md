@@ -24,13 +24,11 @@ rake simple_blog_engine:install:migrations
 rake acts_as_taggable_on_engine:install:migrations
 ```
 
-Installing assets
+Install assets
 
 ```shell
 rails generate simple_blog:install
 ```
-
-
 
 # License
 

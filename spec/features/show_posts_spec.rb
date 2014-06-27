@@ -2,11 +2,7 @@ require 'spec_helper'
 
 feature 'Show posts' do
   background do
-    create_a_blog_post(:title => 'Cool stuff',
-                       :body => 'Cool body',
-                       :description => 'Cool description',
-                       :tags => 'first_tag, second_tag',
-                       :keywords => 'first_keyword, second_keyword')
+    create_a_blog_post
     visit blog_posts_path
     click_on 'Cool Stuff'
   end

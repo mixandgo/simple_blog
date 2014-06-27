@@ -34,9 +34,7 @@ rails generate simple_blog:install
 
 ```ruby
 #in layouts/application.html.erb
-<% if content_for?(:seo_meta) %>
-  <%= yield(:seo_meta) %>
-<% end %>
+<%= yield(:seo_meta) %>
 ```
 
 # License

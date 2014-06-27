@@ -30,6 +30,15 @@ Install assets
 rails generate simple_blog:install
 ```
 
+##Usage
+
+```ruby
+#in layouts/application.html.erb
+<% if content_for?(:seo_meta) %>
+  <%= yield(:seo_meta) %>
+<% end %>
+```
+
 # License
 
 ### This code is free to use under the terms of the MIT license.

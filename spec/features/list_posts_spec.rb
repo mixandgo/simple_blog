@@ -2,8 +2,16 @@ require 'spec_helper'
 
 feature 'List posts' do
   background do
-    create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body', :tags => 'cool tag')
-    create_a_blog_post(:title => 'More cool stuff', :body => 'Cool body', :tags => 'cool tag')
+    create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body',
+                       :description => 'Cool description', :tags => 'cool tag')
+    create_a_blog_post(:title => 'More cool stuff', :body => 'Cool body',
+                       :description => 'Cool description', :tags => 'cool tag')
+  end
+
+  scenario 'should display description' do
+    visit blog_posts_path
+    expect(page).to have_content('Cool description')
+    expect(page).not_to have_content('Cool body')
   end
 
   scenario 'all the published posts are displayed' do

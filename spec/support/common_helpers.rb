@@ -24,3 +24,7 @@ end
 def expect_url_not_to_contain(string)
   expect(URI.parse(current_url).to_s).not_to match(string)
 end
+
+def expect_page_to_contain_meta_tag(name, content)
+  expect(page).to have_css("meta[name='#{name}'][content='#{content}']", :visible => false)
+end

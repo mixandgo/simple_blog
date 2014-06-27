@@ -4,8 +4,8 @@
   <% if @blog_posts.present? %>
     <% @blog_posts.each do |post| %>
       <div class="simple-blog-post">
-        <p class="simple-blog-post-body"><%= post.body.html_safe %></p>
         <h2 class="simple-blog-post-title"><%= link_to post.pretty_title, blog_post_path(post) %></h2>
+        <p class="simple-blog-post-body"><%= post.description.html_safe %></p>
         <div class="simple-blog-post-tags">
           Tags: <%= blog_post_tags(post) %>
         </div>

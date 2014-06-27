@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Edit posts' do
   scenario 'editting a post' do
-    create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body')
+    create_a_blog_post
     visit admin_blog_posts_path
     click_on 'Cool Stuff'
     fill_in :blog_post_title, :with => "Uncool stuff"
@@ -12,7 +12,7 @@ feature 'Edit posts' do
   end
 
   scenario 'handle validations' do
-    create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body')
+    create_a_blog_post
     visit admin_blog_posts_path
     click_on 'Cool Stuff'
     invalid_title = "a" * 80 # triggers a validation error
@@ -28,7 +28,7 @@ feature 'Edit posts' do
   end
 
   scenario 'update tags' do
-    create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body', :tags => 'First Tag, Second Tag')
+    create_a_blog_post
     visit admin_blog_posts_path
     click_on 'Cool Stuff'
     fill_in 'blog_post_tag_list', :with => 'Edited_tag'
@@ -38,7 +38,7 @@ feature 'Edit posts' do
   end
 
   scenario 'update keywords' do
-    create_a_blog_post(:title => 'Cool stuff', :keywords => "keyword1, keyword2")
+    create_a_blog_post
     visit admin_blog_posts_path
     click_on 'Cool Stuff'
     fill_in 'blog_post_keywords', :with => 'edited_keyword1, edited_keyword2'

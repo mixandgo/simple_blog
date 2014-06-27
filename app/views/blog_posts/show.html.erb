@@ -1,5 +1,10 @@
+<% content_for(:seo_meta) do %>
+  <%# HTML seo %>
+  <meta name="description" content="<%= strip_tags_for_seo(@blog_post.description) %>" />
+  <meta name="keywords" content="<%= @blog_post.keywords %>" />
+<% end %>
 <div class="simple-blog-posts-show">
-  <h1 class="simple-blog-post-title"><%= @blog_post.title.titleize %></h1>
+  <h1 class="simple-blog-post-title"><%= @blog_post.pretty_title %></h1>
   <p class="simple-blog-post-tags">
     Tags: <%= blog_post_tags(@blog_post) %>
   </p>

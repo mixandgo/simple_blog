@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Show posts' do
   background do
-    create_a_blog_post(:title => 'Cool stuff', :body => 'Cool body', :tags => 'first_tag, second_tag')
+    create_a_blog_post
     visit blog_posts_path
     click_on 'Cool Stuff'
   end
@@ -16,5 +16,10 @@ feature 'Show posts' do
   scenario 'clicking on a tag adds the tag as a filter in the url' do
     click_on 'first_tag'
     expect(current_url).to match(filter_posts_path('first_tag'))
+  end
+
+  scenario 'page should have meta tags for seo' do
+    expect_page_to_contain_meta_tag("description", "Cool description")
+    expect_page_to_contain_meta_tag("keywords", "first_keyword, second_keyword")
   end
 end

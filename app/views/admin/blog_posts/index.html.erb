@@ -4,7 +4,7 @@
   <% if @blog_posts.present? %>
     <% @blog_posts.each do |post| %>
       <div class="simple-blog-post">
-        <h2 class="simple-blog-post-title"><%= link_to post.title.titleize, edit_admin_blog_post_path(post) %></h2>
+        <h2 class="simple-blog-post-title"><%= link_to post.pretty_title, edit_admin_blog_post_path(post) %></h2>
         <p class="simple-blog-post-body"><%= post.body.html_safe %></p>
         <div class="simple-blog-post-tags">
           Tags: <%= post.tag_list %>

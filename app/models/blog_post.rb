@@ -16,6 +16,10 @@ class BlogPost < ActiveRecord::Base
     !!published_at
   end
 
+  def pretty_title
+    title.titleize
+  end
+
   private
 
   def set_slug

@@ -43,7 +43,7 @@ describe BlogPost do
   end
 
   describe "#pretty_title" do
-    it "returns the title titleize" do
+    it "returns the title titleized" do
       post = build(:blog_post, :title => "a cool title")
       expect(post.pretty_title).to eq("A Cool Title")
     end

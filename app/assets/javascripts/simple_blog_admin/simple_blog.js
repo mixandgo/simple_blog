@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  // addCkeditor('simple-blog-post-form-body');
-  // addCkeditor('simple-blog-post-form-description');
+  addCkeditor('simple-blog-post-form-body');
+  addCkeditor('simple-blog-post-form-description');
 });
 
 function addCkeditor(element_id) {

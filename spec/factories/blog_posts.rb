@@ -5,5 +5,13 @@ FactoryGirl.define do
     description "The most awesome post description"
     keywords "awesome, marketing, simple_blog, post"
     published_at 1.week.ago
+
+    trait :empty_post do
+      title ""
+      body ""
+      description ""
+      keywords ""
+      published_at nil
+    end
   end
 end

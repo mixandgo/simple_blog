@@ -7,21 +7,11 @@ class Admin::BlogPostsController < Admin::BaseController
   end
 
   def new
-    @blog_post = BlogPost.new
+    @blog_post = BlogPost.create
+    redirect_to edit_admin_blog_post_path(@blog_post)
   end
 
   def edit
-  end
-
-  def create
-    @blog_post = BlogPost.new(blog_post_params)
-    if @blog_post.save
-      flash.notice = t('.flash_notice')
-      redirect_to edit_admin_blog_post_path(@blog_post)
-    else
-      flash.alert = t('.flash_alert')
-      render :action => :new
-    end
   end
 
   def update

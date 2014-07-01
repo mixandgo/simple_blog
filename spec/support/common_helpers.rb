@@ -10,7 +10,7 @@ def create_a_blog_post(options={})
   end
   fill_in 'blog_post_tag_list', :with => options[:tags] || 'first_tag, second_tag'
   fill_in 'blog_post_keywords', :with => options[:keywords] || 'first_keyword, second_keyword'
-  click_button 'Create post'
+  click_button 'Update post'
 end
 
 def add_text_to(textarea, text)

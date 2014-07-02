@@ -68,5 +68,24 @@ module Admin
         expect(assigns(:blog_posts)).to eq([post])
       end
     end
+
+    describe "#destroy" do
+      let(:blog_post) { create(:blog_post) }
+
+      it "calls the destroy method on blog_post" do
+        delete :destroy, :id => blog_post.id
+        expect(BlogPost.count).to eq(0)
+      end
+
+      it "sets a flash notice that the post was deleted" do
+        delete :destroy, :id => blog_post.id
+        expect(flash[:notice]).not_to be_nil
+      end
+
+      it "redirects to the posts list page" do
+        delete :destroy, :id => blog_post.id
+        expect(response).to redirect_to(admin_blog_posts_path)
+      end
+    end
   end
 end

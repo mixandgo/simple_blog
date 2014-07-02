@@ -1,6 +1,6 @@
 class Admin::BlogPostsController < Admin::BaseController
 
-  before_filter :find_blog_post!, :only => [:edit, :update]
+  before_filter :find_blog_post!, :only => [:edit, :update, :destroy]
 
   def index
     @blog_posts = BlogPost.unscoped
@@ -22,6 +22,12 @@ class Admin::BlogPostsController < Admin::BaseController
       flash[:alert] = t('.flash_alert')
       render :action => :edit
     end
+  end
+
+  def destroy
+    @blog_post.destroy
+    flash[:notice] = t('.flash_notice')
+    redirect_to admin_blog_posts_path
   end
 
   private

@@ -1,5 +1,5 @@
 class BlogPost < ActiveRecord::Base
-  before_save :generate_random_title
+  before_save :default_values
   acts_as_taggable
 
   validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}, :if => :published?
@@ -9,11 +9,11 @@ class BlogPost < ActiveRecord::Base
   default_scope { where("published_at IS NOT NULL") }
 
   def safe_body
-    body.nil? ? "" : body.html_safe
+    body.html_safe
   end
 
   def safe_description
-    description.nil? ? "" : description.html_safe
+    description.html_safe
   end
 
   def to_param
@@ -25,18 +25,19 @@ class BlogPost < ActiveRecord::Base
   end
 
   def pretty_title
-    title.titleize
+    title.empty? ? I18n.t("admin.blog_posts.empty_post.title") : title.titleize
   end
 
   private
-
-  def generate_random_title
-    self.title = (0...8).map { (65 + rand(26)).chr }.join if title.nil?
-    self.slug = title_to_slug
-  end
 
   def title_to_slug
     title.parameterize
   end
 
+  def default_values
+    self.body ||= ""
+    self.description ||= ""
+    self.title ||= ""
+    self.slug = title_to_slug
+  end
 end

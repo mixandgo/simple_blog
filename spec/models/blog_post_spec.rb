@@ -30,15 +30,13 @@ describe BlogPost do
 
   describe "before_save" do
     it "sets the slug" do
-      post = build(:blog_post, :title => "Foo bar")
-      post.save
+      post = create(:blog_post, :title => "Foo bar")
       expect(post.slug).to eq("foo-bar")
     end
 
-    it "sets a random title" do
-      post = build(:blog_post, :empty_post)
-      post.save
-      expect(post.title).to_not be_nil
+    it "sets an empty slug for an empty post" do
+      empty_post = create(:blog_post, :empty_post)
+      expect(empty_post.slug).to be_empty
     end
   end
 
@@ -74,40 +72,54 @@ describe BlogPost do
       post = build(:blog_post, :title => "a cool title")
       expect(post.pretty_title).to eq("A Cool Title")
     end
+
+    it "returns the default title when title empty" do
+      post = build(:blog_post, :title => "")
+      expect(post.pretty_title).to eq("Empty title")
+    end
   end
 
   describe "#safe_body" do
     let(:safe_body_text) { "safe body" }
+    let(:blog_post) { build(:blog_post) }
+
 
     it "returns the html safe body" do
-      blog_post = build(:blog_post)
-
       expect(blog_post.body).to receive(:html_safe).and_return safe_body_text
+
       expect(blog_post.safe_body).to eq(safe_body_text)
-    end
-
-    it "returns an empty string when body is nil" do
-      empty_blog_post = build(:blog_post, :empty_post)
-
-      expect(empty_blog_post.safe_body).to eq("")
     end
   end
 
   describe "#safe_description" do
     let(:safe_description_text) { "safe description" }
+    let(:blog_post) { build(:blog_post) }
 
     it "returns the html safe description" do
-      blog_post = build(:blog_post)
-
       expect(blog_post.description).to receive(:html_safe).and_return safe_description_text
+
       expect(blog_post.safe_description).to eq(safe_description_text)
     end
+  end
 
-    it "returns an empty string when description is nil" do
-      empty_blog_post = build(:blog_post, :empty_post)
+  describe "#default_values" do
+    let(:blog_post) { BlogPost.create }
 
-      expect(empty_blog_post.safe_description).to eq("")
+    it "sets the body to an empty string" do
+      expect(blog_post.body).to be_a(String)
+      expect(blog_post.body).to be_empty
     end
+
+    it "sets the description to an empty string" do
+      expect(blog_post.description).to be_a(String)
+      expect(blog_post.description).to be_empty
+    end
+
+    it "sets the title to an empty string" do
+      expect(blog_post.title).to be_a(String)
+      expect(blog_post.title).to be_empty
+    end
+
   end
 
 end

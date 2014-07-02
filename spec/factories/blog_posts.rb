@@ -6,7 +6,7 @@ FactoryGirl.define do
     keywords "awesome, marketing, simple_blog, post"
     published_at 1.week.ago
 
-    trait :empty_post do
+    trait :unpublished_empty_post do
       title ""
       body ""
       description ""

@@ -1,4 +1,6 @@
 en:
+  blog_post:
+    empty_title: "Empty title"
   admin:
     blog_posts:
       edit:
@@ -20,8 +22,6 @@ en:
         new_post: "New post"
         page_heading: "Blog"
         no_published_posts: "There are no published posts available."
-      empty_post:
-        title: "Empty title"
   blog_posts:
     index:
       page_heading: "Blog"

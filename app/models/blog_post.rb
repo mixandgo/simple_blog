@@ -1,20 +1,12 @@
 class BlogPost < ActiveRecord::Base
-  before_save :default_values
+  before_save :set_slug
   acts_as_taggable
 
-  validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}, :if => :published?
-  validates :description, :presence => true, :if => :published?
-  validates :body, :presence => true, :if => :published?
+  validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}, :on => :update
+  validates :body, :presence => true, :on => :update
+  validates :description, :presence => true, :on => :update, :if => :published?
 
   default_scope { where("published_at IS NOT NULL") }
-
-  def safe_body
-    body.html_safe
-  end
-
-  def safe_description
-    description.html_safe
-  end
 
   def to_param
     title_to_slug
@@ -25,7 +17,7 @@ class BlogPost < ActiveRecord::Base
   end
 
   def pretty_title
-    title.empty? ? I18n.t("admin.blog_posts.empty_post.title") : title.titleize
+    title.nil? ? I18n.t("blog_post.empty_title") : title.titleize
   end
 
   private
@@ -34,10 +26,7 @@ class BlogPost < ActiveRecord::Base
     title.parameterize
   end
 
-  def default_values
-    self.body ||= ""
-    self.description ||= ""
-    self.title ||= ""
-    self.slug = title_to_slug
+  def set_slug
+    self.slug = title_to_slug unless title.nil?
   end
 end

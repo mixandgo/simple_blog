@@ -16,6 +16,7 @@
             Keywords: <%= post.keywords %>
           </div>
         <% end %>
+        <%= link_to "Delete", admin_blog_post_path(post.id), :method => :delete %>
       </div>
     <% end %>
   <% else %>

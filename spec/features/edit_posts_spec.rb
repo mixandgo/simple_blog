@@ -46,4 +46,12 @@ feature 'Edit posts' do
     visit admin_blog_posts_path
     expect(page).to have_content('Keywords: edited_keyword1, edited_keyword2')
   end
+
+  scenario 'deleting a post' do
+    visit admin_blog_posts_path
+    click_on 'New post'
+    click_on 'Delete post'
+    expect(page).to have_content('Post was deleted succesfully')
+    expect(page).to have_content('There are no published posts available.')
+  end
 end

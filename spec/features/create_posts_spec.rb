@@ -32,4 +32,13 @@ feature 'Create posts' do
     visit admin_blog_posts_path
     expect(page).to have_content('Keywords: keyword1, keyword2')
   end
+
+  scenario 'user can delete a post' do
+    visit admin_blog_posts_path
+    click_on 'New post'
+    visit admin_blog_posts_path
+    click_on 'Delete'
+    expect(page).to have_content('Post was deleted succesfully')
+    expect(page).to have_content('There are no published posts available.')
+  end
 end

@@ -8,7 +8,7 @@ class Admin::BlogPostsController < Admin::BaseController
 
   def new
     @blog_post = BlogPost.create
-    redirect_to edit_admin_blog_post_path(@blog_post)
+    redirect_to edit_admin_blog_post_path(@blog_post.id)
   end
 
   def edit
@@ -31,6 +31,6 @@ class Admin::BlogPostsController < Admin::BaseController
     end
 
     def find_blog_post!
-      @blog_post = BlogPost.unscoped.find_by!(params.permit(:slug))
+      @blog_post = BlogPost.unscoped.find_by!(params.permit(:id))
     end
 end

@@ -6,18 +6,18 @@ module Admin
       let(:post) { create(:blog_post) }
 
       it "assigns to @blog_post" do
-        patch :update, :slug => post.slug, :blog_post => {:title => "UhHa"}
+        patch :update, :id => post.id, :blog_post => {:title => "UhHa"}
         expect(assigns(:blog_post)).to eq(post)
       end
 
       context "attributes are valid" do
         it "sets a flash notice" do
-          patch :update, :slug => post.slug, :blog_post => {:title => "UhHa"}
+          patch :update, :id => post.id, :blog_post => {:title => "UhHa"}
           expect(flash[:notice]).not_to be_nil
         end
 
         it "redirects to the posts list page" do
-          patch :update, :slug => post.slug, :blog_post => {:title => "UhHa"}
+          patch :update, :id => post.id, :blog_post => {:title => "UhHa"}
           expect(response).to redirect_to(admin_blog_posts_path)
         end
       end
@@ -27,20 +27,20 @@ module Admin
 
         it "sets the alert flash" do
           invalid_title = "a" * 100 # too long
-          patch :update, :slug => post.slug, :blog_post => {:title => invalid_title}
+          patch :update, :id => post.id, :blog_post => {:title => invalid_title}
           expect(flash[:alert]).not_to be_nil
         end
 
         it "renders the edit template" do
           invalid_title = "a" * 100 # too long
-          patch :update, :slug => post.slug, :blog_post => {:title => invalid_title}
+          patch :update, :id => post.id, :blog_post => {:title => invalid_title}
           expect(response).to render_template('blog_posts/edit')
         end
       end
 
       context "can update an unpublished post" do
         it "redirects to the posts list page" do
-          patch :update, :slug => post.slug, :blog_post => {:published_at => nil}
+          patch :update, :id => post.id, :blog_post => {:published_at => nil}
           expect(response).to redirect_to(admin_blog_posts_path)
         end
       end
@@ -48,13 +48,13 @@ module Admin
 
     describe "#new" do
 
-      let(:post_slug) { "slug" }
-      let(:blog_post) { double("blog_post", :slug => post_slug) }
+      let(:post_id) { 100 }
+      let(:blog_post) { double("blog_post", :id => post_id) }
 
       it "creates a new empty blog post and redirects to the edit page" do
         expect(BlogPost).to receive(:create).and_return blog_post
         get :new
-        expect(response).to redirect_to(edit_admin_blog_post_path(blog_post))
+        expect(response).to redirect_to(edit_admin_blog_post_path(blog_post.id))
       end
 
     end

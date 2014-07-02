@@ -4,14 +4,18 @@
   <% if @blog_posts.present? %>
     <% @blog_posts.each do |post| %>
       <div class="simple-blog-post">
-        <h2 class="simple-blog-post-title"><%= link_to post.pretty_title, edit_admin_blog_post_path(post) %></h2>
+        <h2 class="simple-blog-post-title"><%= link_to post.pretty_title, edit_admin_blog_post_path(post.id) %></h2>
         <p class="simple-blog-post-body"><%= post.safe_body %></p>
-        <div class="simple-blog-post-tags">
-          Tags: <%= post.tag_list %>
-        </div>
-        <div class="simple-blog-post-keywords">
-          Keywords: <%= post.keywords %>
-        </div>
+        <% unless post.tag_list.empty? %>
+          <div class="simple-blog-post-tags">
+            Tags: <%= post.tag_list %>
+          </div>
+        <% end %>
+        <% unless post.keywords.nil? %>
+          <div class="simple-blog-post-keywords">
+            Keywords: <%= post.keywords %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   <% else %>

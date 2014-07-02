@@ -5,18 +5,18 @@
     <% @blog_posts.each do |post| %>
       <div class="simple-blog-post">
         <h2 class="simple-blog-post-title"><%= link_to post.pretty_title, edit_admin_blog_post_path(post.id) %></h2>
-        <p class="simple-blog-post-body"><%= post.safe_body %></p>
-        <% unless post.tag_list.empty? %>
+        <p class="simple-blog-post-body"><%= raw post.body %></p>
+        <% if post.tag_list.present? %>
           <div class="simple-blog-post-tags">
             Tags: <%= post.tag_list %>
           </div>
         <% end %>
-        <% unless post.keywords.nil? %>
+        <% if post.keywords.present? %>
           <div class="simple-blog-post-keywords">
             Keywords: <%= post.keywords %>
           </div>
         <% end %>
-        <%= link_to "Delete", admin_blog_post_path(post.id), :method => :delete %>
+        <%= link_to "Delete", admin_blog_post_path(post.id), :method => :delete, :data => { confirm: 'Are you sure?' } %>
       </div>
     <% end %>
   <% else %>

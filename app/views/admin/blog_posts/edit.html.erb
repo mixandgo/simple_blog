@@ -3,7 +3,7 @@
     <%= render 'form', :f => f %>
     <div class="simple-blog-new-post-row">
       <%= f.submit t('.submit'), :class => "simple-blog-new-post-submit" %>
-      <%= link_to "Delete post", admin_blog_post_path(@blog_post.id), :method => :delete %>
+      <%= link_to "Delete post", admin_blog_post_path(@blog_post.id), :method => :delete, :data => { confirm: 'Are you sure' } %>
     </div>
   <% end %>
 </div>

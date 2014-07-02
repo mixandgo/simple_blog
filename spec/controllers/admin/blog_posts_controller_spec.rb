@@ -51,8 +51,13 @@ module Admin
       let(:post_id) { 100 }
       let(:blog_post) { double("blog_post", :id => post_id) }
 
-      it "creates a new empty blog post and redirects to the edit page" do
+      it "creates a new empty blog post" do
         expect(BlogPost).to receive(:create).and_return blog_post
+        get :new
+      end
+
+      it "redirects to the edit page" do
+        allow(BlogPost).to receive(:create).and_return blog_post
         get :new
         expect(response).to redirect_to(edit_admin_blog_post_path(blog_post.id))
       end
@@ -72,7 +77,7 @@ module Admin
     describe "#destroy" do
       let(:blog_post) { create(:blog_post) }
 
-      it "calls the destroy method on blog_post" do
+      it "destroys the blog post specified by id" do
         delete :destroy, :id => blog_post.id
         expect(BlogPost.count).to eq(0)
       end

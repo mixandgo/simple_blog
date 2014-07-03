@@ -30,7 +30,16 @@ class Admin::BlogPostsController < Admin::BaseController
     redirect_to admin_blog_posts_path
   end
 
+  def get_tags
+    @tags = BlogPost.unscoped.all_tags(:conditions => "tags.name LIKE '#{tag_params}%'")
+    render json: @tags.map(&:name)
+  end
+
   private
+
+    def tag_params
+      params.permit(:term)[:term] || ""
+    end
 
     def blog_post_params
       params.require(:blog_post).permit(:title, :body, :description, :keywords, :published_at, :tag_list)

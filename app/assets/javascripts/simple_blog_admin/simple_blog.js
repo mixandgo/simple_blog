@@ -27,7 +27,7 @@ function setAutocomplete(elementId) {
     source: function(request, response) {
       $.getJSON("/admin/blog_posts/get_tags", {
         term: extractLast(request.term)
-      }, response );
+      }, response);
     },
     messages: {
       // removed the helper message that autocomplete shows by default

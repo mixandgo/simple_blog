@@ -1,7 +1,7 @@
 $(document).ready(function() {
   addCkeditor('simple-blog-post-form-body');
   addCkeditor('simple-blog-post-form-description');
-  setAutocomplete('blog_post_tag_list');
+  setAutocomplete('simple-blog-post-form-tag-list');
 });
 
 function addCkeditor(elementId) {
@@ -19,26 +19,25 @@ function addCkeditor(elementId) {
 }
 
 function setAutocomplete(elementId) {
-  $("#"+elementId).bind("keydown", function(event) {
-    if ( event.keyCode === $.ui.keyCode.TAB &&
-         $( this ).autocomplete( "instance" ).menu.active ) {
+  $("#"+elementId).on("keydown", function(event) {
+    if (event.keyCode === $.ui.keyCode.TAB && $(this).autocomplete("instance").menu.active) {
       event.preventDefault();
     }
   }).autocomplete({
-    source: function(request, response ) {
-      $.getJSON( "/admin/blog_posts/get_tags", {
-        term: extractLast( request.term )
+    source: function(request, response) {
+      $.getJSON("/admin/blog_posts/get_tags", {
+        term: extractLast(request.term)
       }, response );
     },
     messages: {
       // removed the helper message that autocomplete shows by default
-        noResults: '',
-        results: function() {}
+      noResults: '',
+      results: function() {}
     },
     search: function() {
       // custom minLength
-      var term = extractLast( this.value );
-      if ( term.length < 2 ) {
+      var term = extractLast(this.value);
+      if (term.length < 2) {
         return false;
       }
     },
@@ -46,26 +45,25 @@ function setAutocomplete(elementId) {
       // prevent value inserted on focus
       return false;
     },
-    select: function( event, ui ) {
-      var terms = split( this.value );
+    select: function(event, ui) {
+      var terms = split(this.value);
       // remove the current input
       terms.pop();
       // add the selected item
-      terms.push( ui.item.value );
+      terms.push(ui.item.value);
       // add placeholder to get the comma-and-space at the end
-      terms.push( "" );
-      this.value = terms.join( ", " );
+      terms.push("");
+      this.value = terms.join(", ");
 
       return false;
     }
   });
 }
 
-
 function split(val) {
-  return val.split( /,\s*/ );
+  return val.split(/,\s*/);
 }
 
 function extractLast(term) {
-  return split( term ).pop();
+  return split(term).pop();
 }

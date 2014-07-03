@@ -38,7 +38,7 @@ class Admin::BlogPostsController < Admin::BaseController
   private
 
     def tag_params
-      params.permit(:term)[:term] || ""
+      params.permit(:term)[:term]
     end
 
     def blog_post_params

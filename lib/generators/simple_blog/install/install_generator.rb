@@ -20,6 +20,14 @@ module SimpleBlog
         install_libraries(folder, file, text)
       end
 
+      def install_css_file
+        folder = "app/assets/stylesheets"
+        file = "application.css"
+
+        text = "\n *= require simple_blog_admin\n"
+        install_libraries(folder, file, text)
+      end
+
       private
 
       def install_libraries(folder, file, text)

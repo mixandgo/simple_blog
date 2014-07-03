@@ -34,7 +34,7 @@ feature 'Edit posts' do
     fill_in 'blog_post_tag_list', :with => 'Edited_tag'
     click_on 'Update post'
     visit admin_blog_posts_path
-    expect(page).to have_content('Tags: Edited_tag')
+    expect(page).to have_content('Edited_tag')
   end
 
   scenario 'update keywords' do
@@ -44,7 +44,7 @@ feature 'Edit posts' do
     fill_in 'blog_post_keywords', :with => 'edited_keyword1, edited_keyword2'
     click_on 'Update post'
     visit admin_blog_posts_path
-    expect(page).to have_content('Keywords: edited_keyword1, edited_keyword2')
+    expect(page).to have_content('edited_keyword1, edited_keyword2')
   end
 
   scenario 'deleting a post' do

@@ -2,23 +2,49 @@
   <h1 class="simple-blog-title"><%= t('.page_heading') %></h1>
 
   <% if @blog_posts.present? %>
+  <table>
+    <tr>
+      <th>
+        Title
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Tags
+      </th>
+      <th>
+        Keywords
+      </th>
+      <th>
+        Published?
+      </th>
+      <th>
+        Delete
+      </th>
+    </tr>
     <% @blog_posts.each do |post| %>
-      <div class="simple-blog-post">
-        <h2 class="simple-blog-post-title"><%= link_to post.pretty_title, edit_admin_blog_post_path(post.id) %></h2>
-        <p class="simple-blog-post-body"><%= raw post.body %></p>
-        <% if post.tag_list.present? %>
-          <div class="simple-blog-post-tags">
-            Tags: <%= post.tag_list %>
-          </div>
-        <% end %>
-        <% if post.keywords.present? %>
-          <div class="simple-blog-post-keywords">
-            Keywords: <%= post.keywords %>
-          </div>
-        <% end %>
-        <%= link_to "Delete", admin_blog_post_path(post.id), :method => :delete, :data => { confirm: 'Are you sure?' } %>
-      </div>
+      <tr class="simple-blog-post">
+        <td class="simple-blog-post-title">
+          <%= link_to post.pretty_title, edit_admin_blog_post_path(post.id) %>
+        </td>
+        <td class="simple-blog-post-body">
+          <p><%= raw post.body %></p>
+        </td>
+        <td class="simple-blog-post-tags">
+          <%= post.tag_list %>
+        <td class="simple-blog-post-keywords">
+          <%= post.keywords %>
+        </td>
+        <td class="simple-blog-post-published">
+          <%= post.published? %>
+        </td>
+        <td class="simple-blog-post-delete">
+          <%= link_to "Delete", admin_blog_post_path(post.id), :method => :delete, :data => { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
     <% end %>
+    </table>
   <% else %>
     <p class="simple-blog-posts-missing"><%= t('.no_published_posts') %></p>
   <% end %>

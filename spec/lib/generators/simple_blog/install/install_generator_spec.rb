@@ -46,4 +46,21 @@ describe SimpleBlog::Generators::InstallGenerator do
     end
 
   end
+
+  describe "#install_css_file" do
+
+    it "does not create application.css if not already present" do
+      run_generator
+      assert_file "app/assets/stylesheets/application.css", "\n *= require simple_blog_admin\n"
+    end
+
+    it "appends 'simple_blog_admin' to application.css when file is present" do
+      FileUtils.mkdir_p("spec/tmp/app/assets/stylesheets/")
+      File.open("spec/tmp/app/assets/stylesheets/application.css", "w")
+      run_generator
+      assert_file "app/assets/stylesheets/application.css", "\n *= require simple_blog_admin\n"
+    end
+
+  end
+
 end

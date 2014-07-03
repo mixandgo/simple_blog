@@ -92,13 +92,13 @@ describe BlogPost do
     end
 
     it "searches for everything when term is empty string" do
-      expect(blog_post).to receive(:all_tags).with(:conditions => "tags.name LIKE '%'").and_return [tag]
-      expect(BlogPost.find_tags("")).to eq [tag]
+      expect(blog_post).to receive(:all_tags).and_return [tag]
+      BlogPost.find_tags("")
     end
 
     it "searches for the term" do
       expect(blog_post).to receive(:all_tags).with(:conditions => "tags.name LIKE 'term%'").and_return [tag]
-      expect(BlogPost.find_tags(term)).to eq [tag]
+      BlogPost.find_tags(term)
     end
 
   end

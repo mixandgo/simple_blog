@@ -21,6 +21,7 @@ class BlogPost < ActiveRecord::Base
   end
 
   def self.find_tags(term)
+    return unscoped.all_tags if term.blank?
     unscoped.all_tags(:conditions => "tags.name LIKE '#{term}%'")
   end
 

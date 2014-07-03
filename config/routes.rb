@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   get '/blog/tag/:tag' => "blog_posts#filter", :as => :filter_posts
 
   namespace :admin do
-    resources :blog_posts, :param => :slug
+    resources :blog_posts
   end
 end

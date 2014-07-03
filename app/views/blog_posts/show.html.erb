@@ -5,10 +5,12 @@
 <% end %>
 <div class="simple-blog-posts-show">
   <h1 class="simple-blog-post-title"><%= @blog_post.pretty_title %></h1>
-  <p class="simple-blog-post-tags">
-    Tags: <%= blog_post_tags(@blog_post) %>
-  </p>
+  <% if @blog_post.tag_list.present? %>
+    <p class="simple-blog-post-tags">
+      Tags: <%= blog_post_tags(@blog_post) %>
+    </p>
+  <% end %>
   <div class="simple-blog-post-body">
-    <%= @blog_post.body.html_safe %>
+    <%= raw @blog_post.body %>
   </div>
 </div>

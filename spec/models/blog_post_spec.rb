@@ -1,17 +1,50 @@
 require 'spec_helper'
 
 describe BlogPost do
-  it { should validate_presence_of(:title) }
-  it { should validate_uniqueness_of(:title) }
-  it { should validate_presence_of(:description) }
-  it { should validate_presence_of(:body) }
-  it { should ensure_length_of(:title).is_at_most(72) }
+
+  describe "validations on update" do
+    subject { create(:blog_post, :unpublished_empty) }
+
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:body) }
+    it { should ensure_length_of(:title).is_at_most(72) }
+
+    describe "uniqueness" do
+      let(:title) { "unique title" }
+      let!(:post) { create(:blog_post, :title => title) }
+
+      it "should validate uniqueness of title" do
+        expect(create(:blog_post, :title => title)).to have(1).errors_on(:title)
+      end
+    end
+
+  end
+
+  describe "validations on create" do
+    subject { build(:blog_post, :unpublished_empty) }
+
+    it { should_not validate_presence_of(:title) }
+    it { should_not validate_uniqueness_of(:title) }
+    it { should_not validate_presence_of(:description) }
+    it { should_not validate_presence_of(:body) }
+    it { should_not ensure_length_of(:title).is_at_most(72) }
+  end
+
+  describe "validations when published at date is present" do
+    subject { create(:blog_post, :published_at => 1.week.ago, :description => "") }
+
+    it { should validate_presence_of(:description) }
+  end
 
   describe "before_save" do
     it "sets the slug" do
-      post = build(:blog_post, :title => "Foo bar")
-      post.save
+      post = create(:blog_post, :title => "Foo bar")
       expect(post.slug).to eq("foo-bar")
+    end
+
+    it "sets an empty slug for an empty post" do
+      empty_post = create(:blog_post, :unpublished_empty)
+      expect(empty_post.slug).to be_empty
     end
   end
 
@@ -48,4 +81,5 @@ describe BlogPost do
       expect(post.pretty_title).to eq("A Cool Title")
     end
   end
+
 end

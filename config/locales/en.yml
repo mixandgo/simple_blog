@@ -14,6 +14,8 @@ en:
       update:
         flash_notice: "Post was succesfully updated."
         flash_alert: "Post was not updated."
+      destroy:
+        flash_notice: "Post was deleted succesfully."
       index:
         new_post: "New post"
         page_heading: "Blog"

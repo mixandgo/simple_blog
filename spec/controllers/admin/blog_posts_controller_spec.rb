@@ -6,18 +6,18 @@ module Admin
       let(:post) { create(:blog_post) }
 
       it "assigns to @blog_post" do
-        patch :update, :slug => post.slug, :blog_post => {:title => "UhHa"}
+        patch :update, :id => post.id, :blog_post => {:title => "UhHa"}
         expect(assigns(:blog_post)).to eq(post)
       end
 
       context "attributes are valid" do
         it "sets a flash notice" do
-          patch :update, :slug => post.slug, :blog_post => {:title => "UhHa"}
+          patch :update, :id => post.id, :blog_post => {:title => "UhHa"}
           expect(flash[:notice]).not_to be_nil
         end
 
         it "redirects to the posts list page" do
-          patch :update, :slug => post.slug, :blog_post => {:title => "UhHa"}
+          patch :update, :id => post.id, :blog_post => {:title => "UhHa"}
           expect(response).to redirect_to(admin_blog_posts_path)
         end
       end
@@ -27,83 +27,41 @@ module Admin
 
         it "sets the alert flash" do
           invalid_title = "a" * 100 # too long
-          patch :update, :slug => post.slug, :blog_post => {:title => invalid_title}
+          patch :update, :id => post.id, :blog_post => {:title => invalid_title}
           expect(flash[:alert]).not_to be_nil
         end
 
         it "renders the edit template" do
           invalid_title = "a" * 100 # too long
-          patch :update, :slug => post.slug, :blog_post => {:title => invalid_title}
+          patch :update, :id => post.id, :blog_post => {:title => invalid_title}
           expect(response).to render_template('blog_posts/edit')
         end
       end
 
       context "can update an unpublished post" do
         it "redirects to the posts list page" do
-          patch :update, :slug => post.slug, :blog_post => {:published_at => nil}
+          patch :update, :id => post.id, :blog_post => {:published_at => nil}
           expect(response).to redirect_to(admin_blog_posts_path)
-        end
-      end
-    end
-
-    describe "#create" do
-      let(:params) { attributes_for(:blog_post, :title => "Cool post",
-                                    :body => "Cool post body",
-                                    :description => "Cool post description") }
-
-      it "assigns to @blog_post" do
-        post :create, :blog_post => params
-        expect(assigns(:blog_post)).to be_a(BlogPost)
-      end
-
-      context "attributes are valid" do
-        it "creates a new record" do
-          expect {
-            post :create, :blog_post => params
-          }.to change(BlogPost, :count).by(1)
-        end
-
-        it "sets a flash notice" do
-          post :create, :blog_post => params
-          expect(flash[:notice]).not_to be_nil
-        end
-
-        it "redirects to the post details page" do
-          post :create, :blog_post => params
-          expect(response).to redirect_to(edit_admin_blog_post_path(BlogPost.last))
-        end
-      end
-
-      context "attributes are invalid" do
-        it "doesn't create a new record" do
-          expect {
-            post :create, :blog_post => {:foo => :bar}
-          }.to_not change(BlogPost, :count)
-        end
-
-        it "sets a flash alert" do
-          post :create, :blog_post => {:foo => :bar}
-          expect(flash[:alert]).not_to be_nil
-        end
-
-        it "renders the new post form" do
-          post :create, :blog_post => {:foo => :bar}
-          expect(response).to render_template('blog_posts/new')
         end
       end
     end
 
     describe "#new" do
 
-      it "assigns a new Post to @blog_post" do
+      let(:post_id) { 100 }
+      let(:blog_post) { double("blog_post", :id => post_id) }
+
+      it "creates a new empty blog post" do
+        expect(BlogPost).to receive(:create).and_return blog_post
         get :new
-        expect(assigns[:blog_post]).to be_a_new(BlogPost)
       end
 
-      it "renders the new template" do
+      it "redirects to the edit page" do
+        allow(BlogPost).to receive(:create).and_return blog_post
         get :new
-        expect(response).to render_template('blog_posts/new')
+        expect(response).to redirect_to(edit_admin_blog_post_path(blog_post.id))
       end
+
     end
 
     describe "#index" do
@@ -113,6 +71,25 @@ module Admin
         expect(BlogPost).to receive(:unscoped).and_return [post]
         get :index
         expect(assigns(:blog_posts)).to eq([post])
+      end
+    end
+
+    describe "#destroy" do
+      let(:blog_post) { create(:blog_post) }
+
+      it "destroys the blog post specified by id" do
+        delete :destroy, :id => blog_post.id
+        expect(BlogPost.count).to eq(0)
+      end
+
+      it "sets a flash notice that the post was deleted" do
+        delete :destroy, :id => blog_post.id
+        expect(flash[:notice]).not_to be_nil
+      end
+
+      it "redirects to the posts list page" do
+        delete :destroy, :id => blog_post.id
+        expect(response).to redirect_to(admin_blog_posts_path)
       end
     end
   end

@@ -1,6 +1,4 @@
 en:
-  blog_post:
-    empty_title: "Empty title"
   admin:
     blog_posts:
       edit:

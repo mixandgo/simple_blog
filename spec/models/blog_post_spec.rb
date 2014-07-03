@@ -3,13 +3,13 @@ require 'spec_helper'
 describe BlogPost do
 
   describe "validations on update" do
-    subject { create(:blog_post, :unpublished_empty_post) }
+    subject { create(:blog_post, :unpublished_empty) }
 
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:body) }
     it { should ensure_length_of(:title).is_at_most(72) }
 
-    describe "uniquenss" do
+    describe "uniqueness" do
       let(:title) { "unique title" }
       let!(:post) { create(:blog_post, :title => title) }
 
@@ -21,7 +21,7 @@ describe BlogPost do
   end
 
   describe "validations on create" do
-    subject { build(:blog_post, :unpublished_empty_post) }
+    subject { build(:blog_post, :unpublished_empty) }
 
     it { should_not validate_presence_of(:title) }
     it { should_not validate_uniqueness_of(:title) }
@@ -43,7 +43,7 @@ describe BlogPost do
     end
 
     it "sets an empty slug for an empty post" do
-      empty_post = create(:blog_post, :unpublished_empty_post)
+      empty_post = create(:blog_post, :unpublished_empty)
       expect(empty_post.slug).to be_empty
     end
   end
@@ -79,11 +79,6 @@ describe BlogPost do
     it "returns the title titleized" do
       post = build(:blog_post, :title => "a cool title")
       expect(post.pretty_title).to eq("A Cool Title")
-    end
-
-    it "returns the default title when title nil" do
-      post = create(:blog_post, :title => nil)
-      expect(post.pretty_title).to eq("Empty title")
     end
   end
 

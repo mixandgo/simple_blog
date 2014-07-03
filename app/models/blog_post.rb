@@ -17,7 +17,7 @@ class BlogPost < ActiveRecord::Base
   end
 
   def pretty_title
-    title.nil? ? I18n.t("blog_post.empty_title") : title.titleize
+    title.try(:titleize)
   end
 
   private

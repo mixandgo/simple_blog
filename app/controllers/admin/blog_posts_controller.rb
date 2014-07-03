@@ -31,7 +31,7 @@ class Admin::BlogPostsController < Admin::BaseController
   end
 
   def get_tags
-    @tags = BlogPost.unscoped.all_tags(:conditions => "tags.name LIKE '#{tag_params}%'")
+    @tags = BlogPost.find_tags(tag_params)
     render json: @tags.map(&:name)
   end
 

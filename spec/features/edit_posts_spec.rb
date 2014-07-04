@@ -31,7 +31,7 @@ feature 'Edit posts' do
     create_a_blog_post
     visit admin_blog_posts_path
     click_on 'Cool Stuff'
-    fill_in 'blog_post_tag_list', :with => 'Edited_tag'
+    fill_in 'simple-blog-post-form-tag-list', :with => 'Edited_tag'
     click_on 'Update post'
     visit admin_blog_posts_path
     expect(page).to have_content('Edited_tag')

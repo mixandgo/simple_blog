@@ -92,5 +92,30 @@ module Admin
         expect(response).to redirect_to(admin_blog_posts_path)
       end
     end
+
+    describe "#get_tags" do
+      let(:tag) { double("tag", :name => "tag") }
+      let(:term) { "search_term" }
+
+      before :each do
+        allow(BlogPost).to receive(:find_tags).and_return [tag]
+      end
+
+      it "assigns @tags with the resulting tags" do
+        get :get_tags
+        expect(assigns(:tags)).to eq([tag])
+      end
+
+      it "returns tags filtered by term" do
+        expect(BlogPost).to receive(:find_tags).with(term).and_return [tag]
+        get :get_tags, :term => term
+      end
+
+      it "returns a json of the tags name" do
+        expected_json = [tag.name].to_json
+        get :get_tags
+        expect(response.body).to eq expected_json
+      end
+    end
   end
 end

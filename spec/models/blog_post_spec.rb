@@ -82,4 +82,25 @@ describe BlogPost do
     end
   end
 
+  describe ".find_tags" do
+    let(:term) { "term" }
+    let(:blog_post) { double("blog_post") }
+    let(:tag) { double("tag") }
+
+    before :each do
+      allow(BlogPost).to receive(:unscoped).and_return blog_post
+    end
+
+    it "searches for everything when term is empty string" do
+      expect(blog_post).to receive(:all_tags).and_return [tag]
+      BlogPost.find_tags("")
+    end
+
+    it "searches for the term" do
+      expect(blog_post).to receive(:all_tags).with(:conditions => "tags.name LIKE 'term%'").and_return [tag]
+      BlogPost.find_tags(term)
+    end
+
+  end
+
 end

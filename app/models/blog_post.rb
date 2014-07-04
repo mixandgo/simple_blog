@@ -20,6 +20,11 @@ class BlogPost < ActiveRecord::Base
     title.try(:titleize)
   end
 
+  def self.find_tags(term)
+    return unscoped.all_tags if term.blank?
+    unscoped.all_tags(:conditions => "tags.name LIKE '#{term}%'")
+  end
+
   private
 
   def title_to_slug

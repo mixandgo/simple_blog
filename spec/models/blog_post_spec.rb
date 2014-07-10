@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe BlogPost do
 
+  it { should have_many(:pictures) }
+  it { should have_many(:blog_imageable) }
+
   describe "validations on update" do
     subject { create(:blog_post, :unpublished_empty) }
 

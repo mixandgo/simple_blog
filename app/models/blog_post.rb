@@ -28,6 +28,10 @@ class BlogPost < ActiveRecord::Base
     unscoped.all_tags(:conditions => "tags.name LIKE '#{term}%'")
   end
 
+  def self.unscoped_find(id)
+    unscoped.find(id)
+  end
+
   private
 
   def title_to_slug

@@ -13,7 +13,7 @@ describe Admin::Ckeditor::PicturesController do
   describe "#index" do
     it "should assign all pictures" do
       allow(Ckeditor::Picture).to receive(:find_associated_pictures).
-        with("model_name" => model_name, "model_id" => model_id).
+        with(model_name, model_id).
         and_return picture
 
       get :index, :model_name => model_name, :model_id => model_id
@@ -26,7 +26,7 @@ describe Admin::Ckeditor::PicturesController do
 
     before :each do
       allow(BlogPost).to receive(:unscoped_find).with(model_id).and_return blog_post
-      allow(Ckeditor).to receive(:picture_model).and_return picture
+      allow(Ckeditor::Picture).to receive(:new).and_return picture
       allow(picture).to receive(:new).and_return picture
     end
 

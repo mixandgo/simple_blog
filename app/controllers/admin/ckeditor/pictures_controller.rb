@@ -5,14 +5,14 @@ class Admin::Ckeditor::PicturesController < Admin::BaseController
   before_filter :find_picture, :only => :destroy
 
   def index
-    @pictures = Ckeditor::Picture.find_associated_pictures(picture_params)
+    @pictures = Ckeditor::Picture.find_associated_pictures(*picture_params.values)
 
     respond_with(@pictures)
   end
 
   def create
     @article = BlogPost.unscoped_find(picture_params[:model_id])
-    @picture = Ckeditor.picture_model.new
+    @picture = Ckeditor::Picture.new
 
     render_with_assets(@picture)
   end
@@ -35,7 +35,6 @@ class Admin::Ckeditor::PicturesController < Admin::BaseController
           window.parent.CKEDITOR.tools.callFunction(#{params[:CKEditorFuncNum]}, '#{config.relative_url_root}#{Ckeditor::Utils.escape_single_quotes(asset.url_content)}');
         </script>"
 
-        # picture = Ckeditor.asset_adapter.find_all.find(asset.id)
         @article.pictures << asset
         render :text => body
       else

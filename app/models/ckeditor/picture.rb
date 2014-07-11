@@ -12,6 +12,7 @@ class Ckeditor::Picture < Ckeditor::Asset
       joins("JOIN blog_imageables ON blog_imageables.ckeditor_assets_id = ckeditor_assets.id").
       where("blog_imageables.imageable_type = ? AND blog_imageables.imageable_id = ?", model_name, model_id)
     pictures.where("ckeditor_assets.id = ?", id) unless id.nil?
+    pictures
   end
 
 end

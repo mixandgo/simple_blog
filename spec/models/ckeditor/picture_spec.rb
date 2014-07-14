@@ -22,8 +22,9 @@ describe Ckeditor::Picture do
     end
 
     it "returns the picture with the specified id" do
+      allow(sql).to receive(:first)
       expect(sql).to receive(:where).
-        with("ckeditor_assets.id = ?", id)
+        with("ckeditor_assets.id = ?", id).and_return sql
 
       Ckeditor::Picture.find_associated_pictures(model_name, model_id, id)
     end

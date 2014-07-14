@@ -85,16 +85,16 @@ describe Admin::Ckeditor::PicturesController do
       allow(Ckeditor::Picture).to receive(:find_associated_pictures).
         with(model_name, model_id, id).
         and_return picture
-      allow(picture).to receive(:destroy)
+      allow(picture).to receive(:delete)
     end
 
-    it "should call destroy on picture" do
-      expect(picture).to receive(:destroy)
+    it "should call delete on picture" do
+      expect(picture).to receive(:delete)
 
       delete :destroy, :model_name => model_name, :model_id => model_id, :id => id
     end
 
-    it "renders nothing after picture was distroyed" do
+    it "renders nothing after picture was deleted" do
       delete :destroy, :model_name => model_name, :model_id => model_id, :id => id
 
       expect(response.body).to be_blank

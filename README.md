@@ -12,21 +12,10 @@ SimpleBlog works with Rails 4.0 onwards. You can add it to your Gemfile with:
 gem 'simple_blog', :git => 'git@github.com:mixandgo/simple_blog.git'
 ```
 
-#### Post installation
-
-Install migrations
+#### Installation
 
 ```shell
-#For simple blog migrations
-rake simple_blog_engine:install:migrations
-
-#For simple blog tags migrations
-rake acts_as_taggable_on_engine:install:migrations
-```
-
-Install assets
-
-```shell
+#installs assets and run migrations
 rails generate simple_blog:install
 ```
 

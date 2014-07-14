@@ -28,6 +28,11 @@ module SimpleBlog
         install_libraries(folder, file, text)
       end
 
+      def run_migrations
+        rake "simple_blog_engine:install:migrations"
+        rake "acts_as_taggable_on_engine:install:migrations"
+      end
+
       private
 
       def install_libraries(folder, file, text)

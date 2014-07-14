@@ -18,7 +18,7 @@ class Admin::Ckeditor::PicturesController < Admin::BaseController
   end
 
   def destroy
-    @picture.destroy
+    @picture.delete
     render :nothing => true
   end
 
@@ -47,6 +47,6 @@ class Admin::Ckeditor::PicturesController < Admin::BaseController
     end
 
     def find_picture
-      @picture = Ckeditor::Picture.find_associated_pictures(picture_params)
+      @picture = Ckeditor::Picture.find_associated_pictures(*picture_params.values)
     end
 end

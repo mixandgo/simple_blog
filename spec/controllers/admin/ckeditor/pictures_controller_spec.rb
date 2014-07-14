@@ -83,7 +83,7 @@ describe Admin::Ckeditor::PicturesController do
 
     before :each do
       allow(Ckeditor::Picture).to receive(:find_associated_pictures).
-        with("model_name" => model_name, "model_id" => model_id, "id" => id).
+        with(model_name, model_id, id).
         and_return picture
       allow(picture).to receive(:destroy)
     end

@@ -9,9 +9,9 @@ Rails.application.routes.draw do
     end
 
     namespace :ckeditor do
-      get "/:model_name/:model_id" => "pictures#index", :as => :ckeditor_pictures
-      post "/:model_name/:model_id" => "pictures#create", :as => :ckeditor_picture_create
-      delete "/:model_name/:model_id/:id" => "pictures#destroy", :as => :ckeditor_picture_destroy
+      get "/:model_name/:model_id" => "pictures#index", :as => :pictures
+      post "/:model_name/:model_id" => "pictures#create", :as => :picture_create
+      delete "/:model_name/:model_id/:id" => "pictures#destroy", :as => :picture_destroy
     end
   end
 end

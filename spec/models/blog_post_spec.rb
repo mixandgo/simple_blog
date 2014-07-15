@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe BlogPost do
 
+  it { should have_many(:pictures) }
+  it { should have_many(:blog_imageable) }
+
   describe "validations on update" do
     subject { create(:blog_post, :unpublished_empty) }
 
@@ -103,4 +106,18 @@ describe BlogPost do
 
   end
 
+  describe ".unscoped_find" do
+    let(:blog_post) { double("blog_post") }
+    let(:id) { 100 }
+
+    before :each do
+      allow(BlogPost).to receive(:unscoped).and_return blog_post
+    end
+
+    it "searches for the blog post with the specified id" do
+      expect(blog_post).to receive(:find).with(id).and_return blog_post
+
+      BlogPost.unscoped_find(id)
+    end
+  end
 end

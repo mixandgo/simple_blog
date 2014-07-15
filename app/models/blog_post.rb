@@ -1,4 +1,7 @@
 class BlogPost < ActiveRecord::Base
+  has_many :blog_imageable, :as => :imageable
+  has_many :pictures, :through => :blog_imageable, :class_name => Ckeditor::Picture
+
   before_save :set_slug
   acts_as_taggable
 
@@ -23,6 +26,10 @@ class BlogPost < ActiveRecord::Base
   def self.find_tags(term)
     return unscoped.all_tags if term.blank?
     unscoped.all_tags(:conditions => "tags.name LIKE '#{term}%'")
+  end
+
+  def self.unscoped_find(id)
+    unscoped.find(id)
   end
 
   private

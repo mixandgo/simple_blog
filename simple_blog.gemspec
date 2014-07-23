@@ -31,4 +31,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "launchy"
   s.add_development_dependency "generator_spec"
   s.add_development_dependency "selenium-webdriver"
+  s.add_development_dependency "database_cleaner"
 end

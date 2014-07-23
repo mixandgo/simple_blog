@@ -30,4 +30,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "launchy"
   s.add_development_dependency "generator_spec"
+  s.add_development_dependency "selenium-webdriver"
 end

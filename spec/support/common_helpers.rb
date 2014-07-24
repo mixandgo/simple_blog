@@ -1,6 +1,6 @@
 def create_a_blog_post(options={})
   visit new_admin_blog_post_path
-  fill_in 'Title', :with => options[:title] || 'Cool stuff'
+  fill_in 'simple-blog-post-form-title', :with => options[:title] || 'Cool stuff'
   fill_in 'simple-blog-post-form-body', :with => options[:body] || 'Cool body'
   fill_in 'simple-blog-post-form-description', :with => options[:description] || 'Cool description'
   unless options.has_key?(:unpublished)

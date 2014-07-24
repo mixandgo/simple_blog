@@ -5,7 +5,7 @@ feature 'Edit posts' do
     create_a_blog_post
     visit admin_blog_posts_path
     click_on 'Cool Stuff'
-    fill_in :blog_post_title, :with => "Uncool stuff"
+    fill_in 'simple-blog-post-form-title', :with => "Uncool stuff"
     click_on 'Update post'
     expect(page).to have_content('Uncool Stuff')
     expect(page).to have_content('Post was succesfully updated.')
@@ -17,7 +17,7 @@ feature 'Edit posts' do
     click_on 'Cool Stuff'
     invalid_title = "a" * 80 # triggers a validation error
     invalid_body = invalid_description = ""
-    fill_in :blog_post_title, :with => invalid_title
+    fill_in 'simple-blog-post-form-title', :with => invalid_title
     add_text_to('body', invalid_body)
     add_text_to('description', invalid_description)
     click_on 'Update post'

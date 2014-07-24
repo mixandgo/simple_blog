@@ -51,7 +51,7 @@ feature 'Create posts' do
 
   scenario 'user gets a warning when message is longer then 65 character', :js => true do
     visit new_admin_blog_post_path
-    fill_in 'Title', :with => "a"*66
+    fill_in 'simple-blog-post-form-title', :with => "a"*66
     expect(page).to have_content('Warning: Blog post title has over 65 characters')
   end
 

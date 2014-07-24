@@ -74,15 +74,13 @@ function setTitleValidation() {
 
   var warningMessage = "Warning: Blog post title has over 65 characters."
 
-  $(".edit_blog_post").on("keyup", "#blog_post_title", function(event) {
-    if ($("#blog_post_title").val().length > 65) {
-      if ($("#simple-blog-form-errors").length > 0) {
-        $("#simple-blog-form-errors").html(warningMessage);
-      } else {
-        $("#blog_post_title").after("<div id='simple-blog-form-errors' class=''>" + warningMessage + "</div>")
-      }
+  $(".simple-blog-posts-new").on("keyup", "#simple-blog-post-form-title", function(event) {
+    if ($(this).val().length > 65) {
+      // add the warning message
+      $("#simple-blog-form-title-warning").html(warningMessage);
     } else {
-      $("#simple-blog-form-errors").html("");
+      // remove the warning message if title is below 65 characters so it doesn't show a warning when it's not needed
+      $("#simple-blog-form-title-warning").html("");
     }
   })
 

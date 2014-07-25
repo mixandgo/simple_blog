@@ -1,4 +1,7 @@
 class BlogPost < ActiveRecord::Base
+  has_many :imageables, :as => :imageable
+  has_many :images, :through => :imageables, :class_name => Ckeditor::Image
+
   before_save :set_slug
   acts_as_taggable
 

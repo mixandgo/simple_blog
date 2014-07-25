@@ -1,7 +1,8 @@
 <%= render "form_errors", :obj => f.object %>
 <div class="simple-blog-new-post-row">
   <%= f.label :title, :class => "left-side-label" %>
-  <%= f.text_field :title, :class => "textfield", :size => 100 %>
+  <%= f.text_field :title, :id => "simple-blog-post-form-title", :class => "textfield", :size => 100 %>
+  <div id='simple-blog-form-title-warning' class='simple-blog-form-warning'></div>
 </div>
 <div class="simple-blog-new-post-row">
   <%= f.label :description %>

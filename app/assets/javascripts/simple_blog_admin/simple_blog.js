@@ -2,6 +2,7 @@ $(document).ready(function() {
   addCkeditor('simple-blog-post-form-body');
   addCkeditor('simple-blog-post-form-description');
   setAutocomplete('simple-blog-post-form-tag-list');
+  setTitleValidation();
 });
 
 function addCkeditor(elementId) {
@@ -66,4 +67,21 @@ function split(val) {
 
 function extractLast(term) {
   return split(term).pop();
+}
+
+
+function setTitleValidation() {
+
+  var warningMessage = "Warning: Blog post title has over 65 characters."
+
+  $(".simple-blog-posts-new").on("keyup", "#simple-blog-post-form-title", function(event) {
+    if ($(this).val().length > 65) {
+      // add the warning message
+      $("#simple-blog-form-title-warning").html(warningMessage);
+    } else {
+      // remove the warning message if title is below 65 characters so it doesn't show a warning when it's not needed
+      $("#simple-blog-form-title-warning").html("");
+    }
+  })
+
 }

@@ -2,8 +2,6 @@ class Admin::Ckeditor::BaseController < Admin::BaseController
   respond_to :html, :json
   layout 'ckeditor/application'
 
-  before_filter :find_image, :only => :destroy
-
   def index
     @images = @model.images
 
@@ -17,7 +15,8 @@ class Admin::Ckeditor::BaseController < Admin::BaseController
   end
 
   def destroy
-    @image.delete
+    image = @model.images.where(params.permit(:id))
+    image.delete
     render :nothing => true
   end
 
@@ -39,9 +38,5 @@ class Admin::Ckeditor::BaseController < Admin::BaseController
       else
         render :nothing => true
       end
-    end
-
-    def find_image
-      @image = @model.images.where(params.permit(:id))
     end
 end

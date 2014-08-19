@@ -13,7 +13,7 @@ shared_examples "an image post controller" do |actions|
         get :index, id_name => id
         expect(assigns[:images]).to eq(images)
       end
-    end 
+    end
 
     context "create controller" do
       let(:image) { double(:image) }
@@ -64,16 +64,23 @@ shared_examples "an image post controller" do |actions|
     end
 
     context "delete controller" do
-      let(:image_id) { 100 }
+      let(:image_id) { "100" }
       let(:image) { double("image") }
 
       before :each do
-        # allow(model).to receive(:images).and_return model
-        # allow(model).to receive(:where).with(image_id).and_return image
+        allow(model).to receive(:images).and_return image
+        allow(image).to receive(:where).with({"id" => image_id}).and_return image
       end
 
       specify "calls the delete method on the image" do
-        get :destroy, id_name => id, :id => image_id
+        expect(image).to receive(:delete)
+        post :destroy, id_name => id, :id => image_id
+      end
+
+      specify "renders nothing" do
+        allow(image).to receive(:delete)
+        post :destroy, id_name => id, :id => image_id
+        expect(response.body).to eq " "
       end
     end
   end

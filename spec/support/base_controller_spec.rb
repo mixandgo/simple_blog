@@ -74,12 +74,12 @@ shared_examples "an image post controller" do |actions|
       end
 
       specify "calls the delete method on the image" do
-        expect(image).to receive(:delete)
+        expect(image).to receive(:destroy)
         post :destroy, id_name => id, :id => image_id
       end
 
       specify "renders nothing" do
-        allow(image).to receive(:delete)
+        allow(image).to receive(:destroy)
         post :destroy, id_name => id, :id => image_id
         expect(response.body).to eq " "
       end

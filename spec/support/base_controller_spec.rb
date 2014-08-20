@@ -70,6 +70,7 @@ shared_examples "an image post controller" do |actions|
       before :each do
         allow(model).to receive(:images).and_return image
         allow(image).to receive(:where).with({"id" => image_id}).and_return image
+        allow(image).to receive(:first).and_return image
       end
 
       specify "calls the delete method on the image" do

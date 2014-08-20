@@ -23,6 +23,10 @@ class BlogPost < ActiveRecord::Base
     title.try(:titleize)
   end
 
+  def self.unscoped_find_by!(id)
+    unscoped.where(:id => id).first
+  end
+
   def self.find_tags(term)
     return unscoped.all_tags if term.blank?
     unscoped.all_tags(:conditions => "tags.name LIKE '#{term}%'")

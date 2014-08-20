@@ -15,7 +15,7 @@ class Admin::Ckeditor::BaseController < Admin::BaseController
   end
 
   def destroy
-    image = @model.images.where(params.permit(:id))
+    image = @model.images.where(params.permit(:id)).first
     image.delete
     render :nothing => true
   end

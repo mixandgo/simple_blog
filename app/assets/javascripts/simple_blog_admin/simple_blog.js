@@ -3,7 +3,15 @@ $(document).ready(function() {
   addCkeditor('simple-blog-post-form-description');
   setAutocomplete('simple-blog-post-form-tag-list');
   setTitleValidation();
+  setDatePicker();
 });
+
+function setDatePicker() {
+  new Pikaday({
+    field: $('#datepicker')[0],
+    format: 'DD/MM/YYYY'
+  });
+}
 
 function addCkeditor(elementId) {
   if ($("#"+elementId).length) {

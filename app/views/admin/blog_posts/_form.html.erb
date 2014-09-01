@@ -18,7 +18,7 @@
 </div>
 <div class="simple-blog-new-post-row">
   <%= f.label :published_at, :class => "left-side-label" %>
-  <%= f.date_select :published_at, :prompt => { day: t('.prompt_select_day'), month: t('.prompt_select_month'), year: t('.prompt_select_year') } %>
+  <%= f.text_field :published_at, :id => "datepicker", :value => f.object.published_at.present? ? f.object.published_at.strftime("%d/%m/%Y") : "" %>
 </div>
 <div class="simple-blog-new-post-row">
   <%= f.label :tag_list, :class => "left-side-label" %>

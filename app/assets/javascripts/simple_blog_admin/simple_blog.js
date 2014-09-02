@@ -5,6 +5,7 @@ $(document).ready(function() {
   setAutocomplete('simple-blog-post-form-keyword-list');
   setTitleValidation();
   setKeywordHandler();
+  addDatepicker();
 });
 
 function setKeywordHandler() {
@@ -14,6 +15,10 @@ function setKeywordHandler() {
       KeywordParser.showTopKeywords(ckeditor.getData());
     });
   });
+}
+
+function addDatepicker() {
+  $("#simple-blog-post-form-published-at").datepicker({ dateFormat: "dd/mm/yy" });
 }
 
 function addCkeditor(elementId) {

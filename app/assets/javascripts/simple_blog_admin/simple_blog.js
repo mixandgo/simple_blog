@@ -4,7 +4,13 @@ $(document).ready(function() {
   setAutocomplete('simple-blog-post-form-tag-list');
   setAutocomplete('simple-blog-post-form-keyword-list');
   setTitleValidation();
+  addDatepicker();
 });
+
+function addDatepicker() {
+  $("#simple-blog-post-form-published-at").datepicker({ dateFormat: "dd/mm/yy" });
+}
+
 
 function addCkeditor(elementId) {
   if ($("#"+elementId).length) {

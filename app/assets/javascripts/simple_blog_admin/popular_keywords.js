@@ -1,62 +1,58 @@
-var keywordParser = {
-  html: "",
-  text: "",
-  keywords: "",
-  keywordNumber: 20,
-  topKeywordsObject: {},
-  topKeywordsList: [],
-  allKeywords: [],
-  blackListKeywords: ["the","be","to","of","and","a","in","that","have","I","it","for","not","on","with","he","as","you","do","at","this","but","his","by","from","they","we","say","her","she","or","an","will","my","one","all","would","there","their","what","so","up","out","if","about","who","get","which","go","me","when","make","can","like","time","no","just","him","know","take","people","into","year","your","good","some","could","them","see","other","than","then","now","look","only","come","its","over","think","also","back","after","use","two","how","our","work","first","well","way","even","new","want","because","any","these","give","day","most","us", "theyre", "youre", ],
+var KeywordParser = (function () {
 
-  setTopKeywordsList: function() {
+  var keywords = "";
+  var keywordListLength = 20;
+  var topKeywordsObject = {};
+  var topKeywordsList = [];
+  var allKeywords = [];
+  var blackListKeywords = ["the","be","to","of","and","a","in","that","have","I","it","for","not","on","with","he","as","you","do","at","this","but","his","by","from","they","we","say","her","she","or","an","will","my","one","all","would","there","their","what","so","up","out","if","about","who","get","which","go","me","when","make","can","like","time","no","just","him","know","take","people","into","year","your","good","some","could","them","see","other","than","then","now","look","only","come","its","over","think","also","back","after","use","two","how","our","work","first","well","way","even","new","want","because","any","these","give","day","most","us", "theyre", "youre"];
+
+  var setTopKeywordsList = function(html) {
+    // strip html tags
     // ignore everything except letters
-    this.text = this.html.replace(/[^a-zA-Z ]/g, "");
-    this.allKeywords = this.text.match(/\S+/g);
-    this.topKeywordsList = [];
-    this.topKeywordsObject = {};
-    for(keywordIndex in this.allKeywords) {
-      var keyword = this.allKeywords[keywordIndex];
-      if ((keyword.length <= 2) || (this.blackListKeywords.indexOf(keyword.toLowerCase()) != -1)) { continue; }
-      if (keyword in this.topKeywordsObject) {
-        this.topKeywordsObject[keyword] += 1
+    text = html.replace(/<\/?[^>]+(>|$)/g, "").replace(/[^a-zA-Z ]/g, "");
+    allKeywords = text.match(/\S+/g);
+    topKeywordsList = [];
+    topKeywordsObject = {};
+    for(var keywordIndex in allKeywords) {
+      var keyword = allKeywords[keywordIndex];
+      if ((keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)) { continue; }
+      if (keyword in topKeywordsObject) {
+        topKeywordsObject[keyword] += 1
       } else {
-        this.topKeywordsObject[keyword] = 1
+        topKeywordsObject[keyword] = 1
       }
     }
-  },
+  };
 
-  orderKeywords: function() {
-    for (var keyword in this.topKeywordsObject) {
-      this.topKeywordsList.push([keyword, this.topKeywordsObject[keyword]])
+  var orderKeywords = function() {
+    for (var keyword in topKeywordsObject) {
+      topKeywordsList.push([keyword, topKeywordsObject[keyword]])
     }
-    this.topKeywordsList = this.topKeywordsList.sort(function(a, b) {return b[1] - a[1]})
-  },
+    topKeywordsList = topKeywordsList.sort(function(a, b) {return b[1] - a[1]})
+  };
 
-  getTopKeywordsList: function() {
-    this.orderKeywords();
-    this.keywords = "";
-    for(var index = 0; index < this.topKeywordsList.length; index ++) {
-      if (index > this.keywordNumber) { break; }
-      keyword = this.topKeywordsList[index]
-      this.keywords += "</br>kw: " + keyword[0] + " - nr: " + keyword[1];
+  var getTopKeywordsList = function() {
+    orderKeywords();
+    keywords = "";
+    for(var index = 0; index < topKeywordsList.length; index ++) {
+      if (index > keywordListLength) { break; }
+      keyword = topKeywordsList[index]
+      keywords += "</br>kw: " + keyword[0] + " - nr: " + keyword[1];
     }
-  },
+  };
 
-  showTopKeywords: function() {
-    this.setTopKeywordsList();
-    this.getTopKeywordsList();
+  var showTopKeywords = function(html) {
+    setTopKeywordsList(html);
+    getTopKeywordsList();
     if ($("#simple-blog-form-keywords-view").length == 0) {
-      $("#simple-blog-form-keywords").after("<div id='simple-blog-form-keywords-view'>" + this.keywords +  "</div>");
+      $("#simple-blog-form-keywords").after("<div id='simple-blog-form-keywords-view'>" + keywords +  "</div>");
     } else {
-      $("#simple-blog-form-keywords-view").html(this.keywords);
+      $("#simple-blog-form-keywords-view").html(keywords);
     }
-  }
-}
+  };
 
-CKEDITOR.on("instanceReady", function(evt) {
-  CKEDITOR.instances["simple-blog-post-form-body"].document.on("keyup", function(event) {
-    var ckeditor = CKEDITOR.instances["simple-blog-post-form-body"]
-    keywordParser.html = ckeditor.getData();
-    keywordParser.showTopKeywords();
-  });
-});
+  return {
+    showTopKeywords: showTopKeywords
+  };
+})();

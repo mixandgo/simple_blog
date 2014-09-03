@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-shared_examples "an image post controller" do |actions|
+shared_examples "a controller for attaching images to models" do |actions|
   actions.each_pair do |id_name, id|
-    context "index controller" do
-      let(:images) { double("images") }
+    context "index controller method" do
+      let(:images) { double("images").as_null_object }
 
       before :each do
         allow(model).to receive(:images).and_return(images)
@@ -15,8 +15,8 @@ shared_examples "an image post controller" do |actions|
       end
     end
 
-    context "create controller" do
-      let(:image) { double(:image) }
+    context "create controller method" do
+      let(:image) { double(:image).as_null_object }
 
       before :each do
         allow(Ckeditor::Image).to receive(:new).and_return image
@@ -38,11 +38,12 @@ shared_examples "an image post controller" do |actions|
 
       context "valid image" do
 
+        let(:image_json_output) { "image_json_output" }
+
         before :each do
+          allow(model).to receive(:images).and_return image
           allow(image).to receive(:save).and_return true
-          allow(image).to receive(:url_content).and_return ""
-          allow(model).to receive(:images).and_return model
-          allow(model).to receive("<<")
+
         end
 
         specify "returns a ckeditor call when it's a CKEditor all" do
@@ -51,8 +52,9 @@ shared_examples "an image post controller" do |actions|
         end
 
         specify "returns the id and type of the image when it's not a CKEditor call" do
+          allow(image).to receive(:to_json).and_return image_json_output
           get :create, id_name => id
-          expect(response.body).to eq image.to_json(:only => [:id, :type])
+          expect(response.body).to eq image_json_output
         end
 
         specify "it assigns the image to the model" do
@@ -63,17 +65,15 @@ shared_examples "an image post controller" do |actions|
 
     end
 
-    context "delete controller" do
+    context "destroy controller method" do
       let(:image_id) { "100" }
-      let(:image) { double("image") }
+      let(:image) { double("image").as_null_object }
 
       before :each do
         allow(model).to receive(:images).and_return image
-        allow(image).to receive(:where).with({"id" => image_id}).and_return image
-        allow(image).to receive(:first).and_return image
       end
 
-      specify "calls the delete method on the image" do
+      specify "calls the destroy method on the image" do
         expect(image).to receive(:destroy)
         post :destroy, id_name => id, :id => image_id
       end

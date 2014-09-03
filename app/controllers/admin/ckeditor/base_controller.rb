@@ -11,7 +11,7 @@ class Admin::Ckeditor::BaseController < Admin::BaseController
   def create
     @image = Ckeditor::Image.new
 
-    render_with_assets(@image)
+    render_with_asset(@image)
   end
 
   def destroy
@@ -22,7 +22,7 @@ class Admin::Ckeditor::BaseController < Admin::BaseController
 
   private
 
-    def render_with_assets(asset)
+    def render_with_asset(asset)
       file = params[:CKEditor].blank? ? params[:qqfile] : params[:upload]
       asset.data = Ckeditor::Http.normalize_param(file, request)
 

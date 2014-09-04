@@ -9,7 +9,7 @@ def create_a_blog_post(options={})
     select '2013', :from => 'blog_post_published_at_1i'
   end
   fill_in 'simple-blog-post-form-tag-list', :with => options[:tags] || 'first_tag, second_tag'
-  fill_in 'blog_post_keywords', :with => options[:keywords] || 'first_keyword, second_keyword'
+  fill_in 'simple-blog-post-form-keyword-list', :with => options[:keywords] || 'first_keyword, second_keyword'
   click_button 'Update post'
 end
 

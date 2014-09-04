@@ -41,7 +41,7 @@ feature 'Edit posts' do
     create_a_blog_post
     visit admin_blog_posts_path
     click_on 'Cool Stuff'
-    fill_in 'blog_post_keywords', :with => 'edited_keyword1, edited_keyword2'
+    fill_in 'simple-blog-post-form-keyword-list', :with => 'edited_keyword1, edited_keyword2'
     click_on 'Update post'
     visit admin_blog_posts_path
     expect(page).to have_content('edited_keyword1, edited_keyword2')

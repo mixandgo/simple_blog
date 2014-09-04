@@ -4,6 +4,7 @@ class BlogPost < ActiveRecord::Base
 
   before_save :set_slug
   acts_as_taggable
+  acts_as_taggable_on :keywords
 
   validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}, :on => :update
   validates :body, :presence => true, :on => :update

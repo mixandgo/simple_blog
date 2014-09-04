@@ -3,14 +3,12 @@ FactoryGirl.define do
     sequence(:title) {|n| "Awesome post title #{n}" }
     body "Even more awesome post body"
     description "The most awesome post description"
-    keywords "awesome, marketing, simple_blog, post"
     published_at 1.week.ago
 
     trait :unpublished_empty do
       title ""
       body ""
       description ""
-      keywords ""
       published_at nil
     end
   end

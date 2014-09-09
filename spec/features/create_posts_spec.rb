@@ -54,10 +54,4 @@ feature 'Create posts' do
     fill_in 'simple-blog-post-form-title', :with => "a"*66
     expect(page).to have_content('Warning: Blog post title has over 65 characters')
   end
-
-  scenario 'user can see the datepicker when clicking on the published date', :js => true do
-    visit new_admin_blog_post_path
-    page.find('#simple-blog-post-form-published-at').click
-    expect(page).to have_css("#ui-datepicker-div")
-  end
 end

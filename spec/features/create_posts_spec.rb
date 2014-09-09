@@ -54,4 +54,11 @@ feature 'Create posts' do
     fill_in 'simple-blog-post-form-title', :with => "a"*66
     expect(page).to have_content('Warning: Blog post title has over 65 characters')
   end
+
+  scenario 'user can set a published_at date that will stay' do
+    create_a_blog_post(:published_at => "01/01/2014")
+    visit admin_blog_posts_path
+    click_on 'Cool Stuff'
+    expect(page).to have_xpath("//input[@value='01/01/2014']")
+  end
 end

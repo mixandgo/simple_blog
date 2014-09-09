@@ -1,15 +1,6 @@
-$(document).ready(function() {
-  addCkeditor('simple-blog-post-form-body');
-  addCkeditor('simple-blog-post-form-description');
-  setAutocomplete('simple-blog-post-form-tag-list');
-  setTitleValidation();
-  addDatepicker();
-});
-
 function addDatepicker() {
   $("#simple-blog-post-form-published-at").datepicker({ dateFormat: "dd/mm/yy" });
 }
-
 
 function addCkeditor(elementId) {
   if ($("#"+elementId).length) {
@@ -91,3 +82,11 @@ function setTitleValidation() {
   })
 
 }
+
+$(document).ready(function() {
+  addCkeditor('simple-blog-post-form-body');
+  addCkeditor('simple-blog-post-form-description');
+  setAutocomplete('simple-blog-post-form-tag-list');
+  setTitleValidation();
+  addDatepicker();
+});

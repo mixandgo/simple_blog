@@ -67,4 +67,5 @@ feature 'Create posts' do
     page.find('#simple-blog-post-form-published-at').click
     expect(page).to have_css("#ui-datepicker-div")
   end
+
 end

@@ -1,13 +1,3 @@
-$(document).ready(function() {
-  addCkeditor('simple-blog-post-form-body');
-  addCkeditor('simple-blog-post-form-description');
-  setAutocomplete('simple-blog-post-form-tag-list');
-  setAutocomplete('simple-blog-post-form-keyword-list');
-  setTitleValidation();
-  setKeywordHandler();
-  addDatepicker();
-});
-
 function setKeywordHandler() {
   CKEDITOR.on("instanceReady", function(evt) {
     CKEDITOR.instances["simple-blog-post-form-body"].document.on("keyup", function(event) {
@@ -99,5 +89,14 @@ function setTitleValidation() {
       $("#simple-blog-form-title-warning").html("");
     }
   })
-
 }
+
+$(document).ready(function() {
+  addCkeditor('simple-blog-post-form-body');
+  addCkeditor('simple-blog-post-form-description');
+  setAutocomplete('simple-blog-post-form-tag-list');
+  setAutocomplete('simple-blog-post-form-keyword-list');
+  setTitleValidation();
+  setKeywordHandler();
+  addDatepicker();
+});

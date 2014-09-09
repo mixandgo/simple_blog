@@ -5,13 +5,11 @@ var KeywordParser = (function () {
 
   var setTopKeywordsList = function(html) {
     keywordsObject = {};
-    var allKeywords = getKeywordsList(html);
-    var keywordsList = [];
+    var allKeywords = getAllKeywords(html);
     for (var keywordIndex = 0; keywordIndex < allKeywords.length; keywordIndex++) {
       var keyword = allKeywords[keywordIndex];
-      // skip if keyword length greater then 2 to prevent logging small words
-      // and skip if word in blackList Keywords
-      if ((keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)) { continue; }
+
+      if (keywordIsBlacklisted(keyword)) { continue; }
       if (keyword in keywordsObject) {
         keywordsObject[keyword] += 1
       } else {
@@ -20,7 +18,13 @@ var KeywordParser = (function () {
     }
   };
 
-  var getKeywordsList = function(html) {
+  var keywordIsBlacklisted = function(keyword) {
+    // test if keyword length greater then 2 to prevent logging small words
+    // test if keyword in blacklist
+    return (keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)
+  };
+
+  var getAllKeywords = function(html) {
     // strip html tags
     // ignore everything except letters
     return html.replace(/<\/?[^>]+(>|$)/g, "").replace(/[^a-zA-Z ]/g, "").match(/\S+/g);

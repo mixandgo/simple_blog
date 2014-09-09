@@ -29,13 +29,13 @@ feature 'Create posts' do
   end
 
   scenario 'user can add tags' do
-    create_a_blog_post(:tags => 'first_tag, second_tag')
+    create_a_blog_post_with_tags('first_tag, second_tag')
     visit admin_blog_posts_path
     expect(page).to have_content('first_tag, second_tag')
   end
 
   scenario 'user can add keywords' do
-    create_a_blog_post(:keywords => 'keyword1, keyword2')
+    create_a_blog_post_with_keywords('keyword1, keyword2')
     visit admin_blog_posts_path
     expect(page).to have_content('keyword1, keyword2')
   end

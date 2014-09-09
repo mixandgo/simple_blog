@@ -2,22 +2,26 @@ require 'spec_helper'
 
 feature 'List posts' do
   background do
-    create_a_blog_post
+    create_a_blog_post(:title => 'Blog post title',
+                       :body => 'Blog post body',
+                       :tags => 'first_tag, second_tag',
+                       :description => 'Blog post description',
+                       :keywords => 'first_keyword, second_keyword')
   end
 
   scenario 'should display description' do
     visit blog_posts_path
-    expect(page).to have_content('Cool description')
-    expect(page).not_to have_content('Cool body')
+    expect(page).to have_content('Blog post description')
+    expect(page).not_to have_content('Blog post body')
   end
 
   scenario 'all the published posts are displayed' do
-    create_a_blog_post(:title => 'More cool stuff')
-    create_a_blog_post(:title => 'Unpublished post', :unpublished => true)
+    create_a_blog_post_with_title('Second blog post title')
+    create_a_blog_post(:title => 'Unpublished post title', :unpublished => true)
     visit blog_posts_path
-    expect(page).to have_content('Cool Stuff')
-    expect(page).to have_content('More Cool Stuff')
-    expect(page).not_to have_content('Unpublished Post')
+    expect(page).to have_content('Blog Post Title')
+    expect(page).to have_content('Second Blog Post Title')
+    expect(page).not_to have_content('Unpublished Post title')
   end
 
   scenario 'posts show tags on index page' do
@@ -26,12 +30,12 @@ feature 'List posts' do
   end
 
   scenario 'filtering by tag returns only posts with that tag' do
-    create_a_blog_post(:title => 'More cool stuff')
-    create_a_blog_post(:title => 'Not cool stuff', :tags => 'different tag')
+    create_a_blog_post_with_title('Second blog post title')
+    create_a_blog_post(:title => 'Differnt tag blog post title', :tags => 'different tag')
     visit blog_posts_path
     click_link('first_tag', :match => :first)
-    expect(page).to have_content('Cool Stuff')
-    expect(page).to have_content('More Cool Stuff')
-    expect(page).not_to have_content('Not Cool Stuff')
+    expect(page).to have_content('Blog Post Title')
+    expect(page).to have_content('Second Blog Post Title')
+    expect(page).not_to have_content('Different Tag Blog Post Title')
   end
 end

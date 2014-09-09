@@ -4,12 +4,5 @@ FactoryGirl.define do
     body "Even more awesome post body"
     description "The most awesome post description"
     published_at 1.week.ago
-
-    trait :unpublished_empty do
-      title ""
-      body ""
-      description ""
-      published_at nil
-    end
   end
 end

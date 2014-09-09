@@ -5,7 +5,7 @@ describe BlogPost do
   it { should have_many(:imageables) }
 
   describe "validations on update" do
-    subject { create(:blog_post, :unpublished_empty) }
+    subject { BlogPost.create }
 
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:body) }
@@ -23,7 +23,7 @@ describe BlogPost do
   end
 
   describe "validations on create" do
-    subject { build(:blog_post, :unpublished_empty) }
+    subject { BlogPost.new }
 
     it { should_not validate_presence_of(:title) }
     it { should_not validate_uniqueness_of(:title) }
@@ -45,8 +45,8 @@ describe BlogPost do
     end
 
     it "sets an empty slug for an empty post" do
-      empty_post = create(:blog_post, :unpublished_empty)
-      expect(empty_post.slug).to be_empty
+      empty_post = BlogPost.create
+      expect(empty_post.slug).to be_nil
     end
   end
 

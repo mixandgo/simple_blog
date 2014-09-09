@@ -62,10 +62,10 @@ feature 'Create posts' do
     expect(page).to have_content('kw: coolbody - nr: 6')
   end
 
-  scenario 'user can see the datepicker when clicking on the published date', :js => true do
-    visit new_admin_blog_post_path
-    page.find('#simple-blog-post-form-published-at').click
-    expect(page).to have_css("#ui-datepicker-div")
+  scenario 'user can set a published_at date that will stay' do
+    create_a_blog_post(:published_at => "01/01/2014")
+    visit admin_blog_posts_path
+    click_on 'Cool Stuff'
+    expect(page).to have_xpath("//input[@value='01/01/2014']")
   end
-
 end

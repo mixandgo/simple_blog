@@ -105,4 +105,24 @@ describe BlogPost do
 
   end
 
+  describe "#find_image_by" do
+    let(:images) { double("images").as_null_object }
+    let(:blog_post) { BlogPost.new }
+    let(:id) { "100" }
+
+    before :each do
+      allow(blog_post).to receive(:images).and_return images
+      allow(images).to receive(:where).with(id).and_return images
+    end
+
+    it "looks for image with specified id" do
+      expect(images).to receive(:where).with(id)
+      blog_post.find_image_by(id)
+    end
+
+    it "returns the first image from the list of returned images" do
+      expect(images).to receive(:first)
+      blog_post.find_image_by(id)
+    end
+  end
 end

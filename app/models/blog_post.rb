@@ -24,6 +24,10 @@ class BlogPost < ActiveRecord::Base
     title.try(:titleize)
   end
 
+  def find_image_by(id)
+    images.where(id).first
+  end
+
   def self.unscoped_find_by!(id)
     unscoped.where(:id => id).first
   end

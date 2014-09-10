@@ -9,18 +9,16 @@ feature 'List posts' do
                        :keywords => 'first_keyword, second_keyword')
   end
 
-  scenario 'should display description' do
+  scenario 'should only display post descsription' do
     visit blog_posts_path
     expect(page).to have_content('Blog post description')
     expect(page).not_to have_content('Blog post body')
   end
 
   scenario 'all the published posts are displayed' do
-    create_a_blog_post_with_title('Second blog post title')
     create_a_blog_post(:title => 'Unpublished post title', :unpublished => true)
     visit blog_posts_path
     expect(page).to have_content('Blog Post Title')
-    expect(page).to have_content('Second Blog Post Title')
     expect(page).not_to have_content('Unpublished Post title')
   end
 
@@ -30,12 +28,10 @@ feature 'List posts' do
   end
 
   scenario 'filtering by tag returns only posts with that tag' do
-    create_a_blog_post_with_title('Second blog post title')
     create_a_blog_post(:title => 'Differnt tag blog post title', :tags => 'different tag')
     visit blog_posts_path
     click_link('first_tag', :match => :first)
     expect(page).to have_content('Blog Post Title')
-    expect(page).to have_content('Second Blog Post Title')
     expect(page).not_to have_content('Different Tag Blog Post Title')
   end
 end

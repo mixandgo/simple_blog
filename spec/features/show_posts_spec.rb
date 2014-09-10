@@ -7,8 +7,7 @@ feature 'Show posts' do
                        :tags => 'first_tag, second_tag',
                        :description => 'Blog post description',
                        :keywords => 'first_keyword, second_keyword')
-    visit blog_posts_path
-    click_on 'Blog Post Title'
+    visit_show_page_for('Blog Post Title')
   end
 
   scenario 'displaying a post' do

@@ -13,15 +13,6 @@ def create_a_blog_post(options={})
   click_button 'Update post'
 end
 
-def method_missing(meth, *args, &block)
-  if meth.to_s =~ /^create_a_blog_post_with_(.+)$/
-    options = {$1.to_sym => args.first}
-    create_a_blog_post(options, &block)
-  else
-    super
-  end
-end
-
 def add_text_to(textarea, text)
   fill_in "simple-blog-post-form-#{textarea}", :with => text
 end
@@ -38,8 +29,12 @@ def expect_page_to_contain_meta_tag(name, content)
   expect(page).to have_css("meta[name='#{name}'][content='#{content}']", :visible => false)
 end
 
-def create_a_blog_post_and_go_to_it
-  create_a_blog_post_with_title('Blog Post Title')
+def visit_admin_edit_page_for(title)
   visit admin_blog_posts_path
-  click_on 'Blog Post Title'
+  click_on title
+end
+
+def visit_show_page_for(title)
+  visit blog_posts_path
+  click_on title
 end

@@ -1,11 +1,8 @@
 require 'spec_helper'
 
 feature 'Images' do
-  before :each do
-    use_selenium_driver
-  end
 
-  scenario 'adding an image to a new blog_post' do
+  scenario 'adding an image to a new blog_post', :js => true do
     open_ckeditor_browser
     inside_ckeditor_browser do
       upload_image('logo.png')
@@ -13,7 +10,7 @@ feature 'Images' do
     end
   end
 
-  scenario 'adding and image to a new blog_post does not add it to another new blog_post' do
+  scenario 'adding and image to a new blog_post does not add it to another new blog_post', :js => true do
     open_ckeditor_browser
     inside_ckeditor_browser do
       upload_image('logo.png')
@@ -25,7 +22,7 @@ feature 'Images' do
     end
   end
 
-  scenario 'deleting an image' do
+  scenario 'deleting an image', :js => true do
     open_ckeditor_browser
     inside_ckeditor_browser do
       upload_image('logo.png')

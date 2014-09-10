@@ -1,7 +1,7 @@
 class Admin::Ckeditor::BlogPostImagesController < Admin::Ckeditor::BaseController
   before_filter :find_blog_post
 
-  respond_to :html, :json
+  respond_to :json, :html
   layout 'ckeditor/application'
 
   def index
@@ -17,7 +17,7 @@ class Admin::Ckeditor::BlogPostImagesController < Admin::Ckeditor::BaseControlle
   end
 
   def destroy
-    image = @blog_post.images.where(params.permit(:id)).first
+    image = @blog_post.find_image_by(params.permit(:id))
     image.destroy
     render :nothing => true
   end

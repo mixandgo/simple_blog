@@ -24,6 +24,7 @@ class Admin::Ckeditor::BlogPostImagesController < Admin::Ckeditor::BaseControlle
 
   def destroy
     image = @blog_post.find_image_by(params.permit(:id))
+    image.remove_data!
     image.destroy
     render :nothing => true
   end

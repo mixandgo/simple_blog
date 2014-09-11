@@ -93,6 +93,11 @@ describe Admin::Ckeditor::BlogPostImagesController do
       xhr :post, :destroy, :blog_post_id => blog_post_id, :id => image_id
     end
 
+    it "calls the remove_data! method on the image" do
+      expect(image).to receive(:remove_data!)
+      xhr :post, :destroy, :blog_post_id => blog_post_id, :id => image_id
+    end
+
     it "renders nothing" do
       xhr :post, :destroy, :blog_post_id => blog_post_id, :id => image_id
       expect(response.body).to eq " "

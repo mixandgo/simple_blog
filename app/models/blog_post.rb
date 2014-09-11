@@ -1,6 +1,6 @@
 class BlogPost < ActiveRecord::Base
   has_many :imageables, :as => :imageable
-  has_many :images, :through => :imageables, :class_name => Ckeditor::Image
+  has_many :images, :through => :imageables, :class_name => Ckeditor::Image, :dependent => :destroy
 
   before_save :set_slug
   acts_as_taggable
@@ -22,6 +22,14 @@ class BlogPost < ActiveRecord::Base
 
   def pretty_title
     title.try(:titleize)
+  end
+
+  def find_image_by(id)
+    images.where(id).first
+  end
+
+  def self.unscoped_find_by!(id)
+    unscoped.where(:id => id).first
   end
 
   def self.find_tags(term)

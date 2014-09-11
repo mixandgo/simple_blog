@@ -1,0 +1,13 @@
+<div id="fileupload" class="gal-holder">
+  <div class="gal-item">
+    <div class="fileupload-button gal-upload-holder">
+      <%= link_to t(:upload, :scope => [:ckeditor, :buttons]), 'javascript:void(0)', :class => "add" %>
+    </div>
+  </div>
+
+  <div class="fileupload-list" data-endless="true">
+    <%= render 'asset' %>
+  </div>
+
+  <%= render 'uploader_script' %>
+</div>

@@ -1,4 +1,4 @@
-<div class="simple-blog-posts-new">
+<div class="simple-blog-posts-new" id="simple-blog-post-form">
   <%= form_for @blog_post, :url => admin_blog_post_path(@blog_post.id), :method => :put do |f| %>
     <%= render 'form', :f => f %>
     <div class="simple-blog-new-post-row">

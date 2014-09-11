@@ -1,5 +1,5 @@
 <%= render "form_errors", :obj => f.object %>
-<div class="simple-blog-new-post-row" id="simple-blog-post-form">
+<div class="simple-blog-new-post-row">
   <%= f.label :title, :class => "left-side-label" %>
   <%= f.text_field :title, :id => "simple-blog-post-form-title", :class => "textfield", :size => 100 %>
   <div id='simple-blog-form-title-warning' class='simple-blog-form-warning'></div>
@@ -8,13 +8,13 @@
   <%= f.label :description %>
 </div>
 <div class="simple-blog-new-post-row">
-  <%= f.text_area :description, :id => "simple-blog-post-form-description" %>
+  <%= f.cktext_area :description, default_toolbar(f, :id => "simple-blog-post-form-description") %>
 </div>
 <div class="simple-blog-new-post-row">
   <%= f.label :body %>
 </div>
 <div class="simple-blog-new-post-row">
-  <%= f.text_area :body, :id => "simple-blog-post-form-body" %>
+  <%= f.cktext_area :body, default_toolbar(f, :id => "simple-blog-post-form-body") %>
 </div>
 <div class="simple-blog-new-post-row">
   <%= f.label :published_at, :class => "left-side-label" %>

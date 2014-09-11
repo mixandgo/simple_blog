@@ -12,19 +12,9 @@ describe Admin::Ckeditor::BlogPostImagesController do
     allow(blog_post).to receive(:images).and_return images
   end
 
-  describe "#find_model" do
-    it "calls unscoped_find_by with the blog_post_id" do
-      expect(BlogPost).to receive(:unscoped_find_by!).with(blog_post_id).and_return blog_post
-      xhr :get, :index, :blog_post_id => blog_post_id
-    end
-
-    it "assigns to @blog_post" do
-      xhr :get, :index, :blog_post_id => blog_post_id
-      expect(assigns(:blog_post)).to eq(blog_post)
-    end
-  end
-
   describe "#index" do
+    it_behaves_like "a controller that needs @blog_post assigned", {:controller => :index, :method => :get, :options => {}}
+
     it "assigns to @images" do
       xhr :get, :index, :blog_post_id => blog_post_id
       expect(assigns[:images]).to eq(images)
@@ -41,6 +31,8 @@ describe Admin::Ckeditor::BlogPostImagesController do
     before :each do
       allow(Ckeditor::Image).to receive(:new).and_return image
     end
+
+    it_behaves_like "a controller that needs @blog_post assigned", {:controller => :create, :method => :get, :options => {}}
 
     context "invalid image" do
 
@@ -63,12 +55,12 @@ describe Admin::Ckeditor::BlogPostImagesController do
         allow(image).to receive(:save).and_return true
       end
 
-      it "returns a ckeditor call when it's a CKEditor all" do
+      it "returns a ckeditor js call when 'CKEditor' send through params" do
         xhr :get, :create, :blog_post_id => blog_post_id, :CKEditor => "true", :CKEDITORFuncNum => 100
         expect(response.body).to include("window.parent.CKEDITOR.tools.callFunction")
       end
 
-      it "returns the id and type of the image when it's not a CKEditor call" do
+      it "returns an image json output as default" do
         allow(image).to receive(:to_json).and_return image_json_output
         xhr :get, :create, :blog_post_id => blog_post_id
         expect(response.body).to eq image_json_output
@@ -88,6 +80,8 @@ describe Admin::Ckeditor::BlogPostImagesController do
     before :each do
       allow(blog_post).to receive(:find_image_by).with("id" => image_id).and_return image
     end
+
+    it_behaves_like "a controller that needs @blog_post assigned", {:controller => :destroy, :method => :post, :options => {:id => "100"}}
 
     it "uses the image with the specified id" do
       expect(blog_post).to receive(:find_image_by).with("id" => image_id)

@@ -13,7 +13,13 @@ class Admin::Ckeditor::BlogPostImagesController < Admin::Ckeditor::BaseControlle
   def create
     @image = Ckeditor::Image.new
 
-    render_with_asset(@image)
+    asset = create_asset_from(@image)
+    if asset
+      @blog_post.images << asset
+      render_with_asset(asset)
+    else
+      render :nothing => true
+    end
   end
 
   def destroy
@@ -24,22 +30,19 @@ class Admin::Ckeditor::BlogPostImagesController < Admin::Ckeditor::BaseControlle
 
   private
 
-    def render_with_asset(asset)
+    def create_asset_from(image)
       file = params[:CKEditor].blank? ? params[:qqfile] : params[:upload]
-      asset.data = Ckeditor::Http.normalize_param(file, request)
+      image.data = Ckeditor::Http.normalize_param(file, request)
+      callback = ckeditor_before_create_asset(image)
 
-      callback = ckeditor_before_create_asset(asset)
+      return image if callback && image.save
+    end
 
-      if callback && asset.save
-        body = params[:CKEditor].blank? ? asset.to_json(:only=>[:id, :type]) : %Q"<script type='text/javascript'>
+    def render_with_asset(asset)
+      body = params[:CKEditor].blank? ? asset.to_json(:only=>[:id, :type]) : %Q"<script type='text/javascript'>
           window.parent.CKEDITOR.tools.callFunction(#{params[:CKEditorFuncNum]}, '#{config.relative_url_root}#{Ckeditor::Utils.escape_single_quotes(asset.url_content)}');
         </script>"
-
-        @blog_post.images << asset
-        render :text => body
-      else
-        render :nothing => true
-      end
+      render :text => body
     end
 
     def find_blog_post

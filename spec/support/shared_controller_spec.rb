@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 shared_examples "a controller that needs @blog_post assigned" do |action|
-  describe "making sure @blog_post get assigned" do
+  describe "making sure @blog_post get's assigned" do
     let(:blog_post) { double.as_null_object }
     let(:blog_post_id) { "100" }
 

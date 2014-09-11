@@ -9,7 +9,7 @@ feature 'List posts' do
                        :keywords => 'first_keyword, second_keyword')
   end
 
-  scenario 'should only display post descsription' do
+  scenario "should only display the post's descsription" do
     visit blog_posts_path
     expect(page).to have_content('Blog post description')
     expect(page).not_to have_content('Blog post body')

@@ -63,9 +63,9 @@ feature 'Create posts' do
   end
 
   scenario 'user can set a published_at date that will stay' do
-    create_a_blog_post(:published_at => "01/01/2014")
+    create_a_blog_post(:title => "Blog Post Title", :published_at => "01/01/2014")
     visit admin_blog_posts_path
-    click_on 'Cool Stuff'
+    click_on 'Blog Post Title'
     expect(page).to have_xpath("//input[@value='01/01/2014']")
   end
 end

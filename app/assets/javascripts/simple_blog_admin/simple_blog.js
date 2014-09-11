@@ -3,7 +3,17 @@ $(document).ready(function() {
   addCkeditor('simple-blog-post-form-description');
   setAutocomplete('simple-blog-post-form-tag-list');
   setTitleValidation();
+  setKeywordHandler();
 });
+
+function setKeywordHandler() {
+  CKEDITOR.on("instanceReady", function(evt) {
+    CKEDITOR.instances["simple-blog-post-form-body"].document.on("keyup", function(event) {
+      var ckeditor = CKEDITOR.instances["simple-blog-post-form-body"]
+      KeywordParser.showTopKeywords(ckeditor.getData());
+    });
+  });
+}
 
 function addCkeditor(elementId) {
   if ($("#"+elementId).length) {

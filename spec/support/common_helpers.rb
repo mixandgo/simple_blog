@@ -9,7 +9,7 @@ def create_a_blog_post(options={})
     select '2013', :from => 'blog_post_published_at_1i'
   end
   fill_in 'simple-blog-post-form-tag-list', :with => options[:tags] || 'first_tag, second_tag'
-  fill_in 'blog_post_keywords', :with => options[:keywords] || 'first_keyword, second_keyword'
+  fill_in 'simple-blog-form-keywords', :with => options[:keywords] || 'first_keyword, second_keyword'
   click_button 'Update post'
 end
 
@@ -27,4 +27,18 @@ end
 
 def expect_page_to_contain_meta_tag(name, content)
   expect(page).to have_css("meta[name='#{name}'][content='#{content}']", :visible => false)
+end
+
+# Used to fill ckeditor fields
+# @param [String] locator label text for the textarea or textarea id
+def fill_in_ckeditor(locator, params = {})
+  page.execute_script <<-SCRIPT
+  var ckeditor = CKEDITOR.instances['#{locator}']
+  ckeditor.setData('#{params[:with]}');
+  ckeditor.document.fire("keyup");
+  SCRIPT
+end
+
+def wait_for_ckeditor(selector)
+  expect(page).to have_css(selector)
 end

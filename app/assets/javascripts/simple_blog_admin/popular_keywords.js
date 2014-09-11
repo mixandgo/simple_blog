@@ -19,8 +19,8 @@ var KeywordParser = (function () {
   };
 
   var keywordIsBlacklisted = function(keyword) {
-    // test if keyword length greater then 2 to prevent logging small words
-    // test if keyword in blacklist
+    //skip if keyword is shorter than 2 characters
+    // and skip if word is in blackListKeywords"
     return (keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)
   };
 
@@ -39,11 +39,11 @@ var KeywordParser = (function () {
   };
 
   var getTopKeywordsList = function() {
-    var allowedKeywordsNumber = 20;
+    var totalAllowedKeywords = 20;
     var keywordsList = sortKeywords();
     var topKeywordsList = [];
 
-    for(var index = 0; index < allowedKeywordsNumber; index ++) {
+    for(var index = 0; index < totalAllowedKeywords; index ++) {
       if (index < keywordsList.length){
         topKeywordsList.push(keywordsList[index]);
       }

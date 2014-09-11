@@ -2,14 +2,17 @@ require 'spec_helper'
 
 feature 'Show posts' do
   background do
-    create_a_blog_post
-    visit blog_posts_path
-    click_on 'Cool Stuff'
+    create_a_blog_post(:title => 'Blog post title',
+                       :body => 'Blog post body',
+                       :tags => 'first_tag, second_tag',
+                       :description => 'Blog post description',
+                       :keywords => 'first_keyword, second_keyword')
+    visit_show_page_for('Blog Post Title')
   end
 
   scenario 'displaying a post' do
-    expect(page).to have_content('Cool Stuff') # yes, it's titleized
-    expect(page).to have_content('Cool body')
+    expect(page).to have_content('Blog Post Title') # yes, it's titleized
+    expect(page).to have_content('Blog post body')
     expect(page).to have_content('first_tag, second_tag')
   end
 
@@ -19,7 +22,7 @@ feature 'Show posts' do
   end
 
   scenario 'page should have meta tags for seo' do
-    expect_page_to_contain_meta_tag("description", "Cool description")
+    expect_page_to_contain_meta_tag("description", "Blog post description")
     expect_page_to_contain_meta_tag("keywords", "first_keyword, second_keyword")
   end
 end

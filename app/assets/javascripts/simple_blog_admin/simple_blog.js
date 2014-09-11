@@ -2,6 +2,7 @@ $(document).ready(function() {
   addCkeditor('simple-blog-post-form-body');
   addCkeditor('simple-blog-post-form-description');
   setAutocomplete('simple-blog-post-form-tag-list');
+  setAutocomplete('simple-blog-post-form-keyword-list');
   setTitleValidation();
 });
 
@@ -26,7 +27,7 @@ function setAutocomplete(elementId) {
     }
   }).autocomplete({
     source: function(request, response) {
-      $.getJSON("/admin/blog_posts/get_tags", {
+      $.getJSON('/admin/blog_posts/get_tags', {
         term: extractLast(request.term)
       }, response);
     },

@@ -78,8 +78,6 @@ function setTitleValidation() {
 }
 
 $(document).ready(function() {
-  addCkeditor('simple-blog-post-form-body');
-  addCkeditor('simple-blog-post-form-description');
   setAutocomplete('simple-blog-post-form-tag-list');
   setAutocomplete('simple-blog-post-form-keyword-list');
   setTitleValidation();

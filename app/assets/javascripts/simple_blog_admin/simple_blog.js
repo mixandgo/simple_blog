@@ -1,24 +1,8 @@
 $(document).ready(function() {
-  addCkeditor('simple-blog-post-form-body');
-  addCkeditor('simple-blog-post-form-description');
   setAutocomplete('simple-blog-post-form-tag-list');
   setAutocomplete('simple-blog-post-form-keyword-list');
   setTitleValidation();
 });
-
-function addCkeditor(elementId) {
-  if ($("#"+elementId).length) {
-    CKEDITOR.replace(elementId, {
-      toolbar: [
-        { name: 'document', items: [ 'Source' ] },
-        { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
-        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline' ] },
-        { name: 'insert', items: [ 'Image' ] },
-        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
-      ]
-    });
-  }
-}
 
 function setAutocomplete(elementId) {
   $("#"+elementId).on("keydown", function(event) {

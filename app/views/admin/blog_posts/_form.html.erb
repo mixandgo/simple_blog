@@ -8,13 +8,13 @@
   <%= f.label :description %>
 </div>
 <div class="simple-blog-new-post-row">
-  <%= f.text_area :description, :id => "simple-blog-post-form-description" %>
+  <%= f.cktext_area :description, default_toolbar(f, :id => "simple-blog-post-form-description",) %>
 </div>
 <div class="simple-blog-new-post-row">
   <%= f.label :body %>
 </div>
 <div class="simple-blog-new-post-row">
-  <%= f.text_area :body, :id => "simple-blog-post-form-body" %>
+  <%= f.cktext_area :body, default_toolbar(f, :id => "simple-blog-post-form-body") %>
 </div>
 <div class="simple-blog-new-post-row">
   <%= f.label :published_at, :class => "left-side-label" %>

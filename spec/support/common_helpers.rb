@@ -4,9 +4,7 @@ def create_a_blog_post(options={})
   fill_in 'simple-blog-post-form-body', :with => options[:body] || 'Cool body'
   fill_in 'simple-blog-post-form-description', :with => options[:description] || 'Cool description'
   unless options.has_key?(:unpublished)
-    select '1', :from => 'blog_post_published_at_3i'
-    select 'January', :from => 'blog_post_published_at_2i'
-    select '2013', :from => 'blog_post_published_at_1i'
+    fill_in 'simple-blog-post-form-published-at', :with => options[:published_at] || Date.today
   end
   fill_in 'simple-blog-post-form-tag-list', :with => options[:tags] || 'first_tag, second_tag'
   fill_in 'blog_post_keywords', :with => options[:keywords] || 'first_keyword, second_keyword'

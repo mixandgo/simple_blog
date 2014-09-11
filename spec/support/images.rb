@@ -1,7 +1,3 @@
-def use_selenium_driver
-  Capybara.current_driver = :selenium
-end
-
 def open_ckeditor_browser
   visit new_admin_blog_post_path
   find(:css, "div#cke_simple-blog-post-form-description")

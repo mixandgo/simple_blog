@@ -19,7 +19,7 @@ var KeywordParser = (function () {
   };
 
   var keywordIsBlacklisted = function(keyword) {
-    //skip if keyword is shorter than 2 characters
+    // skip if keyword is shorter than 2 characters
     // and skip if word is in blackListKeywords"
     return (keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)
   };

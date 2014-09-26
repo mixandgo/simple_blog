@@ -11,9 +11,12 @@ describe BlogPost do
     describe "uniqueness" do
       let(:title) { "unique title" }
       let!(:post) { create(:blog_post, :title => title) }
+      let!(:duplicated_blog_post) { create(:blog_post) }
 
       it "should validate uniqueness of title" do
-        expect(create(:blog_post, :title => title)).to have(1).errors_on(:title)
+        duplicated_blog_post.update_attributes(:title => title)
+
+        expect(duplicated_blog_post.errors[:title].size).to eq(1)
       end
     end
 
@@ -58,12 +61,14 @@ describe BlogPost do
   describe "#published?" do
     it "returns true if published_at is not nil" do
       post = build(:blog_post)
-      expect(post.published?).to be_true
+      expect(post.published?).to be_truthy
     end
 
     it "returns false if published_at is nil" do
       post = build(:blog_post, :published_at => nil)
-      expect(post.published?).to be_false
+      expect(post.published?).to be_falsey
+
+
     end
   end
 

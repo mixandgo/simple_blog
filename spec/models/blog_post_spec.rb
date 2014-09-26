@@ -1,12 +1,16 @@
 require 'spec_helper'
 
-describe BlogPost do
+
+describe BlogPost, :type => :model do
+  it { is_expected.to have_many(:images) }
+  it { is_expected.to have_many(:imageables) }
+
   describe "validations on update" do
     subject { BlogPost.create }
 
-    it { should validate_presence_of(:title) }
-    it { should validate_presence_of(:body) }
-    it { should ensure_length_of(:title).is_at_most(72) }
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_presence_of(:body) }
+    it { is_expected.to ensure_length_of(:title).is_at_most(72) }
 
     describe "uniqueness" do
       let(:title) { "unique title" }
@@ -25,17 +29,17 @@ describe BlogPost do
   describe "validations on create" do
     subject { BlogPost.new }
 
-    it { should_not validate_presence_of(:title) }
-    it { should_not validate_uniqueness_of(:title) }
-    it { should_not validate_presence_of(:description) }
-    it { should_not validate_presence_of(:body) }
-    it { should_not ensure_length_of(:title).is_at_most(72) }
+    it { is_expected.not_to validate_presence_of(:title) }
+    it { is_expected.not_to validate_uniqueness_of(:title) }
+    it { is_expected.not_to validate_presence_of(:description) }
+    it { is_expected.not_to validate_presence_of(:body) }
+    it { is_expected.not_to ensure_length_of(:title).is_at_most(72) }
   end
 
   describe "validations when published at date is present" do
     subject { create(:blog_post, :published_at => 1.week.ago, :description => "") }
 
-    it { should validate_presence_of(:description) }
+    it { is_expected.to validate_presence_of(:description) }
   end
 
   describe "before_save" do
@@ -54,7 +58,7 @@ describe BlogPost do
     it "finds all the published records" do
       published = create(:blog_post)
       create(:blog_post, :published_at => nil) # unpublished
-      BlogPost.all.should == [published]
+      expect(BlogPost.all).to eq([published])
     end
   end
 
@@ -88,7 +92,7 @@ describe BlogPost do
 
   describe ".find_tags" do
     let(:term) { "term" }
-    let(:blog_post) { double("blog_post") }
+    let(:blog_post) { class_double("BlogPost") }
     let(:tag) { double("tag") }
 
     before :each do

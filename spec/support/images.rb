@@ -6,8 +6,7 @@ def open_ckeditor_browser
 end
 
 def inside_ckeditor_browser
-  new_window = page.driver.browser.window_handles.last
-  page.within_window new_window do
+  page.within_window windows.last do
     yield
   end
 end

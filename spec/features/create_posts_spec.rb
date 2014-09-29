@@ -62,6 +62,13 @@ feature 'Create posts' do
     expect(page).to have_content('kw: coolbody - nr: 6')
   end
 
+  scenario 'user does not see whitespaces as top keywords when writing an article', :js => true do
+    visit new_admin_blog_post_path
+    wait_for_ckeditor('#cke_simple-blog-post-form-body')
+    fill_in_ckeditor 'simple-blog-post-form-body', :with => "coolbody                        "*6
+    expect(page).to have_content('kw: coolbody - nr: 6')
+  end
+
   scenario 'user can set a published_at date that will stay' do
     create_a_blog_post(:title => "Blog Post Title", :published_at => "01/01/2014")
     visit admin_blog_posts_path

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Admin::Ckeditor::BlogPostImagesController do
+describe Admin::Ckeditor::BlogPostImagesController, :type => :controller do
 
-  let(:blog_post) { double("blog_post").as_null_object }
+  let(:blog_post) { instance_double("BlogPost").as_null_object }
   let(:blog_post_id) { "100" }
   let(:images) { double(:images).as_null_object }
-  let(:image) { double(:image).as_null_object }
+  let(:image) { instance_double("Image").as_null_object }
 
   before :each do
     allow(BlogPost).to receive(:unscoped_find_by!).with(blog_post_id).and_return blog_post
@@ -27,9 +27,11 @@ describe Admin::Ckeditor::BlogPostImagesController do
   end
 
   describe "#create" do
+    let(:image_json_output) { "image_json_output" }
 
     before :each do
       allow(Ckeditor::Image).to receive(:new).and_return image
+      allow(image).to receive(:to_json).and_return image_json_output
     end
 
     it_behaves_like "a controller that needs @blog_post assigned", {:controller => :create, :method => :get, :options => {}}
@@ -53,6 +55,7 @@ describe Admin::Ckeditor::BlogPostImagesController do
 
       before :each do
         allow(image).to receive(:save).and_return true
+        allow(image).to receive(:to_json).and_return image_json_output
       end
 
       it "returns a ckeditor js call when 'CKEditor' send through params" do
@@ -86,6 +89,7 @@ describe Admin::Ckeditor::BlogPostImagesController do
     it "uses the image with the specified id" do
       expect(blog_post).to receive(:find_image_by).with("id" => image_id)
       xhr :post, :destroy, :blog_post_id => blog_post_id, :id => image_id
+
     end
 
     it "calls the destroy method on the image" do

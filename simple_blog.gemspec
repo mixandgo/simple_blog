@@ -24,9 +24,9 @@ Gem::Specification.new do |s|
   s.add_dependency "acts-as-taggable-on"
 
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "rspec-rails", "2.14.0"
-  s.add_development_dependency "capybara", "2.1.0"
-  s.add_development_dependency "factory_girl_rails", "4.3.0"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "capybara"
+  s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "launchy"
   s.add_development_dependency "generator_spec"

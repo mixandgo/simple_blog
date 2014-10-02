@@ -27,7 +27,7 @@ var KeywordParser = (function () {
   var getAllKeywords = function(html) {
     // strip html tags
     // ignore everything except letters
-    return html.replace(/<\/?[^>]+(>|$)/g, "").replace(/[^a-zA-Z ]/g, "").match(/\S+/g);
+    return html.replace(/<\/?[^>]+(>|$)|(&gt;)|(?:&nbsp;|<br>)|(\s?&lt;)/g, "").replace(/[^a-zA-Z ]/g, "").match(/\S+/g);
   };
 
   var sortKeywords = function() {

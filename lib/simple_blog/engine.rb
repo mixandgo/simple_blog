@@ -1,7 +1,6 @@
 require 'jquery-rails'
 require 'carrierwave'
 require 'mini_magick'
-require 'ckeditor'
 require 'acts-as-taggable-on'
 
 module SimpleBlog

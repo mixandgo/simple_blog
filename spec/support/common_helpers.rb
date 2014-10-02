@@ -37,17 +37,3 @@ def visit_show_page_for(title)
   visit blog_posts_path
   click_on title
 end
-
-# Used to fill ckeditor fields
-# @param [String] locator label text for the textarea or textarea id
-def fill_in_ckeditor(locator, params = {})
-  page.execute_script <<-SCRIPT
-  var ckeditor = CKEDITOR.instances['#{locator}']
-  ckeditor.setData('#{params[:with]}');
-  ckeditor.document.fire("keyup");
-  SCRIPT
-end
-
-def wait_for_ckeditor(selector)
-  expect(page).to have_css(selector)
-end

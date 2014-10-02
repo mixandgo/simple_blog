@@ -1,10 +1,5 @@
 function setKeywordHandler() {
-  CKEDITOR.on("instanceReady", function(evt) {
-    CKEDITOR.instances["simple-blog-post-form-body"].document.on("keyup", function(event) {
-      var ckeditor = CKEDITOR.instances["simple-blog-post-form-body"]
-      KeywordParser.showTopKeywords(ckeditor.getData());
-    });
-  });
+  // this needs to be rewriten
 }
 
 function addDatepicker() {

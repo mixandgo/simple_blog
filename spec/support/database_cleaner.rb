@@ -9,6 +9,5 @@ RSpec.configure do |config|
 
   config.after :each do
     DatabaseCleaner.clean
-    FileUtils.rm_rf('spec/dummy/public/uploads/ckeditor/pictures')
   end
 end

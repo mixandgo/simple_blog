@@ -57,19 +57,17 @@ feature 'Create posts' do
 
 
   scenario 'user sees the top keywords while writing an article', :js => true do
-    # this will be addressed when keyword parser is fixed
-
-    # visit new_admin_blog_post_path
-    # fill_in 'simple-blog-post-form-body', :with => "coolbody "*6
-    # expect(page).to have_content('kw: coolbody - nr: 6')
+    pending "keyword parser will need some changes when everything is done. it will be addressed in a separate ticket"
+    visit new_admin_blog_post_path
+    fill_in 'simple-blog-post-form-body', :with => "coolbody "*6
+    expect(page).to have_content('kw: coolbody - nr: 6')
   end
 
   scenario 'user does not see whitespaces as top keywords when writing an article', :js => true do
-    # this will be addressed when keyword parser if fixed
-
-    # visit new_admin_blog_post_path
-    # fill_in 'simple-blog-post-form-body', :with => "coolbody                        "*6
-    # expect(page).to have_content('kw: coolbody - nr: 6')
+    pending "keyword parser will need some changes when everything is done. it will be addressed in a separate ticket"
+    visit new_admin_blog_post_path
+    fill_in 'simple-blog-post-form-body', :with => "coolbody                        "*6
+    expect(page).to have_content('kw: coolbody - nr: 6')
   end
 
   scenario 'user can set a published_at date that will stay' do

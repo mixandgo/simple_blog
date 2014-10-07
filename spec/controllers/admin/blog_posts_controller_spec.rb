@@ -65,10 +65,18 @@ module Admin
     end
 
     describe "#index" do
-      let(:blog_post) { instance_double("BlogPost") }
+      let(:blog_post) { double("BlogPost") }
+
+      before :each do
+        allow(BlogPost).to receive(:unscoped).and_return [blog_post]
+      end
 
       it "returns all unscoped blog posts" do
-        expect(BlogPost).to receive(:unscoped).and_return [blog_post]
+        expect(BlogPost).to receive(:unscoped)
+        get :index
+      end
+
+      it "assigns to @blog posts" do
         get :index
         expect(assigns(:blog_posts)).to eq([blog_post])
       end

@@ -65,7 +65,7 @@ describe BlogPostsController, :type => :controller do
     end
 
     it "renders the show template" do
-      expect(BlogPost).to receive(:find_by!).with("slug" => slug)
+      allow(BlogPost).to receive(:find_by!).with("slug" => slug)
       get :show, :slug => slug
       expect(response).to render_template('blog_posts/show')
     end

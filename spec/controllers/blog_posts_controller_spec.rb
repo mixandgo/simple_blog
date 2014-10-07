@@ -8,7 +8,7 @@ describe BlogPostsController, :type => :controller do
       allow(BlogPost).to receive(:all).and_return [blog_post]
     end
 
-    it "returns all the blog posts" do
+    it "finds all the blog posts" do
       expect(BlogPost).to receive(:all)
       get :index
     end
@@ -32,7 +32,7 @@ describe BlogPostsController, :type => :controller do
       allow(BlogPost).to receive(:tagged_with).with(tag).and_return [blog_post]
     end
 
-    it "returns all blog posts filtered by tag" do
+    it "finds all blog posts filtered by tag" do
       expect(BlogPost).to receive(:tagged_with).with(tag)
       get :filter, :tag => tag
     end
@@ -53,7 +53,7 @@ describe BlogPostsController, :type => :controller do
     let(:slug) { "cool slug" }
     let(:blog_post) { double("BlogPost") }
 
-    it "returns blog posts by slug" do
+    it "finds blog posts by slug" do
       expect(BlogPost).to receive(:find_by!).with("slug" => slug)
       get :show, :slug => slug
     end

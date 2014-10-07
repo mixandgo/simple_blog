@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe BlogPost, :type => :model do
 
   describe "validations on update" do
@@ -13,15 +12,14 @@ describe BlogPost, :type => :model do
     describe "uniqueness" do
       let(:title) { "unique title" }
       let!(:post) { create(:blog_post, :title => title) }
-      let!(:duplicated_blog_post) { create(:blog_post) }
+      let!(:duplicated_blog_post) { build(:blog_post) }
 
       it "should validate uniqueness of title" do
-        duplicated_blog_post.update_attributes(:title => title)
-
+        duplicated_blog_post.update(:title => title)
+        duplicated_blog_post.valid?
         expect(duplicated_blog_post.errors[:title].size).to eq(1)
       end
     end
-
   end
 
   describe "validations on create" do

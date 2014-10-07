@@ -1,13 +1,21 @@
 require 'spec_helper'
 
-describe BlogPostsController do
+describe BlogPostsController, :type => :controller do
   describe "#index" do
-    let(:post) { double("post") }
+    let(:blog_post) { double("BlogPost") }
 
-    it "should assign all blog_posts" do
-      expect(BlogPost).to receive(:all).and_return [post]
+    before :each do
+      allow(BlogPost).to receive(:all).and_return [blog_post]
+    end
+
+    it "finds all the blog posts" do
+      expect(BlogPost).to receive(:all)
       get :index
-      expect(assigns(:blog_posts)).to eq([post])
+    end
+
+    it "assigns to @blog_posts" do
+      get :index
+      expect(assigns(:blog_posts)).to eq([blog_post])
     end
 
     it "renders the index template" do
@@ -18,12 +26,20 @@ describe BlogPostsController do
 
   describe "#filter" do
     let(:tag) { "cool tag" }
-    let(:post) { double("post") }
+    let(:blog_post) { double("BlogPost") }
 
-    it "assigns tagged posts to @blog_posts" do
-      expect(BlogPost).to receive(:tagged_with).with(tag).and_return [post]
+    before :each do
+      allow(BlogPost).to receive(:tagged_with).with(tag).and_return [blog_post]
+    end
+
+    it "finds all blog posts filtered by tag" do
+      expect(BlogPost).to receive(:tagged_with).with(tag)
       get :filter, :tag => tag
-      expect(assigns(:blog_posts)).to eq([post])
+    end
+
+    it "assigns to @blog_posts" do
+      get :filter, :tag => tag
+      expect(assigns(:blog_posts)).to eq([blog_post])
     end
 
     it "renders the index template" do
@@ -35,17 +51,21 @@ describe BlogPostsController do
 
   describe "#show" do
     let(:slug) { "cool slug" }
-    let(:post) { double("post") }
+    let(:blog_post) { double("BlogPost") }
 
-    it "assigns @blog_post" do
-      expect(BlogPost).to receive(:find_by!).with("slug" => slug).and_return post
-
+    it "finds blog posts by slug" do
+      expect(BlogPost).to receive(:find_by!).with("slug" => slug)
       get :show, :slug => slug
-      expect(assigns(:blog_post)).to eq(post)
+    end
+
+    it "assigns to @blog_post" do
+      allow(BlogPost).to receive(:find_by!).with("slug" => slug).and_return blog_post
+      get :show, :slug => slug
+      expect(assigns(:blog_post)).to eq(blog_post)
     end
 
     it "renders the show template" do
-      BlogPost.should_receive(:find_by!).with("slug" => slug)
+      allow(BlogPost).to receive(:find_by!).with("slug" => slug)
       get :show, :slug => slug
       expect(response).to render_template('blog_posts/show')
     end

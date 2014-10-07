@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Admin
-  describe BlogPostsController do
+  describe BlogPostsController, :type => :controller do
     describe "#update" do
       let(:post) { create(:blog_post) }
 
@@ -49,7 +49,7 @@ module Admin
     describe "#new" do
 
       let(:post_id) { 100 }
-      let(:blog_post) { double("blog_post", :id => post_id) }
+      let(:blog_post) { instance_double("BlogPost", :id => post_id) }
 
       it "creates a new empty blog post" do
         expect(BlogPost).to receive(:create).and_return blog_post
@@ -65,12 +65,20 @@ module Admin
     end
 
     describe "#index" do
-      let(:post) { double("post") }
+      let(:blog_post) { double("BlogPost") }
+
+      before :each do
+        allow(BlogPost).to receive(:unscoped).and_return [blog_post]
+      end
 
       it "returns all unscoped blog posts" do
-        expect(BlogPost).to receive(:unscoped).and_return [post]
+        expect(BlogPost).to receive(:unscoped)
         get :index
-        expect(assigns(:blog_posts)).to eq([post])
+      end
+
+      it "assigns to @blog posts" do
+        get :index
+        expect(assigns(:blog_posts)).to eq([blog_post])
       end
     end
 

@@ -1,0 +1,8 @@
+<div class="simple-blog-posts-new" id="simple-blog-post-form">
+  <%= form_for @blog_post, :url => admin_blog_posts_path, :method => :post do |f| %>
+    <%= render 'form', :f => f %>
+    <div class="simple-blog-new-post-row">
+      <%= f.submit t('.submit'), :class => "simple-blog-new-post-submit" %>
+    </div>
+  <% end %>
+</div>

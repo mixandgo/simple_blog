@@ -10,7 +10,7 @@ module Admin
         allow(BlogPost).to receive(:new).with(params).and_return blog_post
       end
 
-      it "creates a new blog post with the specified params" do
+      it "instantiates a new blog post with the specified params" do
         expect(BlogPost).to receive(:new).with(params)
         post :create, :blog_post => params
       end
@@ -118,7 +118,7 @@ module Admin
     end
 
     describe "#new" do
-      let(:blog_post) { instance_double("BlogPost") }
+      let(:blog_post) { double("BlogPost") }
 
       before :each do
         allow(BlogPost).to receive(:new).and_return blog_post
@@ -135,7 +135,6 @@ module Admin
       end
 
       it "renders the new template" do
-        allow(BlogPost).to receive(:new)
         get :new
         expect(response).to render_template('blog_posts/new')
       end

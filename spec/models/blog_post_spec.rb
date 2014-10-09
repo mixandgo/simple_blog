@@ -2,38 +2,18 @@ require 'spec_helper'
 
 describe BlogPost, :type => :model do
 
-  describe "validations on update" do
-    subject { BlogPost.create }
-
-    it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_presence_of(:body) }
-    it { is_expected.to ensure_length_of(:title).is_at_most(72) }
-
-    describe "uniqueness" do
-      let(:title) { "unique title" }
-      let!(:post) { create(:blog_post, :title => title) }
-      let!(:duplicated_blog_post) { build(:blog_post) }
-
-      it "should validate uniqueness of title" do
-        duplicated_blog_post.update(:title => title)
-        duplicated_blog_post.valid?
-        expect(duplicated_blog_post.errors[:title].size).to eq(1)
-      end
-    end
-  end
-
   describe "validations on create" do
     subject { BlogPost.new }
 
-    it { is_expected.not_to validate_presence_of(:title) }
-    it { is_expected.not_to validate_uniqueness_of(:title) }
-    it { is_expected.not_to validate_presence_of(:description) }
-    it { is_expected.not_to validate_presence_of(:body) }
-    it { is_expected.not_to ensure_length_of(:title).is_at_most(72) }
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_uniqueness_of(:title) }
+    it { is_expected.to validate_uniqueness_of(:title) }
+    it { is_expected.to validate_presence_of(:body) }
+    it { is_expected.to ensure_length_of(:title).is_at_most(72) }
   end
 
   describe "validations when published at date is present" do
-    subject { create(:blog_post, :published_at => 1.week.ago, :description => "") }
+    subject { build(:blog_post, :published_at => 1.week.ago, :description => "") }
 
     it { is_expected.to validate_presence_of(:description) }
   end

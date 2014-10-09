@@ -2,6 +2,57 @@ require 'spec_helper'
 
 module Admin
   describe BlogPostsController, :type => :controller do
+    describe "#create" do
+      let(:params) { {:title => ""} }
+      let(:blog_post) { double.as_null_object }
+
+      before :each do
+        allow(BlogPost).to receive(:new).with(params).and_return blog_post
+      end
+
+      it "creates a new blog post with the specified params" do
+        expect(BlogPost).to receive(:new).with(params)
+        post :create, :blog_post => params
+      end
+
+      it "saves the new blog post" do
+        expect(blog_post).to receive(:save)
+        post :create, :blog_post => params
+      end
+
+      context "valid parameters" do
+        before :each do
+          allow(blog_post).to receive(:save).and_return true
+        end
+
+        it "redirects to the index page" do
+          post :create, :blog_post => params
+          expect(response).to redirect_to(admin_blog_posts_path)
+        end
+
+        it "sets a flash notice" do
+          post :create, :blog_post => params
+          expect(flash[:notice]).not_to be_nil
+        end
+      end
+
+      context "invalid parameters" do
+        before :each do
+          allow(blog_post).to receive(:save).and_return false
+        end
+
+        it "renders the new template" do
+          post :create, :blog_post => params
+          expect(response).to render_template('blog_posts/new')
+        end
+
+        it "sets the alert flash" do
+          post :create, :blog_post => params
+          expect(flash[:alert]).not_to be_nil
+        end
+      end
+    end
+
     describe "#update" do
       let(:post) { create(:blog_post) }
 
@@ -46,22 +97,48 @@ module Admin
       end
     end
 
-    describe "#new" do
+    describe "#edit" do
+      let(:id) { "100" }
+      let(:post) { double.as_null_object }
 
-      let(:post_id) { 100 }
-      let(:blog_post) { instance_double("BlogPost", :id => post_id) }
+      before :each do
+        allow(BlogPost).to receive(:unscoped).and_return post
+        allow(post).to receive(:find_by!).with({"id" => id}).and_return post
+      end
+
+      it "assigns the @blog_post" do
+        get :edit, :id => id
+        expect(assigns(:blog_post)).to eq(post)
+      end
+
+      it "renders the edit template" do
+        get :edit, :id => id
+        expect(response).to render_template('blog_posts/edit')
+      end
+    end
+
+    describe "#new" do
+      let(:blog_post) { instance_double("BlogPost") }
+
+      before :each do
+        allow(BlogPost).to receive(:new).and_return blog_post
+      end
 
       it "creates a new empty blog post" do
-        expect(BlogPost).to receive(:create).and_return blog_post
+        expect(BlogPost).to receive(:new)
         get :new
       end
 
-      it "redirects to the edit page" do
-        allow(BlogPost).to receive(:create).and_return blog_post
+      it "assigns to blog_post" do
         get :new
-        expect(response).to redirect_to(edit_admin_blog_post_path(blog_post.id))
+        expect(assigns(:blog_post)).to eq(blog_post)
       end
 
+      it "renders the new template" do
+        allow(BlogPost).to receive(:new)
+        get :new
+        expect(response).to render_template('blog_posts/new')
+      end
     end
 
     describe "#index" do

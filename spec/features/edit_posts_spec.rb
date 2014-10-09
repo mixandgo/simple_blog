@@ -44,8 +44,8 @@ feature 'Edit posts' do
   end
 
   scenario 'deleting a post' do
-    visit admin_blog_posts_path
-    click_on 'New post'
+    create_a_blog_post(:title => 'Blog Post Title')
+    click_on 'Blog Post Title'
     click_on 'Delete post'
     expect(page).to have_content('Post was deleted succesfully')
     expect(page).to have_content('There are no published posts available.')

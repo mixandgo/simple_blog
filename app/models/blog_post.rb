@@ -3,9 +3,9 @@ class BlogPost < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :keywords
 
-  validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}, :on => :update
-  validates :body, :presence => true, :on => :update
-  validates :description, :presence => true, :on => :update, :if => :published?
+  validates :title, :uniqueness => true, :presence => true, :length => {:maximum => 72}
+  validates :body, :presence => true
+  validates :description, :presence => true, :if => :published?
 
   default_scope { where("published_at IS NOT NULL") }
 

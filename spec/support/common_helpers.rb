@@ -8,7 +8,7 @@ def create_a_blog_post(options={})
   end
   fill_in 'simple-blog-post-form-tag-list', :with => options[:tags] || 'first_tag, second_tag'
   fill_in 'simple-blog-post-form-keyword-list', :with => options[:keywords] || 'first_keyword, second_keyword'
-  click_button 'Update post'
+  click_button 'Create post'
 end
 
 def add_text_to(textarea, text)

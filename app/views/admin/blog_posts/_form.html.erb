@@ -8,13 +8,13 @@
   <%= f.label :description %>
 </div>
 <div class="simple-blog-new-post-row">
-  <%= f.text_area :description, :id => "simple-blog-post-form-description" %>
+  <%= f.text_area :description, :id => "simple-blog-post-form-description", :rows => 15, :cols => 100 %>
 </div>
 <div class="simple-blog-new-post-row">
   <%= f.label :body %>
 </div>
 <div class="simple-blog-new-post-row">
-  <%= f.text_area :body, :id => "simple-blog-post-form-body" %>
+  <%= f.text_area :body, :id => "simple-blog-post-form-body", :rows => 40, :cols => 100 %>
 </div>
 <div class="simple-blog-new-post-row">
   <%= f.label :published_at, :class => "left-side-label" %>
@@ -27,4 +27,20 @@
 <div class="simple-blog-new-post-row">
   <%= f.label :keyword_list, :class => "left-side-label" %>
   <%= f.text_field :keyword_list, :class => "textfield", :size => 100, :id => "simple-blog-post-form-keyword-list" %>
+</div>
+<% if @blog_images %>
+  <div class="simple-blog-new-post-row">
+    <% @blog_images.each do |image| %>
+      <div class="simple-blog-post-image">
+        <%= image.image.url %>
+        <%= link_to "Delete Image", delete_blog_image_admin_blog_post_path(f.object.id, image.id), :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<div class="simple-blog-new-post-row">
+  <%= f.fields_for :blog_images do |p| %>
+    <%= p.label :image %>
+    <%= p.file_field :image, :id => "simple-blog-post-form-image" %>
+   <% end %>
 </div>

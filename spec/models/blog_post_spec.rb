@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe BlogPost, :type => :model do
 
+  it { is_expected.to have_many(:blog_images) }
+
   describe "validations on create" do
     subject { BlogPost.new }
 

@@ -1,4 +1,7 @@
 class BlogPost < ActiveRecord::Base
+  has_many :blog_images
+  accepts_nested_attributes_for :blog_images
+
   before_save :set_slug
   acts_as_taggable
   acts_as_taggable_on :keywords

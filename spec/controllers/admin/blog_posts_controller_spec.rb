@@ -100,10 +100,24 @@ module Admin
     describe "#edit" do
       let(:id) { "100" }
       let(:post) { double.as_null_object }
+      let(:blog_images) { double.as_null_object }
 
       before :each do
         allow(BlogPost).to receive(:unscoped).and_return post
         allow(post).to receive(:find_by!).with({"id" => id}).and_return post
+
+        allow(post).to receive(:blog_images).and_return blog_images
+        allow(blog_images).to receive(:all).and_return blog_images
+      end
+
+      it "assigns the @blog_images" do
+        get :edit, :id => id
+        expect(assigns(:blog_images)).to eq(blog_images)
+      end
+
+      it "gets all the blog_images" do
+        expect(blog_images).to receive(:all)
+        get :edit, :id => id
       end
 
       it "assigns the @blog_post" do
@@ -212,24 +226,27 @@ module Admin
     describe "#delete_blog_image" do
       let(:blog_post_id) { "100" }
       let(:blog_image_id) { "100" }
+
       let(:blog_post) { double(:id => blog_post_id) }
-      let(:blog_posts) { double.as_null_object }
       let(:blog_images) { double.as_null_object }
+
+      let(:blog_posts) { double.as_null_object }
       let(:blog_image) { double.as_null_object }
 
       before :each do
         allow(BlogPost).to receive(:unscoped).and_return blog_posts
         allow(blog_posts).to receive(:find_by!).with({"id" => blog_post_id}).and_return blog_post
+
         allow(blog_post).to receive(:blog_images).and_return blog_images
         allow(blog_images).to receive(:find_by!).with(:id => blog_image_id).and_return blog_image
       end
 
-      it "gets the blog_posts blog_image" do
+      it "gets the specified blog_image" do
         expect(blog_images).to receive(:find_by!).with(:id => blog_image_id)
         delete :delete_blog_image, :id => blog_post_id, :blog_image_id => blog_image_id
       end
 
-      it "deletes the blog image" do
+      it "calls delete on blog_image" do
         expect(blog_image).to receive(:delete)
         delete :delete_blog_image, :id => blog_post_id, :blog_image_id => blog_image_id
       end

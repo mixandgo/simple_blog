@@ -32,8 +32,9 @@ feature 'Images' do
     create_a_blog_post(:title => "Blog Post Title", :image => "test.png")
     visit admin_blog_posts_path
     click_on "Blog Post Title"
-    click_on "Delete Image"
+    click_on "Delete image"
     page.driver.browser.switch_to.alert.accept
+    expect(page).to have_content("Blog image was deleted succesfully.")
     expect(page).to_not have_content("/uploads/blog_image/image/1/test.png")
   end
 end

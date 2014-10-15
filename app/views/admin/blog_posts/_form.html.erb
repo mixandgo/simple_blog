@@ -33,13 +33,13 @@
     <% @blog_images.each do |image| %>
       <div class="simple-blog-post-image">
         <%= image.image.url %>
-        <%= link_to t('.delete_image'), delete_blog_image_admin_blog_post_path(f.object.id, image.id), :method => :delete, :data => { :confirm => t('.are_you_sure') } %>
+        <%= link_to t('.delete_image'), admin_blog_image_path(image.id), :method => :delete, :data => { :confirm => t('.are_you_sure') } %>
       </div>
     <% end %>
   </div>
 <% end %>
 <div class="simple-blog-new-post-row">
-  <%= f.fields_for :blog_images do |p| %>
+  <%= f.fields_for :images do |p| %>
     <%= p.label :image %>
     <%= p.file_field :image, :id => "simple-blog-post-form-image" %>
    <% end %>

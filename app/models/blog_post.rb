@@ -1,6 +1,6 @@
 class BlogPost < ActiveRecord::Base
-  has_many :blog_images
-  accepts_nested_attributes_for :blog_images
+  has_many :images, :class_name => "BlogImage"
+  accepts_nested_attributes_for :images
 
   before_save :set_slug
   acts_as_taggable

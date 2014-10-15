@@ -23,7 +23,8 @@ en:
         new_post: "New post"
         page_heading: "Blog"
         no_published_posts: "There are no published posts available."
-      delete_blog_image:
+    blog_images:
+      destroy:
         flash_notice: "Blog image was deleted succesfully."
   blog_posts:
     index:

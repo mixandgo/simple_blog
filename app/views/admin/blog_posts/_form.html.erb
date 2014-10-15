@@ -28,7 +28,7 @@
   <%= f.label :keyword_list, :class => "left-side-label" %>
   <%= f.text_field :keyword_list, :class => "textfield", :size => 100, :id => "simple-blog-post-form-keyword-list" %>
 </div>
-<% if @blog_images %>
+<% if @blog_images.present? %>
   <div class="simple-blog-new-post-row">
     <% @blog_images.each do |image| %>
       <div class="simple-blog-post-image">
@@ -39,8 +39,8 @@
   </div>
 <% end %>
 <div class="simple-blog-new-post-row">
-  <%= f.fields_for :images do |p| %>
-    <%= p.label :image %>
-    <%= p.file_field :image, :id => "simple-blog-post-form-image" %>
+  <%= f.fields_for :images do |i| %>
+    <%= i.label :image %>
+    <%= i.file_field :image, :id => "simple-blog-post-form-image" %>
    <% end %>
 </div>

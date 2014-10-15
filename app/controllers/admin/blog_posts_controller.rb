@@ -8,7 +8,7 @@ class Admin::BlogPostsController < Admin::BaseController
 
   def new
     @blog_post = BlogPost.new
-    @blog_post_image = @blog_post.images.build
+    @blog_post.images.build
   end
 
   def create
@@ -58,6 +58,6 @@ class Admin::BlogPostsController < Admin::BaseController
     end
 
     def find_blog_post!
-      @blog_post = BlogPost.unscoped_find_by!(params.permit(:id)[:id])
+      @blog_post = BlogPost.unscoped_find_by!(params.permit(:id))
     end
 end

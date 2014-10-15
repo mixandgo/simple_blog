@@ -108,4 +108,23 @@ describe BlogPost, :type => :model do
       blog_post.find_image_by(id)
     end
   end
+
+  describe "#unscoped_find_by!" do
+    let(:options) { {:id => 100} }
+    let(:blog_post) { double.as_null_object }
+
+    before :each do
+      allow(BlogPost).to receive(:unscoped).and_return blog_post
+    end
+
+    it "searches for unscoped blog posts" do
+      expect(BlogPost).to receive(:unscoped)
+      BlogPost.unscoped_find_by!(options)
+    end
+
+    it "searches for blog posts with the specified options" do
+      expect(blog_post).to receive(:find_by!).with(options)
+      BlogPost.unscoped_find_by!(options)
+    end
+  end
 end

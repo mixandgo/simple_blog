@@ -103,7 +103,7 @@ module Admin
       let(:blog_images) { double.as_null_object }
 
       before :each do
-        allow(BlogPost).to receive(:unscoped_find_by!).with(id).and_return post
+        allow(BlogPost).to receive(:unscoped_find_by!).with(:id => id).and_return post
         allow(post).to receive(:images).and_return blog_images
       end
 

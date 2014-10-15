@@ -28,8 +28,8 @@ class BlogPost < ActiveRecord::Base
     images.where(id).first
   end
 
-  def self.unscoped_find_by!(id)
-    unscoped.where(:id => id).first
+  def self.unscoped_find_by!(options)
+    unscoped.find_by!(options)
   end
 
   def self.find_tags(term)

@@ -8,7 +8,7 @@ feature 'Images' do
     expect(page).to have_content("/uploads/blog_image/image/1/test.png")
   end
 
-  scenario 'user can add a image from an existing blog post' do
+  scenario 'user can add a image to an existing blog post' do
     create_a_blog_post(:title => "Blog Post Title")
     visit admin_blog_posts_path
     click_on "Blog Post Title"
@@ -28,7 +28,16 @@ feature 'Images' do
     expect(page).to have_content("/uploads/blog_image/image/2/second_test.png")
   end
 
-  scenario 'deleting existing image', :js => true do
+  scenario 'deleting existing image' do
+    create_a_blog_post(:title => "Blog Post Title", :image => "test.png")
+    visit admin_blog_posts_path
+    click_on "Blog Post Title"
+    click_on "Delete image"
+    expect(page).to have_content("Blog image was deleted succesfully.")
+    expect(page).to_not have_content("/uploads/blog_image/image/1/test.png")
+  end
+
+  scenario "user can only delete an image if he clicks 'Yes' inside the popup", :js => true do
     create_a_blog_post(:title => "Blog Post Title", :image => "test.png")
     visit admin_blog_posts_path
     click_on "Blog Post Title"
@@ -36,5 +45,15 @@ feature 'Images' do
     page.driver.browser.switch_to.alert.accept
     expect(page).to have_content("Blog image was deleted succesfully.")
     expect(page).to_not have_content("/uploads/blog_image/image/1/test.png")
+  end
+
+  scenario "image will not be removed if the user clicks 'No' inside the popup", :js => true do
+    create_a_blog_post(:title => "Blog Post Title", :image => "test.png")
+    visit admin_blog_posts_path
+    click_on "Blog Post Title"
+    click_on "Delete image"
+    page.driver.browser.switch_to.alert.dismiss
+    expect(page).to_not have_content("Blog image was deleted succesfully.")
+    expect(page).to have_content("/uploads/blog_image/image/1/test.png")
   end
 end

@@ -21,6 +21,6 @@ class BlogPostsController < ApplicationController
     end
 
     def find_blog_post!
-      @blog_post = BlogPost.find_by!(blog_post_params)
+      @blog_post = BlogPost.unscoped_find_by!(blog_post_params)
     end
 end

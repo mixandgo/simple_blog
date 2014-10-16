@@ -1,4 +1,6 @@
 class BlogPost < ActiveRecord::Base
+  include BlogMarkdown
+
   has_many :images, :class_name => "BlogImage", :dependent => :destroy
   accepts_nested_attributes_for :images, :reject_if => :all_blank
 

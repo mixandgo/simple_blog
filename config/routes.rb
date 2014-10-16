@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     resources :blog_posts do
       get "/get_tags" => "blog_posts#get_tags", as: :get_tags, on: :collection
     end
-
+    resources :blog_images
   end
 end

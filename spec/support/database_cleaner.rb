@@ -10,4 +10,8 @@ RSpec.configure do |config|
   config.after :each do
     DatabaseCleaner.clean
   end
+
+  config.after :all do
+    FileUtils.rm_rf('spec/dummy/public/uploads')
+  end
 end

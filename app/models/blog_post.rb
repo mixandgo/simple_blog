@@ -1,4 +1,7 @@
 class BlogPost < ActiveRecord::Base
+  has_many :images, :class_name => "BlogImage"
+  accepts_nested_attributes_for :images
+
   before_save :set_slug
   acts_as_taggable
   acts_as_taggable_on :keywords
@@ -25,8 +28,8 @@ class BlogPost < ActiveRecord::Base
     images.where(id).first
   end
 
-  def self.unscoped_find_by!(id)
-    unscoped.where(:id => id).first
+  def self.unscoped_find_by!(options)
+    unscoped.find_by!(options)
   end
 
   def self.find_tags(term)

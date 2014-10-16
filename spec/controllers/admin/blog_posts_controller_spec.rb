@@ -100,10 +100,21 @@ module Admin
     describe "#edit" do
       let(:id) { "100" }
       let(:post) { double.as_null_object }
+      let(:blog_images) { double.as_null_object }
 
       before :each do
-        allow(BlogPost).to receive(:unscoped).and_return post
-        allow(post).to receive(:find_by!).with({"id" => id}).and_return post
+        allow(BlogPost).to receive(:unscoped_find_by!).with(:id => id).and_return post
+        allow(post).to receive(:images).and_return blog_images
+      end
+
+      it "assigns the @blog_images" do
+        get :edit, :id => id
+        expect(assigns(:blog_images)).to eq(blog_images)
+      end
+
+      it "gets all the blog_images" do
+        allow(post).to receive(:images)
+        get :edit, :id => id
       end
 
       it "assigns the @blog_post" do
@@ -118,14 +129,21 @@ module Admin
     end
 
     describe "#new" do
-      let(:blog_post) { double("BlogPost") }
+      let(:blog_post) { double.as_null_object }
+      let(:blog_images) { double.as_null_object }
 
       before :each do
         allow(BlogPost).to receive(:new).and_return blog_post
+        allow(blog_post).to receive(:images).and_return blog_images
       end
 
       it "creates a new empty blog post" do
         expect(BlogPost).to receive(:new)
+        get :new
+      end
+
+      it "build an empty image" do
+        expect(blog_images).to receive(:build)
         get :new
       end
 

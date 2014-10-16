@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe BlogPost, :type => :model do
 
+  it { is_expected.to have_many(:images) }
+  it { is_expected.to accept_nested_attributes_for(:images) }
+
   describe "validations on create" do
     subject { BlogPost.new }
 
@@ -104,6 +107,25 @@ describe BlogPost, :type => :model do
     it "returns the first image from the list of returned images" do
       expect(images).to receive(:first)
       blog_post.find_image_by(id)
+    end
+  end
+
+  describe "#unscoped_find_by!" do
+    let(:options) { {:id => 100} }
+    let(:blog_post) { double.as_null_object }
+
+    before :each do
+      allow(BlogPost).to receive(:unscoped).and_return blog_post
+    end
+
+    it "searches for unscoped blog posts" do
+      expect(BlogPost).to receive(:unscoped)
+      BlogPost.unscoped_find_by!(options)
+    end
+
+    it "searches for blog posts with the specified options" do
+      expect(blog_post).to receive(:find_by!).with(options)
+      BlogPost.unscoped_find_by!(options)
     end
   end
 end

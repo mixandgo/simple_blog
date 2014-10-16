@@ -8,6 +8,7 @@ class Admin::BlogPostsController < Admin::BaseController
 
   def new
     @blog_post = BlogPost.new
+    @blog_post.images.build
   end
 
   def create
@@ -22,6 +23,7 @@ class Admin::BlogPostsController < Admin::BaseController
   end
 
   def edit
+    @blog_images = @blog_post.images
   end
 
   def update
@@ -52,10 +54,10 @@ class Admin::BlogPostsController < Admin::BaseController
     end
 
     def blog_post_params
-      params.require(:blog_post).permit(:title, :body, :description, :published_at, :tag_list, :keyword_list)
+      params.require(:blog_post).permit(:title, :body, :description, :published_at, :tag_list, :keyword_list, :images_attributes => [:image])
     end
 
     def find_blog_post!
-      @blog_post = BlogPost.unscoped.find_by!(params.permit(:id))
+      @blog_post = BlogPost.unscoped_find_by!(params.permit(:id))
     end
 end

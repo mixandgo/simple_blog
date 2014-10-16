@@ -1,6 +1,9 @@
 en:
   admin:
     blog_posts:
+      form:
+        delete_image: "Delete image"
+        are_you_sure: "Are you sure?"
       edit:
         submit: "Update post"
       new:
@@ -20,6 +23,9 @@ en:
         new_post: "New post"
         page_heading: "Blog"
         no_published_posts: "There are no published posts available."
+    blog_images:
+      destroy:
+        flash_notice: "Blog image was deleted succesfully."
   blog_posts:
     index:
       page_heading: "Blog"

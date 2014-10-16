@@ -54,18 +54,18 @@ describe BlogPostsController, :type => :controller do
     let(:blog_post) { double("BlogPost") }
 
     it "finds blog posts by slug" do
-      expect(BlogPost).to receive(:find_by!).with("slug" => slug)
+      expect(BlogPost).to receive(:unscoped_find_by!).with("slug" => slug)
       get :show, :slug => slug
     end
 
     it "assigns to @blog_post" do
-      allow(BlogPost).to receive(:find_by!).with("slug" => slug).and_return blog_post
+      allow(BlogPost).to receive(:unscoped_find_by!).with("slug" => slug).and_return blog_post
       get :show, :slug => slug
       expect(assigns(:blog_post)).to eq(blog_post)
     end
 
     it "renders the show template" do
-      allow(BlogPost).to receive(:find_by!).with("slug" => slug)
+      allow(BlogPost).to receive(:unscoped_find_by!).with("slug" => slug)
       get :show, :slug => slug
       expect(response).to render_template('blog_posts/show')
     end

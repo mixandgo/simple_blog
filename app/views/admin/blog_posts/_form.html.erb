@@ -44,3 +44,8 @@
     <%= i.file_field :image, :id => "simple-blog-post-form-image" %>
    <% end %>
 </div>
+<% unless f.object.new_record? %>
+  <div class="simple-blog-new-post-row">
+    <%= link_to "Preview: #{f.object.title}", blog_post_path(f.object.slug), :target => "_blank" %>
+  </div>
+<% end %>

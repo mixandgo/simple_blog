@@ -50,4 +50,17 @@ feature 'Edit posts' do
     expect(page).to have_content('Post was deleted succesfully')
     expect(page).to have_content('There are no published posts available.')
   end
+
+  scenario 'previewing a blog_post' do
+    create_a_blog_post(:title => 'Blog Post Title', :unpublished => true)
+    click_on 'Blog Post Title'
+    expect(page).to have_link("Preview: Blog Post Title", :href => "/blog/blog-post-title")
+  end
+
+  scenario 'clicking on the preview link will show me the blog post' do
+    create_a_blog_post(:title => 'Blog Post Title', :unpublished => true)
+    click_on 'Blog Post Title'
+    click_on 'Preview: Blog Post Title'
+    expect(page).to have_content('Blog Post Title')
+  end
 end

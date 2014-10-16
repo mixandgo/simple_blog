@@ -74,4 +74,9 @@ feature 'Create posts' do
     click_on 'Blog Post Title'
     expect(page).to have_xpath("//input[@value='01/01/2014']")
   end
+
+  scenario "user won't see a preview link when creating a blog post" do
+    visit new_admin_blog_post_path
+    expect(page).to_not have_content("Preview: ")
+  end
 end

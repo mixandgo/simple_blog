@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe BlogPost, :type => :model do
 
-  it { is_expected.to have_many(:images) }
+  it { is_expected.to have_many(:images).dependent(:destroy) }
   it { is_expected.to accept_nested_attributes_for(:images) }
 
   describe "validations on create" do

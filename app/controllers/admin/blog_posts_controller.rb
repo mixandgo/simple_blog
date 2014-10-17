@@ -23,7 +23,7 @@ class Admin::BlogPostsController < Admin::BaseController
   end
 
   def edit
-    @blog_images = @blog_post.images.all
+    @blog_images = @blog_post.images
   end
 
   def update

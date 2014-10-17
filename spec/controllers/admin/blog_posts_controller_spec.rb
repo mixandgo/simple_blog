@@ -113,7 +113,7 @@ module Admin
       end
 
       it "gets all the blog_images" do
-        expect(images).to receive(:all)
+        expect(post).to receive(:images)
         get :edit, :id => id
       end
 

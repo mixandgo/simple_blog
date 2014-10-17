@@ -104,17 +104,6 @@ module Admin
 
       before :each do
         allow(BlogPost).to receive(:unscoped_find_by!).with(:id => id).and_return post
-        allow(post).to receive(:images).and_return images
-      end
-
-      it "assigns the @blog_images" do
-        get :edit, :id => id
-        expect(assigns(:blog_images)).to eq(images)
-      end
-
-      it "gets all the blog_images" do
-        expect(post).to receive(:images)
-        get :edit, :id => id
       end
 
       it "assigns the @blog_post" do

@@ -6,6 +6,7 @@ feature 'Images' do
     visit admin_blog_posts_path
     click_on "Blog Post Title"
     expect(page).to have_content("/uploads/blog_image/image/1/test.png")
+    expect(page).to have_xpath("//img[@src=\"/uploads/blog_image/image/1/thumb_test.png\"]")
   end
 
   scenario 'user can add a image to an existing blog post' do
@@ -16,6 +17,7 @@ feature 'Images' do
     click_on "Update post"
     click_on "Blog Post Title"
     expect(page).to have_content("/uploads/blog_image/image/1/test.png")
+    expect(page).to have_xpath("//img[@src=\"/uploads/blog_image/image/1/thumb_test.png\"]")
   end
 
   scenario 'user can add multiple images when editing a blog post' do

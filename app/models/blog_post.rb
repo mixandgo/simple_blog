@@ -1,6 +1,6 @@
 class BlogPost < ActiveRecord::Base
-  has_many :images, :class_name => "BlogImage"
-  accepts_nested_attributes_for :images
+  has_many :images, :class_name => "BlogImage", :dependent => :destroy
+  accepts_nested_attributes_for :images, :reject_if => :all_blank
 
   before_save :set_slug
   acts_as_taggable

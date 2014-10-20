@@ -32,6 +32,7 @@
   <div class="simple-blog-new-post-row">
     <% @blog_images.each do |image| %>
       <div class="simple-blog-post-image">
+        <%= image_tag image.image.thumb.url %>
         <%= image.image.url %>
         <%= link_to t('.delete_image'), admin_blog_image_path(image.id), :method => :delete, :data => { :confirm => t('.are_you_sure') } %>
       </div>
@@ -39,7 +40,7 @@
   </div>
 <% end %>
 <div class="simple-blog-new-post-row">
-  <%= f.fields_for :images do |i| %>
+  <%= f.fields_for :images, f.object.images.build do |i| %>
     <%= i.label :image %>
     <%= i.file_field :image, :id => "simple-blog-post-form-image" %>
    <% end %>

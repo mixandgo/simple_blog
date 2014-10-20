@@ -1,3 +1,5 @@
+require 'blog_markdown'
+
 class BlogPost < ActiveRecord::Base
   include BlogMarkdown
 

@@ -53,21 +53,25 @@ describe BlogPostsController, :type => :controller do
     let(:slug) { "cool slug" }
     let(:blog_post) { double("BlogPost") }
 
-    it "finds blog posts by slug" do
-      expect(BlogPost).to receive(:find_by!).with("slug" => slug)
-      get :show, :slug => slug
-    end
+    context "valid slug" do
+      before :each do
+        allow(BlogPost).to receive(:unscoped_find_by!).with("slug" => slug).and_return blog_post
+      end
 
-    it "assigns to @blog_post" do
-      allow(BlogPost).to receive(:find_by!).with("slug" => slug).and_return blog_post
-      get :show, :slug => slug
-      expect(assigns(:blog_post)).to eq(blog_post)
-    end
+      it "finds blog posts by slug" do
+        expect(BlogPost).to receive(:unscoped_find_by!).with("slug" => slug)
+        get :show, :slug => slug
+      end
 
-    it "renders the show template" do
-      allow(BlogPost).to receive(:find_by!).with("slug" => slug)
-      get :show, :slug => slug
-      expect(response).to render_template('blog_posts/show')
+      it "assigns to @blog_post" do
+        get :show, :slug => slug
+        expect(assigns(:blog_post)).to eq(blog_post)
+      end
+
+      it "renders the show template" do
+        get :show, :slug => slug
+        expect(response).to render_template('blog_posts/show')
+      end
     end
 
     it "renders a 404 if the post can't be found" do

@@ -61,14 +61,18 @@ describe SimpleBlog::Generators::InstallGenerator do
 
     it "does not create application.css if not already present" do
       generator.install_css_file
-      assert_file "app/assets/stylesheets/application.css", "\n *= require simple_blog_admin\n"
+      expected_text = %{\n *= require simple_blog_admin\n
+*= require simple_blog_admin\n}
+      assert_file "app/assets/stylesheets/application.css", expected_text
     end
 
     it "appends 'simple_blog_admin' to application.css when file is present" do
       FileUtils.mkdir_p("app/assets/stylesheets/")
       File.open("app/assets/stylesheets/application.css", "w")
       generator.install_css_file
-      assert_file "app/assets/stylesheets/application.css", "\n *= require simple_blog_admin\n"
+      expected_text = %{\n *= require simple_blog_admin\n
+*= require simple_blog_admin\n}
+      assert_file "app/assets/stylesheets/application.css", expected_text
     end
 
   end

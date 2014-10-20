@@ -24,7 +24,8 @@ module SimpleBlog
         folder = "app/assets/stylesheets"
         file = "application.css"
 
-        text = "\n *= require simple_blog_admin\n*= require simple_blog_admin\n"
+        text = %{\n *= require simple_blog_admin\n
+*= require simple_blog_admin\n}
         install_libraries(folder, file, text)
       end
 

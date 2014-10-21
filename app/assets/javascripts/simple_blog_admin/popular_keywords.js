@@ -6,14 +6,16 @@ var KeywordParser = (function () {
   var setTopKeywordsList = function(html) {
     keywordsObject = {};
     var allKeywords = getAllKeywords(html);
-    for (var keywordIndex = 0; keywordIndex < allKeywords.length; keywordIndex++) {
-      var keyword = allKeywords[keywordIndex];
+    if (allKeywords != null) {
+      for (var keywordIndex = 0; keywordIndex < allKeywords.length; keywordIndex++) {
+        var keyword = allKeywords[keywordIndex];
 
-      if (keywordIsBlacklisted(keyword)) { continue; }
-      if (keyword in keywordsObject) {
-        keywordsObject[keyword] += 1
-      } else {
-        keywordsObject[keyword] = 1
+        if (keywordIsBlacklisted(keyword)) { continue; }
+        if (keyword in keywordsObject) {
+          keywordsObject[keyword] += 1
+        } else {
+          keywordsObject[keyword] = 1
+        }
       }
     }
   };
@@ -26,8 +28,8 @@ var KeywordParser = (function () {
 
   var getAllKeywords = function(html) {
     // strip html tags
-    // ignore everything except letters
-    return html.replace(/<\/?[^>]+(>|$)|(&gt;)|(?:&nbsp;|<br>)|(\s?&lt;)/g, "").replace(/[^a-zA-Z ]/g, "").match(/\S+/g);
+    // ignore everything except
+    return html.replace(/[^a-zA-Z ]/g, "").match(/\S+/g);
   };
 
   var sortKeywords = function() {

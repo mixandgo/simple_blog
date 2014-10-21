@@ -1,5 +1,7 @@
 function setKeywordHandler() {
-  // this needs to be rewriten
+  $("#simple-blog-post-form").on("keyup", "#simple-blog-post-form-body", function(event){
+    KeywordParser.showTopKeywords($(this).val());
+  })
 }
 
 function addDatepicker() {

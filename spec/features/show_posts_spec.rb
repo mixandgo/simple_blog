@@ -21,8 +21,5 @@ feature 'Show posts' do
     expect(current_url).to match(filter_posts_path('first_tag'))
   end
 
-  scenario 'page should have meta tags for seo' do
-    expect_page_to_contain_meta_tag("description", "Blog post description")
-    expect_page_to_contain_meta_tag("keywords", "first_keyword, second_keyword")
-  end
+
 end

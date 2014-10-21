@@ -2,13 +2,14 @@
   <h1 class="simple-blog-title"><%= t('.page_heading') %></h1>
 
   <% if @blog_posts.present? %>
-    <% @blog_posts.each do |post| %>
-      <div class="simple-blog-post">
-        <h2 class="simple-blog-post-title"><%= link_to post.pretty_title, blog_post_path(post) %></h2>
-        <p class="simple-blog-post-body"><%= raw post.description %></p>
-        <% if post.tag_list.present? %>
-          <div class="simple-blog-post-tags">
-            Tags: <%= blog_post_tags(post) %>
+    <% @blog_posts.each do |blog_post| %>
+      <div class="simple-blog-post" itemscope itemtype="http://schema.org/Article">
+        <h2 itemprop="name" class="simple-blog-post-title"><%= link_to blog_post.pretty_title, blog_post_path(blog_post) %></h2>
+        <p itemprop="description" class="simple-blog-post-body"><%= raw blog_post.description %></p>
+        <%= social_share_button_tag(blog_post.pretty_title, :url => blog_post_path(blog_post)) %>
+        <% if blog_post.tag_list.present? %>
+          <div class="simple-blog-post-tags" itemprop="keywords">
+            Tags: <%= blog_post_tags(blog_post) %>
           </div>
         <% end %>
       </div>

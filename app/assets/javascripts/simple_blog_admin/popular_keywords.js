@@ -6,30 +6,34 @@ var KeywordParser = (function () {
   var setTopKeywordsList = function(html) {
     keywordsObject = {};
     var allKeywords = getAllKeywords(html);
-    if (allKeywords != null) {
-      for (var keywordIndex = 0; keywordIndex < allKeywords.length; keywordIndex++) {
-        var keyword = allKeywords[keywordIndex];
-
-        if (keywordIsBlacklisted(keyword)) { continue; }
-        if (keyword in keywordsObject) {
-          keywordsObject[keyword] += 1
-        } else {
-          keywordsObject[keyword] = 1
-        }
+    for (var keywordIndex = 0; keywordIndex < allKeywords.length; keywordIndex++) {
+      var keyword = allKeywords[keywordIndex];
+      if (keyword in keywordsObject) {
+        keywordsObject[keyword] += 1
+      } else {
+        keywordsObject[keyword] = 1
       }
     }
   };
 
-  var keywordIsBlacklisted = function(keyword) {
-    // skip if keyword is shorter than 2 characters
-    // and skip if word is in blackListKeywords"
-    return (keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)
-  };
+  var lowerCaseList = function(word) {
+    return word.toLowerCase();
+  }
 
   var getAllKeywords = function(html) {
     // strip html tags
-    // ignore everything except
-    return html.replace(/[^a-zA-Z ]/g, "").match(/\S+/g);
+    // ignore everything except letterm 
+    keywords_list = html.replace(/[^a-zA-Z0-9 \n]/g, "").match(/[^\s]+/g);
+    if (keywords_list == null) {
+      // returns an empty list so that nothing blow's up
+      return [];
+    } else {
+      // convert to lowerCase
+      // remove if keyword is shorter than 2 characters
+      // remove if word is in blackListKeywords
+      // remaining words are the one's we want
+      return keywords_list.map(lowerCaseList).filter(function(x) { return (blackListKeywords.indexOf(x) < 0) || (x <= 2) })
+    }
   };
 
   var sortKeywords = function() {

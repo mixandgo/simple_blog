@@ -1,5 +1,5 @@
 function setKeywordHandler() {
-  $("#simple-blog-post-form").on("keyup", "#simple-blog-post-form-body", function(event){
+  $("#simple-blog-post-form").on("blur", "#simple-blog-post-form-body", function(event){
     KeywordParser.showTopKeywords($(this).val());
   })
 }
@@ -80,4 +80,5 @@ $(document).ready(function() {
   setTitleValidation();
   setKeywordHandler();
   addDatepicker();
+  KeywordParser.showTopKeywords($("#simple-blog-post-form-body").val());  
 });

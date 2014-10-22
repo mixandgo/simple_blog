@@ -56,12 +56,16 @@ feature 'Create posts' do
   scenario 'user sees the top keywords while writing an article', :js => true do
     visit new_admin_blog_post_path
     fill_in 'simple-blog-post-form-body', :with => "coolbody "*6
+    # keyword parser are tiggered on page ready
+    click_on "Create post"
     expect(page).to have_content('kw: coolbody - nr: 6')
   end
 
   scenario 'user does not see whitespaces as top keywords when writing an article', :js => true do
     visit new_admin_blog_post_path
     fill_in 'simple-blog-post-form-body', :with => "coolbody                        "*6
+    # keyword parser are tiggered on page ready
+    click_on "Create post"
     expect(page).to have_content('kw: coolbody - nr: 6')
   end
 

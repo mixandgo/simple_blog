@@ -2,15 +2,33 @@
   <%# HTML seo %>
   <meta name="description" content="<%= strip_tags_for_seo(@blog_post.description) %>" />
   <meta name="keywords" content="<%= @blog_post.keyword_list %>" />
+  <%# open graph and twitter meta tags %>
+  <meta property="og:title" content="<%= @blog_post.pretty_title %>" />
+  <meta name="twitter:title" content="<%= @blog_post.pretty_title %>" />
+  <meta property="og:description" content="<%= strip_tags_for_seo(@blog_post.description) %>" />
+  <meta name="twitter:description" content="<%= strip_tags_for_seo(@blog_post.description) %>" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="<%= blog_post_path(@blog_post) %>" />
+  <meta name="twitter:url" content="<%= blog_post_path(@blog_post) %>" />
+  <%# this has to be replaces %>
+  <meta name="twitter:site" content="[WEBSITE_NAME]" />
+  <meta property="fb:app_id" content="[FB_APP_ID]" />
+  <%# images meta tags %>
+  <% @blog_post.images.each do |image| %>
+    <meta property="og:image" content="<%= image.image.url %>" />
+    <meta name="twitter:image" content="<%= image.image.url %>" />
+  <% end %>
 <% end %>
-<div class="simple-blog-posts-show">
-  <h1 class="simple-blog-post-title"><%= @blog_post.pretty_title %></h1>
+<div class="simple-blog-posts-show" itemscope itemtype="http://schema.org/Article">
+  <h1 itemprop="name" class="simple-blog-post-title"><%= @blog_post.pretty_title %></h1>
+  <%= social_share_button_tag(@blog_post.pretty_title, :url => blog_post_path(@blog_post)) %>
   <% if @blog_post.tag_list.present? %>
-    <p class="simple-blog-post-tags">
+    <p class="simple-blog-post-tags" itemprop="keywords">
       Tags: <%= blog_post_tags(@blog_post) %>
     </p>
   <% end %>
-  <div class="simple-blog-post-body">
+  <div class="simple-blog-post-body" itemprop="articleBody">
     <%= raw @blog_post.markdown_body(@blog_post.body) %>
   </div>
 </div>

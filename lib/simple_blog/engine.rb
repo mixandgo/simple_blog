@@ -1,5 +1,6 @@
 require 'jquery-rails'
 require 'carrierwave'
+require 'social-share-button'
 require 'mini_magick'
 require 'acts-as-taggable-on'
 

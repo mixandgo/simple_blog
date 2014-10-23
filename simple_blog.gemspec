@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts-as-taggable-on'
   s.add_dependency 'redcarpet'
   s.add_dependency 'rouge'
+  s.add_dependency "social-share-button"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"

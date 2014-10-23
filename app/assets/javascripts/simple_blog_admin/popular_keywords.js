@@ -8,8 +8,6 @@ var KeywordParser = (function () {
     var allKeywords = getAllKeywords(html);
     for (var keywordIndex = 0; keywordIndex < allKeywords.length; keywordIndex++) {
       var keyword = allKeywords[keywordIndex];
-
-      if (keywordIsBlacklisted(keyword)) { continue; }
       if (keyword in keywordsObject) {
         keywordsObject[keyword] += 1
       } else {
@@ -18,16 +16,34 @@ var KeywordParser = (function () {
     }
   };
 
-  var keywordIsBlacklisted = function(keyword) {
-    // skip if keyword is shorter than 2 characters
-    // and skip if word is in blackListKeywords"
-    return (keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)
+  var keywordIsNotBlacklisted = function(keyword) {
+    // test if keyword length greater then 2 to prevent logging small words
+    // test if keyword in blacklist
+    return !(keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)
   };
+
+  var cleanupKeywords = function(keywordsList) {
+    var cleanedUpKeywordsList = [];
+    for (var keywordIndex = 0; keywordIndex < keywordsList.length; keywordIndex++) {
+      // lowercase keyword so we don't count same word twice
+      var keyword = keywordsList[keywordIndex].toLowerCase();
+      if (keywordIsNotBlacklisted(keyword)) {
+        cleanedUpKeywordsList.push(keyword);
+      }
+    }
+    return cleanedUpKeywordsList;
+  }
 
   var getAllKeywords = function(html) {
     // strip html tags
     // ignore everything except letters
-    return html.replace(/<\/?[^>]+(>|$)|(&gt;)|(?:&nbsp;|<br>)|(\s?&lt;)/g, "").replace(/[^a-zA-Z ]/g, "").match(/\S+/g);
+    var keywordsList = html.replace(/[^a-zA-Z0-9 \n]/g, "").match(/[^\s]+/g);
+    if (keywordsList == null) {
+      // returns an empty list so that nothing blow's up
+      return [];
+    } else {
+      return cleanupKeywords(keywordsList);
+    }
   };
 
   var sortKeywords = function() {

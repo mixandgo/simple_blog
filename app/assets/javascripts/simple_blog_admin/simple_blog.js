@@ -1,5 +1,7 @@
 function setKeywordHandler() {
-  // this needs to be rewriten
+  $("#simple-blog-post-form").on("blur", ".js-keyword-parser", function(event){
+    KeywordParser.showTopKeywords($(this).val());
+  })
 }
 
 function addDatepicker() {
@@ -78,4 +80,5 @@ $(document).ready(function() {
   setTitleValidation();
   setKeywordHandler();
   addDatepicker();
+  KeywordParser.showTopKeywords($(".js-keyword-parser").val());
 });

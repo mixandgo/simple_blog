@@ -16,23 +16,27 @@ var KeywordParser = (function () {
     }
   };
 
-  var lowerCaseList = function(word) {
+  var lowerCaseWord = function(word) {
     return word.toLowerCase();
+  }
+
+  var cleanupKeywords = function(keywordList) {
+    // convert to lowerCase
+    // remove if keyword is shorter than 2 characters
+    // remove if word is in blackListKeywords
+    // remaining words are the one's we want
+    return keywordList.map(lowerCaseWord).filter(function(x) { return (blackListKeywords.indexOf(x) < 0) || (x <= 2) })
   }
 
   var getAllKeywords = function(html) {
     // strip html tags
-    // ignore everything except letterm 
-    keywords_list = html.replace(/[^a-zA-Z0-9 \n]/g, "").match(/[^\s]+/g);
-    if (keywords_list == null) {
+    // ignore everything except letters
+    var keywordsList = html.replace(/[^a-zA-Z0-9 \n]/g, "").match(/[^\s]+/g);
+    if (keywordsList == null) {
       // returns an empty list so that nothing blow's up
       return [];
     } else {
-      // convert to lowerCase
-      // remove if keyword is shorter than 2 characters
-      // remove if word is in blackListKeywords
-      // remaining words are the one's we want
-      return keywords_list.map(lowerCaseList).filter(function(x) { return (blackListKeywords.indexOf(x) < 0) || (x <= 2) })
+      return cleanupKeywords(keywordsList);
     }
   };
 

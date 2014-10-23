@@ -16,16 +16,14 @@ var KeywordParser = (function () {
     }
   };
 
-  var lowerCaseWord = function(word) {
-    return word.toLowerCase();
-  }
-
   var cleanupKeywords = function(keywordList) {
     // convert to lowerCase
     // remove if keyword is shorter than 2 characters
     // remove if word is in blackListKeywords
     // remaining words are the one's we want
-    return keywordList.map(lowerCaseWord).filter(function(x) { return (blackListKeywords.indexOf(x) < 0) || (x <= 2) })
+    return keywordList.
+      map(Function.prototype.call, String.prototype.toLowerCase).
+      filter(function(x) { return (blackListKeywords.indexOf(x) < 0) || (x <= 2) })
   }
 
   var getAllKeywords = function(html) {

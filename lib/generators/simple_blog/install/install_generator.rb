@@ -24,9 +24,11 @@ module SimpleBlog
         folder = "app/assets/stylesheets"
         file = "application.css"
 
-        text = %{\n *= require simple_blog_admin\n
+        text = <<CSS_FILES
 *= require simple_blog_admin\n
-*= require social-share-button\n}
+*= require simple_blog_admin\n
+*= require social-share-button\n
+CSS_FILES
         install_libraries(folder, file, text)
       end
 

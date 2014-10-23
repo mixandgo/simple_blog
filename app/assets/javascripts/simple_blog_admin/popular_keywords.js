@@ -16,14 +16,22 @@ var KeywordParser = (function () {
     }
   };
 
-  var cleanupKeywords = function(keywordList) {
-    // convert to lowerCase
-    // remove if keyword is shorter than 2 characters
-    // remove if word is in blackListKeywords
-    // remaining words are the one's we want
-    return keywordList.
-      map(Function.prototype.call, String.prototype.toLowerCase).
-      filter(function(x) { return (blackListKeywords.indexOf(x) < 0) || (x <= 2) })
+  var keywordIsNotBlacklisted = function(keyword) {
+    // test if keyword length greater then 2 to prevent logging small words
+    // test if keyword in blacklist
+    return !(keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)
+  };
+
+  var cleanupKeywords = function(keywordsList) {
+    var cleanedUpKeywordsList = [];
+    for (var keywordIndex = 0; keywordIndex < keywordsList.length; keywordIndex++) {
+      // lowercase keyword so we don't count same word twice
+      var keyword = keywordsList[keywordIndex].toLowerCase();
+      if (keywordIsNotBlacklisted(keyword)) {
+        cleanedUpKeywordsList.push(keyword);
+      }
+    }
+    return cleanedUpKeywordsList;
   }
 
   var getAllKeywords = function(html) {

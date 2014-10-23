@@ -21,14 +21,22 @@ describe SimpleBlog::Generators::InstallGenerator do
 
     it "creates the file and appends 'simple_blog' when file not present" do
       generator.install_public_javascript
-      assert_file "app/assets/javascripts/application.js", "\n//= require simple_blog\n//= require social-share-button\n"
+      expected_text = <<JS_FILES
+//= require simple_blog\n
+//= require social-share-button\n
+JS_FILES
+      assert_file "app/assets/javascripts/application.js", expected_text
     end
 
     it "appends 'simple_blog' to application.js when file is present" do
       FileUtils.mkdir_p("app/assets/javascripts/")
       File.open("app/assets/javascripts/application.js", "w")
       generator.install_public_javascript
-      assert_file "app/assets/javascripts/application.js", "\n//= require simple_blog\n//= require social-share-button\n"
+      expected_text = <<JS_FILES
+//= require simple_blog\n
+//= require social-share-button\n
+JS_FILES
+      assert_file "app/assets/javascripts/application.js", expected_text
     end
 
   end

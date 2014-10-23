@@ -8,7 +8,10 @@ module SimpleBlog
         folder = "app/assets/javascripts"
         file = "application.js"
 
-        text = "\n//= require simple_blog\n//= require social-share-button\n"
+        text = <<JS_FILES
+//= require simple_blog\n
+//= require social-share-button\n
+JS_FILES
         install_libraries(folder, file, text)
       end
 

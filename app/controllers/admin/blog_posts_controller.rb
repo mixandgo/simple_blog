@@ -15,7 +15,7 @@ class Admin::BlogPostsController < Admin::BaseController
     @blog_post = BlogPost.new(blog_post_params)
     if @blog_post.save
       flash[:notice] = t('.flash_notice')
-      redirect_to admin_blog_posts_path
+      redirect_to edit_admin_blog_post_path(@blog_post.id)
     else
       flash[:alert] = t('.flash_alert')
       render :action => :new

@@ -27,7 +27,7 @@ module Admin
 
         it "redirects to the index page" do
           post :create, :blog_post => params
-          expect(response).to redirect_to(admin_blog_posts_path)
+          expect(response).to redirect_to(edit_admin_blog_post_path(blog_post.id))
         end
 
         it "sets a flash notice" do

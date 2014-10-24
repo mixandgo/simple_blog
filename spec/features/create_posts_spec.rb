@@ -42,6 +42,7 @@ feature 'Create posts' do
 
   scenario 'user can delete a post' do
     create_a_blog_post(:title => "Blog Post Title")
+    visit admin_blog_posts_path
     click_on "Delete"
     expect(page).to have_content('Post was deleted succesfully')
     expect(page).to have_content('There are no published posts available.')
@@ -71,8 +72,6 @@ feature 'Create posts' do
 
   scenario 'user can set a published_at date that will stay' do
     create_a_blog_post(:title => "Blog Post Title", :published_at => "01/01/2014")
-    visit admin_blog_posts_path
-    click_on 'Blog Post Title'
     expect(page).to have_xpath("//input[@value='01/01/2014']")
   end
 

@@ -3,7 +3,6 @@ require 'spec_helper'
 feature 'Edit posts' do
   scenario 'editting a post' do
     create_a_blog_post(:title => 'Blog Post Title')
-    visit_admin_edit_page_for('Blog Post Title')
     fill_in 'simple-blog-post-form-title', :with => 'Different Blog Post Title'
     click_on 'Update post'
     expect(page).to have_content('Different Blog Post Title')
@@ -12,7 +11,6 @@ feature 'Edit posts' do
 
   scenario 'handle validations' do
     create_a_blog_post(:title => 'Blog Post Title')
-    visit_admin_edit_page_for('Blog Post Title')
     invalid_title = "a" * 80 # triggers a validation error
     invalid_body = invalid_description = ""
     fill_in 'simple-blog-post-form-title', :with => invalid_title
@@ -27,7 +25,6 @@ feature 'Edit posts' do
 
   scenario 'update tags' do
     create_a_blog_post(:title => 'Blog Post Title')
-    visit_admin_edit_page_for('Blog Post Title')
     fill_in 'simple-blog-post-form-tag-list', :with => 'Edited_tag'
     click_on 'Update post'
     visit admin_blog_posts_path
@@ -36,7 +33,6 @@ feature 'Edit posts' do
 
   scenario 'update keywords' do
     create_a_blog_post(:title => 'Blog Post Title')
-    visit_admin_edit_page_for('Blog Post Title')
     fill_in 'simple-blog-post-form-keyword-list', :with => 'edited_keyword1, edited_keyword2'
     click_on 'Update post'
     visit admin_blog_posts_path
@@ -45,7 +41,6 @@ feature 'Edit posts' do
 
   scenario 'deleting a post' do
     create_a_blog_post(:title => 'Blog Post Title')
-    click_on 'Blog Post Title'
     click_on 'Delete post'
     expect(page).to have_content('Post was deleted succesfully')
     expect(page).to have_content('There are no published posts available.')
@@ -53,13 +48,11 @@ feature 'Edit posts' do
 
   scenario 'previewing a blog_post' do
     create_a_blog_post(:title => 'Blog Post Title', :unpublished => true)
-    click_on 'Blog Post Title'
     expect(page).to have_link("Preview: Blog Post Title", :href => "/blog/blog-post-title")
   end
 
   scenario 'clicking on the preview link will show me the blog post' do
     create_a_blog_post(:title => 'Blog Post Title', :unpublished => true)
-    click_on 'Blog Post Title'
     click_on 'Preview: Blog Post Title'
     expect(page).to have_content('Blog Post Title')
   end

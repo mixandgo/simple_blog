@@ -38,3 +38,7 @@ def visit_show_page_for(title)
   visit blog_posts_path
   click_on title
 end
+
+def fill_in_body_with(text)
+  fill_in 'simple-blog-post-form-body', :with => text
+end

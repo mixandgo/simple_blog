@@ -25,7 +25,7 @@ module Admin
           allow(blog_post).to receive(:save).and_return true
         end
 
-        it "redirects to the index page" do
+        it "redirects to the edit page" do
           post :create, :blog_post => params
           expect(response).to redirect_to(edit_admin_blog_post_path(blog_post.id))
         end
@@ -67,9 +67,9 @@ module Admin
           expect(flash[:notice]).not_to be_nil
         end
 
-        it "redirects to the posts list page" do
+        it "redirects to the edit page" do
           patch :update, :id => post.id, :blog_post => {:title => "UhHa"}
-          expect(response).to redirect_to(admin_blog_posts_path)
+          expect(response).to redirect_to(edit_admin_blog_post_path(post.id))
         end
       end
 
@@ -92,7 +92,7 @@ module Admin
       context "can update an unpublished post" do
         it "redirects to the posts list page" do
           patch :update, :id => post.id, :blog_post => {:published_at => nil}
-          expect(response).to redirect_to(admin_blog_posts_path)
+          expect(response).to redirect_to(edit_admin_blog_post_path(post.id))
         end
       end
     end

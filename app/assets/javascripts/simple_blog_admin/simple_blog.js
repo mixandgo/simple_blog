@@ -80,5 +80,7 @@ $(document).ready(function() {
   setTitleValidation();
   setKeywordHandler();
   addDatepicker();
-  KeywordParser.showTopKeywords($(".js-keyword-parser").val());
+  if ($(".js-keyword-parser").length > 0) {
+    KeywordParser.showTopKeywords($(".js-keyword-parser").val());
+  }
 });

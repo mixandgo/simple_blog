@@ -19,7 +19,7 @@ var KeywordParser = (function () {
   var keywordIsNotBlacklisted = function(keyword) {
     // test if keyword length greater then 2 to prevent logging small words
     // test if keyword in blacklist
-    return !(keyword.length <= 2) || (blackListKeywords.indexOf(keyword.toLowerCase()) != -1)
+    return (keyword.length > 2) && (blackListKeywords.indexOf(keyword.toLowerCase()) == -1)
   };
 
   var cleanupKeywords = function(keywordsList) {

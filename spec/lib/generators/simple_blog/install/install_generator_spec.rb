@@ -23,7 +23,6 @@ describe SimpleBlog::Generators::InstallGenerator do
       generator.install_public_javascript
       expected_text = <<JS_FILES
 //= require simple_blog\n
-//= require social-share-button\n
 JS_FILES
       assert_file "app/assets/javascripts/application.js", expected_text
     end
@@ -34,7 +33,6 @@ JS_FILES
       generator.install_public_javascript
       expected_text = <<JS_FILES
 //= require simple_blog\n
-//= require social-share-button\n
 JS_FILES
       assert_file "app/assets/javascripts/application.js", expected_text
     end
@@ -70,23 +68,45 @@ JS_FILES
     it "does not create application.css if not already present" do
       generator.install_css_file
       expected_text = <<CSS_FILES
-*= require simple_blog_admin\n
-*= require simple_blog_admin\n
-*= require social-share-button\n
+*= require simple_blog\n
 CSS_FILES
       assert_file "app/assets/stylesheets/application.css", expected_text
     end
 
-    it "appends 'simple_blog_admin' to application.css when file is present" do
+    it "appends 'simple_blog' to application.css when file is present" do
       FileUtils.mkdir_p("app/assets/stylesheets/")
       File.open("app/assets/stylesheets/application.css", "w")
       generator.install_css_file
       expected_text = <<CSS_FILES
-*= require simple_blog_admin\n
-*= require simple_blog_admin\n
-*= require social-share-button\n
+*= require simple_blog\n
 CSS_FILES
       assert_file "app/assets/stylesheets/application.css", expected_text
+    end
+
+  end
+
+  describe "#install_admin_css_file" do
+
+    after :each do
+      File.delete("app/assets/stylesheets/admin/admin.css")
+    end
+
+    it "does not create admin.css if not already present" do
+      generator.install_admin_css_file
+      expected_text = <<CSS_FILES
+*= require simple_blog_admin\n
+CSS_FILES
+      assert_file "app/assets/stylesheets/admin/admin.css", expected_text
+    end
+
+    it "appends 'simple_blog_admin' to admin.css when file is present" do
+      FileUtils.mkdir_p("app/assets/stylesheets/admin/")
+      File.open("app/assets/stylesheets/admin/admin.css", "w")
+      generator.install_admin_css_file
+      expected_text = <<CSS_FILES
+*= require simple_blog_admin\n
+CSS_FILES
+      assert_file "app/assets/stylesheets/admin/admin.css", expected_text
     end
 
   end

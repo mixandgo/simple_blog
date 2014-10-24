@@ -10,7 +10,6 @@ module SimpleBlog
 
         text = <<JS_FILES
 //= require simple_blog\n
-//= require social-share-button\n
 JS_FILES
         install_libraries(folder, file, text)
       end
@@ -28,9 +27,17 @@ JS_FILES
         file = "application.css"
 
         text = <<CSS_FILES
+*= require simple_blog\n
+CSS_FILES
+        install_libraries(folder, file, text)
+      end
+
+      def install_admin_css_file
+        folder = "app/assets/stylesheets/admin"
+        file = "admin.css"
+
+        text = <<CSS_FILES
 *= require simple_blog_admin\n
-*= require simple_blog_admin\n
-*= require social-share-button\n
 CSS_FILES
         install_libraries(folder, file, text)
       end

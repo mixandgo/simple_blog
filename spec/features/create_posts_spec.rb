@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 feature 'Create posts' do
+  scenario 'creating a blog post redirects you to the edit page' do
+    create_a_blog_post
+    expect(current_path).to match "edit"
+  end
+
   scenario 'user can create new posts' do
     create_a_blog_post
     success_message = 'Post was succesfully created.'
@@ -52,22 +57,6 @@ feature 'Create posts' do
     visit new_admin_blog_post_path
     fill_in 'simple-blog-post-form-title', :with => "a"*66
     expect(page).to have_content('Warning: Blog post title has over 65 characters')
-  end
-
-  scenario 'user sees the top keywords while writing an article', :js => true do
-    visit new_admin_blog_post_path
-    fill_in 'simple-blog-post-form-body', :with => "coolbody "*6
-    # keyword parser are tiggered on page ready
-    click_on "Create post"
-    expect(page).to have_content('kw: coolbody - nr: 6')
-  end
-
-  scenario 'user does not see whitespaces as top keywords when writing an article', :js => true do
-    visit new_admin_blog_post_path
-    fill_in 'simple-blog-post-form-body', :with => "coolbody                        "*6
-    # keyword parser are tiggered on page ready
-    click_on "Create post"
-    expect(page).to have_content('kw: coolbody - nr: 6')
   end
 
   scenario 'user can set a published_at date that will stay' do

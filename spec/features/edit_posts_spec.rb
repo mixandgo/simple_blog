@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 feature 'Edit posts' do
+  scenario 'editing a blog post keeps you on the edit page' do
+    create_a_blog_post
+    click_on 'Update post'
+    expect(current_path).to match "edit"
+  end
+
   scenario 'editting a post' do
     create_a_blog_post(:title => 'Blog Post Title')
     fill_in 'simple-blog-post-form-title', :with => 'Different Blog Post Title'

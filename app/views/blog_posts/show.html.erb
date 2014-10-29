@@ -29,6 +29,6 @@
     </p>
   <% end %>
   <div class="simple-blog-post-body" itemprop="articleBody">
-    <%= raw markdown_body(@blog_post.body) %>
+    <%= markdown_to_html(@blog_post.body) %>
   </div>
 </div>

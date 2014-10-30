@@ -70,7 +70,13 @@ var KeywordParser = (function () {
   var formatOutput = function(topKeywordsList) {
     var keywords = "";
     for (var index = 0; index < topKeywordsList.length; index++) {
-      keywords += "</br>kw: " + topKeywordsList[index][0] + " - nr: " + topKeywordsList[index][1];
+      keyword = ["<div class='simple-blog-form-keyword-box'>",
+                 "<span class='simple-blog-form-keyword-word'>Keyword: \"",
+                 topKeywordsList[index][0],
+                 "\" </span><span class='simple-blog-form-keyword-count'> Count: ",
+                 topKeywordsList[index][1],
+                 "</span></div>"].join('')
+      keywords += keyword
     }
     return keywords;
   };

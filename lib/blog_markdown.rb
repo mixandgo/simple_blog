@@ -9,8 +9,8 @@ module BlogMarkdown
     include Rouge::Plugins::Redcarpet
   end
 
-  def markdown_body(body)
-    markdown_renderer.render(body)
+  def markdown_to_html(body)
+    markdown_renderer.render(body).html_safe
   end
 
   private

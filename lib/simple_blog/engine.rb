@@ -7,9 +7,9 @@ require 'acts-as-taggable-on'
 module SimpleBlog
 
   class << self
-    mattr_accessor :website_name, :fb_app_id
-    self.website_name = "Simple Blog"
-    self.fb_app_id = "123"
+    mattr_accessor :twitter_site_name, :fb_app_id
+    self.twitter_site_name = ""
+    self.fb_app_id = ""
   end
 
   def self.setup(&block)

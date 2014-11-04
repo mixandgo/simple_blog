@@ -1,0 +1,20 @@
+<%# HTML seo %>
+<meta name="description" content="<%= strip_tags_for_seo(blog_post.description) %>" />
+<meta name="keywords" content="<%= blog_post.keyword_list %>" />
+<%# open graph and twitter meta tags %>
+<meta property="og:title" content="<%= blog_post.pretty_title %>" />
+<meta name="twitter:title" content="<%= blog_post.pretty_title %>" />
+<meta property="og:description" content="<%= strip_tags_for_seo(blog_post.description) %>" />
+<meta name="twitter:description" content="<%= strip_tags_for_seo(blog_post.description) %>" />
+<meta name="twitter:card" content="summary" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="<%= blog_post_path(blog_post) %>" />
+<meta name="twitter:url" content="<%= blog_post_path(blog_post) %>" />
+<%# this has to be replaces %>
+<meta name="twitter:site" content="<%= SimpleBlog.website_name %>" />
+<meta property="fb:app_id" content="<%= SimpleBlog.fb_app_id %>" />
+<%# images meta tags %>
+<% blog_post.images.each do |image| %>
+  <meta property="og:image" content="<%= image.image.url %>" />
+  <meta name="twitter:image" content="<%= image.image.url %>" />
+<% end %>

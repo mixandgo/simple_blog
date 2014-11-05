@@ -1,53 +1,49 @@
-<div class="simple-blog-posts-index">
-  <h1 class="simple-blog-title"><%= t('.page_heading') %></h1>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= t('.title') %>
+        <%= link_to t('.new_post'), new_admin_blog_post_path, :class => "btn btn-primary pull-right" %>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <% if @blog_posts.present? %>
-  <table>
-    <tr>
-      <th>
-        Title
-      </th>
-      <th>
-        Description
-      </th>
-      <th>
-        Tags
-      </th>
-      <th>
-        Keywords
-      </th>
-      <th>
-        Published?
-      </th>
-      <th>
-        Delete
-      </th>
-    </tr>
-    <% @blog_posts.each do |post| %>
-      <tr class="simple-blog-post">
-        <td class="simple-blog-post-title">
-          <%= link_to post.pretty_title, edit_admin_blog_post_path(post.id) %>
-        </td>
-        <td class="simple-blog-post-body">
-          <p><%= raw post.body %></p>
-        </td>
-        <td class="simple-blog-post-tags">
-          <%= post.tag_list %>
-        </td>
-        <td class="simple-blog-post-keywords">
-          <%= post.keyword_list %>
-        </td>
-        <td class="simple-blog-post-published">
-          <%= post.published? %>
-        </td>
-        <td class="simple-blog-post-delete">
-          <%= link_to "Delete", admin_blog_post_path(post.id), :method => :delete, :data => { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
-    </table>
-  <% else %>
-    <p class="simple-blog-posts-missing"><%= t('.no_published_posts') %></p>
-  <% end %>
-  <%= link_to t('.new_post'), new_admin_blog_post_path %>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="simple-blog-posts-index">
+      <% if @blog_posts.present? %>
+        <table class="table">
+          <tr>
+            <th><%= t('.blog_post_title') %></th>
+            <th><%= t('.blog_post_tags') %></th>
+            <th><%= t('.blog_post_keywords') %></th>
+            <th><%= t('.blog_post_published') %></th>
+            <th><%= t('.blog_post_delete') %></th>
+          </tr>
+          <% @blog_posts.each do |post| %>
+            <tr class="simple-blog-post">
+              <td class="simple-blog-post-title">
+                <%= link_to post.pretty_title, edit_admin_blog_post_path(post.id) %>
+              </td>
+              <td class="simple-blog-post-tags">
+                <%= post.tag_list %>
+              </td>
+              <td class="simple-blog-post-keywords">
+                <%= post.keyword_list %>
+              </td>
+              <td class="simple-blog-post-published">
+                <%= post.published? %>
+              </td>
+              <td class="simple-blog-post-delete">
+                <%= link_to t('.delete'), admin_blog_post_path(post.id), :method => :delete, :data => { confirm: t('.are_you_sure') } %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      <% else %>
+        <p class="simple-blog-posts-missing"><%= t('.no_published_posts') %></p>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -11,6 +11,7 @@ feature 'Edit posts' do
     create_a_blog_post(:title => 'Blog Post Title')
     fill_in 'simple-blog-post-form-title', :with => 'Different Blog Post Title'
     click_on 'Update post'
+    expect(page).to have_content('Different Blog Post Title')
     expect(page).to have_content('Post was succesfully updated.')
   end
 

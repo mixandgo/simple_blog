@@ -1,12 +1,32 @@
 en:
   admin:
     blog_posts:
+      index:
+        title: "Blog Post"
+        subtitle: "Admin"
+        blog_post_title: "Title"
+        blog_post_tags: "Tags"
+        blog_post_keywords: "Keywords"
+        blog_post_published: "Published?"
+        blog_post_delete: "Delete"
+        delete: "Delete"
+        are_you_sure: "Are you sure?"
+        no_published_posts: "There are no published posts available."
+        new_post: "New post"
+        page_heading: "Blog"
       form:
         delete_image: "Delete image"
         are_you_sure: "Are you sure?"
       edit:
+        title: "Edit Blog Post"
+        subtitle: "Admin"
+        preview: "Preview"
+        delete: "Delete post"
+        are_you_sure: "Are you sure"
         submit: "Update post"
       new:
+        title: "New Blog Post"
+        subtitle: "Admin"
         submit: "Create post"
         prompt_select_day: "Select day"
         prompt_select_month: "Select month"
@@ -19,10 +39,6 @@ en:
         flash_alert: "Post was not updated."
       destroy:
         flash_notice: "Post was deleted succesfully."
-      index:
-        new_post: "New post"
-        page_heading: "Blog"
-        no_published_posts: "There are no published posts available."
     blog_images:
       destroy:
         flash_notice: "Blog image was deleted succesfully."

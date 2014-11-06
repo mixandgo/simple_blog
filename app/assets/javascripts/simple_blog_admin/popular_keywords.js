@@ -84,10 +84,10 @@ var KeywordParser = (function () {
   var showTopKeywords = function(html) {
     setTopKeywordsList(html);
     var keywords = formatOutput(getTopKeywordsList())
-    if ($(".js-keyword-view").length == 0) {
-      $(".js-form").after("<div class='js-keyword-view'>" + keywords +  "</div>");
+    if ($(".js-simple-blog-keyword-view").length == 0) {
+      $(".js-simple-blog-form").after("<div class='js-simple-blog-keyword-view'>" + keywords +  "</div>");
     } else {
-      $(".js-keyword-view").html(keywords);
+      $(".js-simple-blog-keyword-view").html(keywords);
     }
   };
 

@@ -1,23 +1,29 @@
-<div class="white-section">
-  <div class="container">
-    <div class="page-header text-center">
-      <h1><%= t('.title') %></h1>
-      <p class="lead text-style"><%= t('.subtitle') %></p>
-    </div>
-  </div>
-</div>
-
-<div class="grey-section blog-wrapper dm-shadow">
-  <div class="container">
-    <div class="content">
-      <div class="js-form">
-        <%= form_for @blog_post, :url => admin_blog_posts_path, :method => :post do |f| %>
-          <%= render 'form', :f => f %>
-          <div class="simple-blog-form-row">
-            <%= f.submit t('.submit'), :class => "simple-blog-form-submit" %>
-          </div>
-        <% end %>
+<%= form_for @blog_post, :url => admin_blog_posts_path, :method => :post, :role => "form" do |f| %>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= t('.title') %>
       </div>
     </div>
   </div>
 </div>
+
+  <div class="col-md-9">
+
+    <div class="js-simple-blog-form">
+      <%= render 'form', :f => f %>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header"><%= t('.sidebar') %></li>
+        <li>
+          <%= f.submit t('.submit'), :class => "btn btn-primary" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+<% end %>

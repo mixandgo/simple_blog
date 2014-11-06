@@ -1,8 +1,8 @@
 <%= render "form_errors", :obj => f.object %>
 <div class="form-group">
   <%= f.label :title %>
-  <%= f.text_field :title, :id => "simple-blog-post-form-title", :class => "js-title form-control", :size => 100 %>
-  <div class='js-title-warning simple-blog-form-warning'></div>
+  <%= f.text_field :title, :id => "simple-blog-post-form-title", :class => "js-simple-blog-title form-control", :size => 100 %>
+  <div class='js-simple-blog-title-warning simple-blog-form-warning'></div>
 </div>
 <div class="form-group">
   <%= f.label :description %>
@@ -10,19 +10,19 @@
 </div>
 <div class="form-group">
   <%= f.label :body %>
-  <%= f.text_area :body, :rows => 20, :id => "simple-blog-post-form-body", :class => "js-keyword-parser form-control" %>
+  <%= f.text_area :body, :rows => 20, :id => "simple-blog-post-form-body", :class => "js-simple-blog-keyword-parser form-control" %>
 </div>
 <div class="form-group">
   <%= f.label :published_at, :class => "left-side-label" %>
-  <%= f.text_field :published_at, :id => "simple-blog-post-form-published-at", :class => "js-published-at form-control", :value => f.object.published_at.present? ? f.object.published_at.strftime("%d/%m/%Y") : "" %>
+  <%= f.text_field :published_at, :id => "simple-blog-post-form-published-at", :class => "js-simple-blog-published-at form-control", :value => f.object.published_at.present? ? f.object.published_at.strftime("%d/%m/%Y") : "" %>
 </div>
 <div class="form-group">
   <%= f.label :tag_list, :class => "left-side-label" %>
-  <%= f.text_field :tag_list, :class => "form-control", :id => "simple-blog-post-form-tag-list" %>
+  <%= f.text_field :tag_list, :class => "form-control js-simple-blog-tag-list", :id => "simple-blog-post-form-tag-list" %>
 </div>
 <div class="form-group">
   <%= f.label :keyword_list, :class => "left-side-label" %>
-  <%= f.text_field :keyword_list, :class => "form-control", :id => "simple-blog-post-form-keyword-list" %>
+  <%= f.text_field :keyword_list, :class => "form-control js-simple-blog-keyword-list", :id => "simple-blog-post-form-keyword-list" %>
 </div>
 <% if @blog_images.present? %>
   <table class="table table-bordered">

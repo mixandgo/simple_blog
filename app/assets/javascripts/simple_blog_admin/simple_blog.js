@@ -1,11 +1,11 @@
 function setKeywordHandler() {
-  $(".js-form").on("blur", ".js-keyword-parser", function(event){
+  $(".js-simple-blog-form").on("blur", ".js-simple-blog-keyword-parser", function(event){
     KeywordParser.showTopKeywords($(this).val());
   })
 }
 
 function addDatepicker() {
-  $(".js-published-at").datepicker({ dateFormat: "dd/mm/yy" });
+  $(".js-simple-blog-published-at").datepicker({ dateFormat: "dd/mm/yy" });
 }
 
 function setAutocomplete(elementId) {
@@ -63,24 +63,24 @@ function setTitleValidation() {
 
   var warningMessage = "Warning: Blog post title has over 65 characters."
 
-  $(".js-form").on("keyup", ".js-title", function(event) {
+  $(".js-simple-blog-form").on("keyup", ".js-simple-blog-title", function(event) {
     if ($(this).val().length > 65) {
       // add the warning message
-      $(".js-title-warning").html(warningMessage);
+      $(".js-simple-blog-title-warning").html(warningMessage);
     } else {
       // remove the warning message if title is below 65 characters so it doesn't show a warning when it's not needed
-      $(".js-title-warning").html("");
+      $(".js-simple-blog-title-warning").html("");
     }
   })
 }
 
 $(document).ready(function() {
-  setAutocomplete('simple-blog-post-form-tag-list');
-  setAutocomplete('simple-blog-post-form-keyword-list');
+  setAutocomplete('js-simple-blog-tag-list');
+  setAutocomplete('js-simple-blog-keyword-list');
   setTitleValidation();
   setKeywordHandler();
   addDatepicker();
-  if ($(".js-keyword-parser").length > 0) {
-    KeywordParser.showTopKeywords($(".js-keyword-parser").val());
+  if ($(".js-simple-blog-keyword-parser").length > 0) {
+    KeywordParser.showTopKeywords($(".js-simple-blog-keyword-parser").val());
   }
 });

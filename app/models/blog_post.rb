@@ -17,6 +17,10 @@ class BlogPost < ActiveRecord::Base
     title_to_slug
   end
 
+  def to_url
+    "/blog/#{to_param}"
+  end
+
   def published?
     !!published_at
   end

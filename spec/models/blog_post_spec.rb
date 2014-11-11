@@ -128,4 +128,12 @@ describe BlogPost, :type => :model do
       BlogPost.unscoped_find_by!(options)
     end
   end
+
+  describe "#to_url" do
+    let(:blog_post) { build(:blog_post) }
+
+    it "returns the blog post complete url" do
+      expect(blog_post.to_url).to eq("/blog/#{blog_post.to_param}")
+    end
+  end
 end

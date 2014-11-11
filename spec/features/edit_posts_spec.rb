@@ -54,12 +54,12 @@ feature 'Edit posts' do
 
   scenario 'previewing a blog_post' do
     create_a_blog_post(:title => 'Blog Post Title', :unpublished => true)
-    expect(page).to have_link("Preview: Blog Post Title", :href => "/blog/blog-post-title")
+    expect(page).to have_link("Preview", :href => "/blog/blog-post-title")
   end
 
   scenario 'clicking on the preview link will show me the blog post' do
     create_a_blog_post(:title => 'Blog Post Title', :unpublished => true)
-    click_on 'Preview: Blog Post Title'
+    click_on 'Preview'
     expect(page).to have_content('Blog Post Title')
   end
 end

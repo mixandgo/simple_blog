@@ -1,10 +1,35 @@
-<div class="simple-blog-posts-new" id="simple-blog-post-form">
-  <%= form_for @blog_post, :url => admin_blog_post_path(@blog_post.id), :method => :put do |f| %>
-    <%= render 'form', :f => f %>
-    <div class="simple-blog-new-post-row">
-      <%= f.submit t('.submit'), :class => "simple-blog-new-post-submit" %>
-      <%= link_to "Delete post", admin_blog_post_path(@blog_post.id), :method => :delete, :data => { confirm: 'Are you sure' } %>
+<%= form_for @blog_post, :url => admin_blog_post_path(@blog_post.id), :method => :put, :role => "form" do |f| %>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= t('.title') %>: <%= @blog_post.title %>
+      </div>
     </div>
-  <% end %>
+  </div>
 </div>
 
+  <div class="col-md-9">
+
+    <div class="js-simple-blog-form">
+      <%= render 'form', :f => f %>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header"><%= t('.sidebar') %></li>
+        <li>
+          <%= link_to t('.delete'), admin_blog_post_path(@blog_post.id), :method => :delete, :data => { confirm: 'Are you sure' }, :class => "btn btn-default" %>
+        </li>
+        <li>
+          <%= link_to t('.preview'), blog_post_path(@blog_post.slug), :target => "_blank", :class => "btn btn-default" %>
+        </li>
+        <li>
+          <%= f.submit t('.submit'), :class => "btn btn-primary" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+<% end %>

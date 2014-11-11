@@ -12,6 +12,7 @@ class BlogPostsController < ApplicationController
   end
 
   def show
+    @blog_post_presenter = BlogPostPresenter.new(@blog_post)
   end
 
   private

@@ -12,7 +12,7 @@ class BlogPostPresenter < SimpleDelegator
     tags = {"twitter:card" => "summary",
             "twitter:title" => model.pretty_title,
             "twitter:description" => model.description,
-            "twitter:url" => blog_post_path(model),
+            "twitter:url" => Rails.application.routes.url_helpers.blog_post_path(model),
             "twitter:site" => SimpleBlog.twitter_site_name}
     set_hash_meta_tags(tags) + set_image_meta_tags(model.images, "twitter:image")
   end
@@ -22,7 +22,7 @@ class BlogPostPresenter < SimpleDelegator
     tags = {"og:type" => "article",
             "og:title" => model.pretty_title,
             "og:description" => model.description,
-            "og:url" => model.to_url,
+            "og:url" => Rails.application.routes.url_helpers.blog_post_path(model),
             "fb:app_id" => SimpleBlog.fb_app_id}
     set_hash_meta_tags(tags, "property") + set_image_meta_tags(model.images, "og:image", "property")
   end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BlogPostPresenter, :type => :model do
+describe BlogPostPresenter do
 
   let(:blog) { BlogPost.new(:title => "some title") }
   let!(:decorator) { BlogPostPresenter.new(blog) }
@@ -8,12 +8,12 @@ describe BlogPostPresenter, :type => :model do
   describe "#seo_tags" do
     it "returns a description meta tag" do
       expect(decorator.seo_tags()).
-        to match("<meta name='description' content='#{blog.description}'>")
+        to match("<meta name='description' content='#{blog.description}'/>")
     end
 
     it "returns a keywords meta tag" do
       expect(decorator.seo_tags()).
-        to match("<meta name='keywords' content='#{blog.keyword_list}'>")
+        to match("<meta name='keywords' content='#{blog.keyword_list}'/>")
     end
   end
 
@@ -29,32 +29,33 @@ describe BlogPostPresenter, :type => :model do
 
     it "returns the twitter card summary meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:card' content='summary'>")
+        to match("<meta name='twitter:card' content='summary'/>")
     end
 
     it "returns the twitter card title meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:title' content='#{blog.pretty_title}'>")
+        to match("<meta name='twitter:title' content='#{blog.pretty_title}'/>")
     end
 
     it "retuns the twitter card description meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:description' content='#{blog.description}'>")
+        to match("<meta name='twitter:description' content='#{blog.description}'/>")
     end
 
     it "returns the twitter card url meta tag" do
+      expected_path = Rails.application.routes.url_helpers.blog_post_path(blog)
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:url' content='#{blog.to_url}'>")
+        to match("<meta name='twitter:url' content='#{expected_path}'/>")
     end
 
     it "returns the twitter site meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:site' content='#{twitter_site_name}'>")
+        to match("<meta name='twitter:site' content='#{twitter_site_name}'/>")
     end
 
     it "returns the twitter image meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:image' content='#{image.url}'>")
+        to match("<meta name='twitter:image' content='#{image.url}'/>")
     end
   end
 
@@ -70,32 +71,33 @@ describe BlogPostPresenter, :type => :model do
 
     it "returns the open graph type meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='og:type' content='article'>")
+        to match("<meta property='og:type' content='article'/>")
     end
 
     it "returns the open graph title meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='og:title' content='#{blog.pretty_title}'>")
+        to match("<meta property='og:title' content='#{blog.pretty_title}'/>")
     end
 
     it "retuns the open graph description meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='og:description' content='#{blog.description}'>")
+        to match("<meta property='og:description' content='#{blog.description}'/>")
     end
 
     it "returns the open graph url meta tag" do
+      expected_path = Rails.application.routes.url_helpers.blog_post_path(blog)
       expect(decorator.facebook_card()).
-        to match("<meta property='og:url' content='#{blog.to_url}'>")
+        to match("<meta property='og:url' content='#{expected_path}'/>")
     end
 
     it "returns the facebook app id meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='fb:app_id' content='#{fb_app_id}'>")
+        to match("<meta property='fb:app_id' content='#{fb_app_id}'/>")
     end
 
     it "returns the open graph image meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='og:image' content='#{image.url}'>")
+        to match("<meta property='og:image' content='#{image.url}'/>")
     end
   end
 

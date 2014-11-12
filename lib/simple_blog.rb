@@ -1,4 +1,5 @@
 require "simple_blog/engine"
+require "shareable"
 
 module SimpleBlog
   class Engine < ::Rails::Engine

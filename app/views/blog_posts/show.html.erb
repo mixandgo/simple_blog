@@ -22,7 +22,7 @@
 <% end %>
 <div class="simple-blog-posts-show" itemscope itemtype="http://schema.org/Article">
   <h1 itemprop="name" class="simple-blog-post-title"><%= @blog_post.pretty_title %></h1>
-  <%= social_share_button_tag(@blog_post.pretty_title, :url => blog_post_path(@blog_post)) %>
+  <%= render_shareable %>
   <% if @blog_post.tag_list.present? %>
     <p class="simple-blog-post-tags" itemprop="keywords">
       Tags: <%= blog_post_tags(@blog_post) %>

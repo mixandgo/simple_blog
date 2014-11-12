@@ -11,8 +11,4 @@ module BlogPostHelper
     strip_tags(text).strip
   end
 
-  def seo_tags(blog_post)
-    render "blog_posts/seo_tags", {:blog_post => blog_post}
-  end
-
 end

@@ -12,8 +12,8 @@ class BlogPostPresenter < SimpleDelegator
     tags = {"twitter:card" => "summary",
             "twitter:title" => model.pretty_title,
             "twitter:description" => model.description,
-            "twitter:url" => model.to_url}
-    tags["twitter:site"] = SimpleBlog.twitter_site_name if SimpleBlog.twitter_site_name.present?
+            "twitter:url" => blog_post_path(model),
+            "twitter:site" => SimpleBlog.twitter_site_name}
     set_hash_meta_tags(tags) + set_image_meta_tags(model.images, "twitter:image")
   end
 
@@ -22,8 +22,8 @@ class BlogPostPresenter < SimpleDelegator
     tags = {"og:type" => "article",
             "og:title" => model.pretty_title,
             "og:description" => model.description,
-            "og:url" => model.to_url}
-    tags["fb:app_id"] = SimpleBlog.fb_app_id if SimpleBlog.fb_app_id.present?
+            "og:url" => model.to_url,
+            "fb:app_id" => SimpleBlog.fb_app_id}
     set_hash_meta_tags(tags, "property") + set_image_meta_tags(model.images, "og:image", "property")
   end
 
@@ -31,14 +31,14 @@ class BlogPostPresenter < SimpleDelegator
     (seo_tags + twitter_card + facebook_card).html_safe
   end
 
+  private
+
   def model
     __getobj__
   end
 
-  private
-
   def meta_tag(name, content, type="name")
-    "<meta #{type}='#{name}' content='#{content}'>"
+    "<meta #{type}='#{name}' content='#{content}'/>"
   end
 
   def set_hash_meta_tags(tags, type = "name")

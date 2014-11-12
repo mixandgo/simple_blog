@@ -6,11 +6,9 @@ require 'acts-as-taggable-on'
 
 module SimpleBlog
 
-  class << self
-    mattr_accessor :twitter_site_name, :fb_app_id
-    self.twitter_site_name = ""
-    self.fb_app_id = ""
-  end
+  mattr_accessor :twitter_site_name, :fb_app_id
+  self.twitter_site_name = ""
+  self.fb_app_id = ""
 
   def self.setup(&block)
     yield self

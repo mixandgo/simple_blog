@@ -51,8 +51,8 @@ describe BlogPostsController, :type => :controller do
 
   describe "#show" do
     let(:slug) { "cool slug" }
-    let(:blog_post) { double("BlogPost") }
-    let(:blog_post_presenter) { double("BlogPostPresenter") }
+    let(:blog_post) { BlogPost.new }
+    let(:blog_post_presenter) { BlogPostPresenter.new(blog_post) }
 
     context "valid slug" do
       before :each do

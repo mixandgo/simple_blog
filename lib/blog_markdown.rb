@@ -1,11 +1,12 @@
 require 'redcarpet'
 require 'rouge'
 require 'rouge/plugins/redcarpet'
+require 'redcarpet_image'
 
 module BlogMarkdown
   include Redcarpet
 
-  class Renderer < Redcarpet::Render::HTML
+  class Renderer < RedcarpetImage
     include Rouge::Plugins::Redcarpet
   end
 

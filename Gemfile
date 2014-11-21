@@ -12,3 +12,4 @@ gemspec
 
 # To use debugger
 gem 'byebug'
+gem 'pry'

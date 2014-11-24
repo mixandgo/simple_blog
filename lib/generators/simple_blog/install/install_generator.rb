@@ -42,6 +42,11 @@ CSS_FILES
         install_libraries(folder, file, text)
       end
 
+      def create_initializer
+        copy_file "initializer.rb", "config/initializers/simple_blog.rb"
+      end
+
+
       def run_migrations
         rake "simple_blog_engine:install:migrations"
         rake "acts_as_taggable_on_engine:install:migrations"

@@ -128,4 +128,5 @@ describe BlogPost, :type => :model do
       BlogPost.unscoped_find_by!(options)
     end
   end
+
 end

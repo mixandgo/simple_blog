@@ -33,12 +33,10 @@ feature 'Social sharing and seo' do
       expect(page).to have_css("meta[property='og:url'][content='/blog/blog-post-title']", :visible => false)
       expect(page).to have_css("meta[property='og:description'][content='Blog post description']", :visible => false)
       expect(page).to have_css("meta[property='og:image'][content='/uploads/blog_image/image/1/test.png']", :visible => false)
-      expect(page).to have_css("meta[property='fb:app_id'][content='[FB_APP_ID]']", :visible => false)
     end
 
     scenario 'should have twitter meta tags' do
       expect(page).to have_css("meta[name='twitter:card'][content='summary']", :visible => false)
-      expect(page).to have_css("meta[name='twitter:site'][content='[WEBSITE_NAME]']", :visible => false)
       expect(page).to have_css("meta[name='twitter:title'][content='Blog Post Title']", :visible => false)
       expect(page).to have_css("meta[name='twitter:description'][content='Blog post description']", :visible => false)
       expect(page).to have_css("meta[name='twitter:url'][content='/blog/blog-post-title']", :visible => false)

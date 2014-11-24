@@ -4,6 +4,15 @@ require 'mini_magick'
 require 'acts-as-taggable-on'
 
 module SimpleBlog
+
+  mattr_accessor :twitter_site_name, :fb_app_id
+  self.twitter_site_name = ""
+  self.fb_app_id = ""
+
+  def self.setup(&block)
+    yield self
+  end
+
   class Engine < ::Rails::Engine
     config.generators do |g|
       g.test_framework :rspec, :view_specs => false

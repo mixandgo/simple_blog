@@ -51,11 +51,13 @@ describe BlogPostsController, :type => :controller do
 
   describe "#show" do
     let(:slug) { "cool slug" }
-    let(:blog_post) { double("BlogPost") }
+    let(:blog_post) { BlogPost.new }
+    let(:blog_post_presenter) { BlogPostPresenter.new(blog_post) }
 
     context "valid slug" do
       before :each do
         allow(BlogPost).to receive(:unscoped_find_by!).with("slug" => slug).and_return blog_post
+        allow(BlogPostPresenter).to receive(:new).with(blog_post).and_return blog_post_presenter
       end
 
       it "finds blog posts by slug" do
@@ -66,6 +68,16 @@ describe BlogPostsController, :type => :controller do
       it "assigns to @blog_post" do
         get :show, :slug => slug
         expect(assigns(:blog_post)).to eq(blog_post)
+      end
+
+      it "sets the blog post presenter"do
+        expect(BlogPostPresenter).to receive(:new).with(blog_post)
+        get :show, :slug => slug
+      end
+
+      it "assigns the @blog_post_presenter" do
+        get :show, :slug => slug
+        expect(assigns(:blog_post_presenter)).to eq(blog_post_presenter)
       end
 
       it "renders the show template" do

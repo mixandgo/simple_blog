@@ -38,6 +38,12 @@ describe BlogPost, :type => :model do
       create(:blog_post, :published_at => nil) # unpublished
       expect(BlogPost.all).to eq([published])
     end
+
+    it "sorts by published date" do
+      published1 = create(:blog_post, :published_at => 2.days.ago)
+      published2 = create(:blog_post, :published_at => Time.now)
+      expect(BlogPost.all).to eq([published2, published1])
+    end
   end
 
   describe "#published?" do

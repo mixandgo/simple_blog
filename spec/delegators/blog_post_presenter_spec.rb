@@ -1,9 +1,13 @@
 require 'spec_helper'
+Rails.application.routes.default_url_options[:host] = 'http://mydomain.com'
 
 describe BlogPostPresenter do
-
   let(:blog) { BlogPost.new(:title => "some title") }
   let!(:decorator) { BlogPostPresenter.new(blog) }
+
+  before :each do
+    allow(decorator).to receive(:root_url).and_return("http://mydomain.com")
+  end
 
   describe "#seo_tags" do
     it "returns a description meta tag" do
@@ -43,7 +47,7 @@ describe BlogPostPresenter do
     end
 
     it "returns the twitter card url meta tag" do
-      expected_path = Rails.application.routes.url_helpers.blog_post_path(blog)
+      expected_path = Rails.application.routes.url_helpers.blog_post_url(blog)
       expect(decorator.twitter_card()).
         to match("<meta name='twitter:url' content='#{expected_path}'/>")
     end
@@ -55,7 +59,7 @@ describe BlogPostPresenter do
 
     it "returns the twitter image meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:image' content='#{image.url}'/>")
+        to match("<meta name='twitter:image' content='http://mydomain.com#{image.url}'/>")
     end
   end
 
@@ -85,7 +89,7 @@ describe BlogPostPresenter do
     end
 
     it "returns the open graph url meta tag" do
-      expected_path = Rails.application.routes.url_helpers.blog_post_path(blog)
+      expected_path = Rails.application.routes.url_helpers.blog_post_url(blog)
       expect(decorator.facebook_card()).
         to match("<meta property='og:url' content='#{expected_path}'/>")
     end
@@ -97,7 +101,7 @@ describe BlogPostPresenter do
 
     it "returns the open graph image meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='og:image' content='#{image.url}'/>")
+        to match("<meta property='og:image' content='http://mydomain.com#{image.url}'/>")
     end
   end
 

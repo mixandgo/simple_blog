@@ -1,6 +1,7 @@
 require 'delegate'
 
 class BlogPostPresenter < SimpleDelegator
+  include Rails.application.routes.url_helpers
 
   def seo_tags
     tags = {"description" => model.description,
@@ -12,7 +13,7 @@ class BlogPostPresenter < SimpleDelegator
     tags = {"twitter:card" => "summary",
             "twitter:title" => model.pretty_title,
             "twitter:description" => model.description,
-            "twitter:url" => Rails.application.routes.url_helpers.blog_post_path(model),
+            "twitter:url" => Rails.application.routes.url_helpers.blog_post_url(model),
             "twitter:site" => SimpleBlog.twitter_site_name}
     set_hash_meta_tags(tags) + set_image_meta_tags(model.images, "twitter:image")
   end
@@ -22,7 +23,7 @@ class BlogPostPresenter < SimpleDelegator
     tags = {"og:type" => "article",
             "og:title" => model.pretty_title,
             "og:description" => model.description,
-            "og:url" => Rails.application.routes.url_helpers.blog_post_path(model),
+            "og:url" => Rails.application.routes.url_helpers.blog_post_url(model),
             "fb:app_id" => SimpleBlog.fb_app_id}
     set_hash_meta_tags(tags, "property") + set_image_meta_tags(model.images, "og:image", "property")
   end
@@ -46,7 +47,6 @@ class BlogPostPresenter < SimpleDelegator
   end
 
   def set_image_meta_tags(images, name, type = "name")
-    images.collect { |image| meta_tag(name, image.image.url, type) }.join
+    images.collect { |image| meta_tag(name, root_url.chomp('/') + image.image.url[0..-1], type) }.join
   end
-
 end

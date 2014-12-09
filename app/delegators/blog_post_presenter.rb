@@ -47,6 +47,6 @@ class BlogPostPresenter < SimpleDelegator
   end
 
   def set_image_meta_tags(images, name, type = "name")
-    images.collect { |image| meta_tag(name, root_url.chomp('/') + image.image.url[0..-1], type) }.join
+    images.collect { |image| meta_tag(name, root_url.chomp('/') + image.image.url, type) }.join
   end
 end

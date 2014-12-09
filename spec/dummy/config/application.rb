@@ -26,4 +26,4 @@ module Dummy
   end
 end
 
-
+Rails.application.routes.default_url_options[:host] = 'http://mydomain.com'

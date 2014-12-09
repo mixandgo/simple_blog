@@ -20,6 +20,4 @@ feature 'Show posts' do
     click_on 'first_tag'
     expect(current_url).to match(filter_posts_path('first_tag'))
   end
-
-
 end

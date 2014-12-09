@@ -19,7 +19,12 @@ gem 'simple_blog', :git => 'git@github.com:mixandgo/simple_blog.git'
 rails generate simple_blog:install
 ```
 
-##Usage
+You also need to set up a default url for your app:
+
+```ruby
+Rails.application.routes.default_url_options[:host] = 'http://mydomain.com'
+```
+## Usage
 
 ```ruby
 #in layouts/application.html.erb

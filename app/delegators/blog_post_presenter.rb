@@ -10,12 +10,12 @@ class BlogPostPresenter < SimpleDelegator
   end
 
   def twitter_card
-    tags = {"twitter:card" => "summary",
+    tags = {"twitter:card" => "summary_large_image",
             "twitter:title" => model.pretty_title,
             "twitter:description" => model.description,
             "twitter:url" => Rails.application.routes.url_helpers.blog_post_url(model),
             "twitter:site" => SimpleBlog.twitter_site_name}
-    set_hash_meta_tags(tags) + set_image_meta_tags(model.images, "twitter:image")
+    set_hash_meta_tags(tags) + set_image_meta_tags(model.images, "twitter:image:src")
   end
 
   # also takes care of google plus open graph meta tags

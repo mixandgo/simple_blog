@@ -32,7 +32,7 @@ describe BlogPostPresenter do
 
     it "returns the twitter card summary meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:card' content='summary'/>")
+        to match("<meta name='twitter:card' content='summary_large_image'/>")
     end
 
     it "returns the twitter card title meta tag" do
@@ -58,7 +58,7 @@ describe BlogPostPresenter do
 
     it "returns the twitter image meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:image' content='http://mydomain.com#{image.url}'/>")
+        to match("<meta name='twitter:image:src' content='http://mydomain.com#{image.url}'/>")
     end
   end
 

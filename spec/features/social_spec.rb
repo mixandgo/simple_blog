@@ -21,26 +21,20 @@ feature 'Social sharing and seo' do
       expect_page_to_contain_meta_tag("keywords", "first_keyword, second_keyword")
     end
 
-    scenario 'should have sherable buttons' do
-      expect(page).to have_css(".social-share-button-twitter")
-      expect(page).to have_css(".social-share-button-facebook")
-      expect(page).to have_css(".social-share-button-google_plus")
-    end
-
     scenario 'should have open graph meta tags' do
       expect(page).to have_css("meta[property='og:title'][content='Blog Post Title']", :visible => false)
       expect(page).to have_css("meta[property='og:type'][content='article']", :visible => false)
-      expect(page).to have_css("meta[property='og:url'][content='/blog/blog-post-title']", :visible => false)
+      expect(page).to have_css("meta[property='og:url'][content='http://mydomain.com/blog/blog-post-title']", :visible => false)
       expect(page).to have_css("meta[property='og:description'][content='Blog post description']", :visible => false)
-      expect(page).to have_css("meta[property='og:image'][content='/uploads/blog_image/image/1/test.png']", :visible => false)
+      expect(page).to have_css("meta[property='og:image'][content='http://mydomain.com/uploads/blog_image/image/1/test.png']", :visible => false)
     end
 
     scenario 'should have twitter meta tags' do
-      expect(page).to have_css("meta[name='twitter:card'][content='summary']", :visible => false)
+      expect(page).to have_css("meta[name='twitter:card'][content='summary_large_image']", :visible => false)
       expect(page).to have_css("meta[name='twitter:title'][content='Blog Post Title']", :visible => false)
       expect(page).to have_css("meta[name='twitter:description'][content='Blog post description']", :visible => false)
-      expect(page).to have_css("meta[name='twitter:url'][content='/blog/blog-post-title']", :visible => false)
-      expect(page).to have_css("meta[name='twitter:image'][content='/uploads/blog_image/image/1/test.png']", :visible => false)
+      expect(page).to have_css("meta[name='twitter:url'][content='http://mydomain.com/blog/blog-post-title']", :visible => false)
+      expect(page).to have_css("meta[name='twitter:image:src'][content='http://mydomain.com/uploads/blog_image/image/1/test.png']", :visible => false)
     end
 
     scenario 'should have schema.org microdata' do
@@ -56,12 +50,6 @@ feature 'Social sharing and seo' do
 
     background do
       visit blog_posts_path
-    end
-
-    scenario 'sould have sherable buttons' do
-      expect(page).to have_css(".social-share-button-twitter")
-      expect(page).to have_css(".social-share-button-facebook")
-      expect(page).to have_css(".social-share-button-google_plus")
     end
 
     scenario 'should have schema.org microdata' do

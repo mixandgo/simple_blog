@@ -43,7 +43,7 @@ function setAutocomplete(elementId) {
       terms.push(ui.item.value);
       // add placeholder to get the comma-and-space at the end
       terms.push("");
-      this.value = terms.join(", ");
+      this.value = terms.join(" ");
 
       return false;
     }
@@ -51,7 +51,7 @@ function setAutocomplete(elementId) {
 }
 
 function split(val) {
-  return val.split(/,\s*/);
+  return val.split(/ \s*/);
 }
 
 function extractLast(term) {

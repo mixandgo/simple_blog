@@ -4,7 +4,7 @@ feature 'Show posts' do
   background do
     create_a_blog_post(:title => 'Blog post title',
                        :body => 'Blog post body',
-                       :tags => 'first_tag, second_tag',
+                       :tags => 'first_tag second_tag',
                        :description => 'Blog post description',
                        :keywords => 'first_keyword, second_keyword')
     visit_show_page_for('Blog Post Title')

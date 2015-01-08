@@ -9,7 +9,7 @@ function addDatepicker() {
 }
 
 function setAutocomplete(elementId) {
-  $("#"+elementId).on("keydown", function(event) {
+  $("."+elementId).on("keydown", function(event) {
     if (event.keyCode === $.ui.keyCode.TAB && $(this).autocomplete("instance").menu.active) {
       event.preventDefault();
     }

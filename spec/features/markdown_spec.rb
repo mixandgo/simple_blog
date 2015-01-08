@@ -32,7 +32,7 @@ end
   end
 
   scenario 'I should see the ruby code highlighted' do
-    expect(page).to have_css("code.ruby")
+    expect(page).to have_css(".ruby")
   end
 
   scenario 'I should see the ruby method definition wrapped in right class' do
@@ -40,7 +40,7 @@ end
   end
 
   scenario 'I should see the css code highlighted' do
-    expect(page).to have_css("code.css")
+    expect(page).to have_css(".css")
   end
 
   scenario 'I should see the css class wrapped in the right class' do

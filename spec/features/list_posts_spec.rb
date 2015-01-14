@@ -34,4 +34,12 @@ feature 'List posts' do
     expect(page).to have_content('Blog Post Title')
     expect(page).not_to have_content('Different Tag Blog Post Title')
   end
+
+  scenario "filtering by tag shouldn't filter by keyword" do
+    create_a_blog_post(:title => 'Differnt tag blog post title', :keywords => 'first_tag')
+    visit blog_posts_path
+    click_link('first_tag', :match => :first)
+    expect(page).to have_content('Blog Post Title')
+    expect(page).not_to have_content('Different Tag Blog Post Title')
+  end
 end

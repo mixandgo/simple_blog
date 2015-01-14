@@ -29,11 +29,11 @@ describe BlogPostsController, :type => :controller do
     let(:blog_post) { double("BlogPost") }
 
     before :each do
-      allow(BlogPost).to receive(:tagged_with).with(tag).and_return [blog_post]
+      allow(BlogPost).to receive(:tagged_with).with(tag, :on => :tags).and_return([blog_post])
     end
 
     it "finds all blog posts filtered by tag" do
-      expect(BlogPost).to receive(:tagged_with).with(tag)
+      expect(BlogPost).to receive(:tagged_with).with(tag, :on => :tags)
       get :filter, :tag => tag
     end
 

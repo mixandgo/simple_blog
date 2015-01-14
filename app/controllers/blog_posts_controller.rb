@@ -7,7 +7,7 @@ class BlogPostsController < ApplicationController
   end
 
   def filter
-    @blog_posts = BlogPost.tagged_with(blog_post_params[:tag])
+    @blog_posts = BlogPost.tagged_with(blog_post_params[:tag], :on => :tags)
     render :index
   end
 

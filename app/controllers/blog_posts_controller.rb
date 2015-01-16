@@ -1,5 +1,6 @@
 class BlogPostsController < ApplicationController
 
+  before_filter :check_tag_exists!, :only => :filter
   before_filter :find_blog_post!, :only => :show
 
   def index
@@ -7,7 +8,7 @@ class BlogPostsController < ApplicationController
   end
 
   def filter
-    @blog_posts = BlogPost.tagged_with(blog_post_params[:tag], :on => :tags)
+    @blog_posts = BlogPost.tagged_with(@tag, :on => :tags)
     render :index
   end
 
@@ -18,10 +19,18 @@ class BlogPostsController < ApplicationController
   private
 
     def blog_post_params
-      params.permit(:tag, :slug)
+      params.permit(:slug)
+    end
+
+    def blog_tag_params
+      params.permit(:tag)
     end
 
     def find_blog_post!
       @blog_post = BlogPost.unscoped_find_by!(blog_post_params)
+    end
+
+    def check_tag_exists!
+      @tag = ActsAsTaggableOn::Tag.find_by!(:name => blog_tag_params[:tag])
     end
 end

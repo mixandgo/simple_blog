@@ -29,7 +29,7 @@ describe BlogPostsController, :type => :controller do
     let(:blog_post) { double("BlogPost") }
 
     context "tag doesn't exist" do
-      it "renders a 404 if the tag can't be found" do
+      it "raises a RecordNotFound Error if the tag can't be found" do
         expect {
           get :filter, :tag => "invalid-tag"
         }.to raise_error(ActiveRecord::RecordNotFound)
@@ -38,7 +38,7 @@ describe BlogPostsController, :type => :controller do
 
     context "tag exists" do
       before :each do
-        allow(ActsAsTaggableOn::Tag).to receive(:find_by!).and_return tag
+        allow(ActsAsTaggableOn::Tag).to receive(:find_by!).and_return(tag)
         allow(BlogPost).to receive(:tagged_with).with(tag, :on => :tags).and_return([blog_post])
       end
 

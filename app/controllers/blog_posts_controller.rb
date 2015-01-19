@@ -1,6 +1,6 @@
 class BlogPostsController < ApplicationController
 
-  before_filter :check_tag_exists!, :only => :filter
+  before_filter :find_tag!, :only => :filter
   before_filter :find_blog_post!, :only => :show
 
   def index
@@ -30,7 +30,7 @@ class BlogPostsController < ApplicationController
       @blog_post = BlogPost.unscoped_find_by!(blog_post_params)
     end
 
-    def check_tag_exists!
+    def find_tag!
       @tag = ActsAsTaggableOn::Tag.find_by!(:name => blog_tag_params[:tag])
     end
 end

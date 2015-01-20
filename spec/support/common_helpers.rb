@@ -8,7 +8,7 @@ def create_a_blog_post(options={})
   end
   fill_in 'simple-blog-post-form-tag-list', :with => options[:tags] || 'first_tag, second_tag'
   fill_in 'simple-blog-post-form-keyword-list', :with => options[:keywords] || 'first_keyword, second_keyword'
-  select options[:language] || 'en', :from => 'simple-blog-post-form-language'
+  select options[:language] || 'English', :from => 'simple-blog-post-form-language'
   attach_image('simple-blog-post-form-image', options[:image] || 'test.png')
   click_button 'Create post'
 end

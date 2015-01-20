@@ -7,9 +7,9 @@ feature 'Create posts' do
   end
 
   scenario 'creating a blog with a different language then english' do
-    create_a_blog_post(:language => "ro")
+    create_a_blog_post(:language => "Romanian")
     visit admin_blog_posts_path
-    expect(page).to have_content("ro")
+    expect(page).to have_content("Romanian")
   end
 
   scenario 'user can create new posts' do

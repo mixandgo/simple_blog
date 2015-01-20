@@ -10,7 +10,7 @@ feature 'List posts' do
   end
 
   scenario 'should only show articles of the current locale' do
-    create_a_blog_post(:title => 'Romanian blog post', :language => 'ro')
+    create_a_blog_post(:title => 'Romanian blog post', :language => 'Romanian')
     I18n.locale = 'ro'
     visit blog_posts_path
     expect(page).to have_content('Romanian Blog Post')

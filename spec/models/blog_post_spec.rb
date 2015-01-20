@@ -32,11 +32,7 @@ describe BlogPost, :type => :model do
     end
   end
 
-  describe "default_scope" do
-    before :each do
-      allow(I18n).to receive(:locale).and_return("en")
-    end
-
+   describe "default_scope" do
     it "finds all the published records" do
       published = create(:blog_post)
       create(:blog_post, :published_at => nil) # unpublished
@@ -49,15 +45,15 @@ describe BlogPost, :type => :model do
       expect(BlogPost.all).to eq([published2, published1])
     end
 
-    context "language" do
+    context "default locale" do
       let!(:english_post) { create(:blog_post, :language => "en") }
       let!(:romanian_post) { create(:blog_post, :language => "ro") }
 
-      it "retuns the current language blog_posts" do
+      it "retuns the current locale blog_posts" do
         expect(BlogPost.all).to eq([english_post])
       end
 
-      it "does not return other language blog_posts" do
+      it "does not return other locale blog_posts" do
         expect(BlogPost.all).not_to include(romanian_post)
       end
     end
@@ -149,16 +145,6 @@ describe BlogPost, :type => :model do
     it "searches for blog posts with the specified options" do
       expect(blog_post).to receive(:find_by!).with(options)
       BlogPost.unscoped_find_by!(options)
-    end
-  end
-
-  describe "#set_slug" do
-    let(:title) { "blog post title" }
-    let(:blog_post) { create(:blog_post, :title => title) }
-
-    it "creates the slug from the title" do
-      expected_slug = title.parameterize
-      expect(blog_post.slug).to eq(expected_slug)
     end
   end
 

@@ -35,6 +35,9 @@
               <td class="simple-blog-post-published">
                 <%= post.published? %>
               </td>
+              <td class="simple-blog-post-language">
+                <%= post.language %>
+              </td>
               <td class="simple-blog-post-delete">
                 <%= link_to t('.delete'), admin_blog_post_path(post.id), :method => :delete, :data => { confirm: t('.are_you_sure') } %>
               </td>

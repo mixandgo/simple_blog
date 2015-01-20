@@ -15,6 +15,7 @@ feature 'List posts' do
     visit blog_posts_path
     expect(page).to have_content('Romanian Blog Post')
     expect(page).not_to have_content('Blog Post Title')
+    I18n.locale = 'en'
   end
 
   scenario "should only display the post's descsription" do

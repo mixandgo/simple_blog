@@ -44,7 +44,7 @@
     <% end %>
   </table>
 <% end %>
-<%= f.select :language, languages_for_select, {}, :class => "form-control", :id => "simple-blog-post-form-language", :value => blog_post.language %>
+<%= f.select :language, languages_for_select, {:prompt => ["English", "en"]}, :class => "form-control", :id => "simple-blog-post-form-language", :value => blog_post.language %>
 <%= f.fields_for :images, blog_post.images.build do |i| %>
   <div class="form-group">
     <%= i.label :image %>

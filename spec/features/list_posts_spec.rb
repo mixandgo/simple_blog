@@ -42,4 +42,10 @@ feature 'List posts' do
     expect(page).to have_content('Blog Post Title')
     expect(page).not_to have_content('Different Tag Blog Post Title')
   end
+
+  scenario "filtering by tag that doesn't exist should 404" do
+    expect {
+      visit filter_posts_path(:tag => "not_a_tag")
+    }.to raise_exception(ActiveRecord::RecordNotFound)
+  end
 end

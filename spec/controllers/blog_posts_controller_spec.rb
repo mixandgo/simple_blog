@@ -28,23 +28,34 @@ describe BlogPostsController, :type => :controller do
     let(:tag) { "cool tag" }
     let(:blog_post) { double("BlogPost") }
 
-    before :each do
-      allow(BlogPost).to receive(:tagged_with).with(tag, :on => :tags).and_return([blog_post])
+    context "tag doesn't exist" do
+      it "raises a RecordNotFound Error if the tag can't be found" do
+        expect {
+          get :filter, :tag => "invalid-tag"
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
     end
 
-    it "finds all blog posts filtered by tag" do
-      expect(BlogPost).to receive(:tagged_with).with(tag, :on => :tags)
-      get :filter, :tag => tag
-    end
+    context "tag exists" do
+      before :each do
+        allow(ActsAsTaggableOn::Tag).to receive(:find_by!).and_return(tag)
+        allow(BlogPost).to receive(:tagged_with).with(tag, :on => :tags).and_return([blog_post])
+      end
 
-    it "assigns to @blog_posts" do
-      get :filter, :tag => tag
-      expect(assigns(:blog_posts)).to eq([blog_post])
-    end
+      it "finds all blog posts filtered by tag" do
+        expect(BlogPost).to receive(:tagged_with).with(tag, :on => :tags)
+        get :filter, :tag => tag
+      end
 
-    it "renders the index template" do
-      get :filter, :tag => tag
-      expect(response).to render_template('blog_posts/index')
+      it "assigns to @blog_posts" do
+        get :filter, :tag => tag
+        expect(assigns(:blog_posts)).to eq([blog_post])
+      end
+
+      it "renders the index template" do
+        get :filter, :tag => tag
+        expect(response).to render_template('blog_posts/index')
+      end
     end
 
   end

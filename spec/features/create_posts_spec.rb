@@ -6,7 +6,7 @@ feature 'Create posts' do
     expect(current_path).to match "edit"
   end
 
-  scenario 'creating a blog with another language then english' do
+  scenario 'creating a blog with a different language then english' do
     create_a_blog_post(:language => "ro")
     visit admin_blog_posts_path
     expect(page).to have_content("ro")

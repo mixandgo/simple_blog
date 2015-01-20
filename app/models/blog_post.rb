@@ -11,7 +11,7 @@ class BlogPost < ActiveRecord::Base
   validates :body, :presence => true
   validates :description, :presence => true, :if => :published?
 
-  default_scope { where("published_at IS NOT NULL").order("published_at DESC") }
+  default_scope { where("published_at IS NOT NULL").where(:language => I18n.locale).order("published_at DESC") }
 
   def to_param
     title_to_slug

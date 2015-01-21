@@ -32,7 +32,7 @@ describe BlogPost, :type => :model do
     end
   end
 
-   describe "default_scope" do
+  describe "default_scope" do
     it "finds all the published records" do
       published = create(:blog_post)
       create(:blog_post, :published_at => nil) # unpublished

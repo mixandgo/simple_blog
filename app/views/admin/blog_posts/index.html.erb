@@ -19,6 +19,7 @@
             <th><%= t('.blog_post_tags') %></th>
             <th><%= t('.blog_post_keywords') %></th>
             <th><%= t('.blog_post_published') %></th>
+            <th><%= t('.blog_post_language')%></th>
             <th><%= t('.blog_post_delete') %></th>
           </tr>
           <% @blog_posts.each do |post| %>
@@ -34,6 +35,9 @@
               </td>
               <td class="simple-blog-post-published">
                 <%= post.published? %>
+              </td>
+              <td class="simple-blog-post-language">
+                <%= language_full_name(post.language) %>
               </td>
               <td class="simple-blog-post-delete">
                 <%= link_to t('.delete'), admin_blog_post_path(post.id), :method => :delete, :data => { confirm: t('.are_you_sure') } %>

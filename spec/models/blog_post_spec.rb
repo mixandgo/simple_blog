@@ -44,6 +44,19 @@ describe BlogPost, :type => :model do
       published2 = create(:blog_post, :published_at => Time.now)
       expect(BlogPost.all).to eq([published2, published1])
     end
+
+    context "default locale" do
+      let!(:english_post) { create(:blog_post, :language => "en") }
+      let!(:romanian_post) { create(:blog_post, :language => "ro") }
+
+      it "retuns the current locale blog_posts" do
+        expect(BlogPost.all).to eq([english_post])
+      end
+
+      it "does not return other locale blog_posts" do
+        expect(BlogPost.all).not_to include(romanian_post)
+      end
+    end
   end
 
   describe "#published?" do

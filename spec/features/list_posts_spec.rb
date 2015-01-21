@@ -9,6 +9,15 @@ feature 'List posts' do
                        :keywords => 'first_keyword, second_keyword')
   end
 
+  scenario 'should only show articles of the current locale' do
+    create_a_blog_post(:title => 'Romanian blog post', :language => 'Romanian')
+    I18n.locale = 'ro'
+    visit blog_posts_path
+    expect(page).to have_content('Romanian Blog Post')
+    expect(page).not_to have_content('Blog Post Title')
+    I18n.locale = 'en'
+  end
+
   scenario "should only display the post's descsription" do
     visit blog_posts_path
     expect(page).to have_content('Blog post description')

@@ -6,6 +6,12 @@ feature 'Create posts' do
     expect(current_path).to match "edit"
   end
 
+  scenario 'creating a blog with a different language then english' do
+    create_a_blog_post(:language => "Romanian")
+    visit admin_blog_posts_path
+    expect(page).to have_content("Romanian")
+  end
+
   scenario 'user can create new posts' do
     create_a_blog_post
     success_message = 'Post was succesfully created.'

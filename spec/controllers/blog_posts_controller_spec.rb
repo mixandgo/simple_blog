@@ -25,7 +25,8 @@ describe BlogPostsController, :type => :controller do
   end
 
   describe "#filter" do
-    let(:tag) { "cool tag" }
+    let(:tag_name) { "cool tag" }
+    let(:tag) { double("tag", :name => tag_name) }
     let(:blog_post) { double("BlogPost") }
 
     context "tag doesn't exist" do
@@ -44,16 +45,21 @@ describe BlogPostsController, :type => :controller do
 
       it "finds all blog posts filtered by tag" do
         expect(BlogPost).to receive(:tagged_with).with(tag, :on => :tags)
-        get :filter, :tag => tag
+        get :filter, :tag => tag_name
       end
 
       it "assigns to @blog_posts" do
-        get :filter, :tag => tag
+        get :filter, :tag => tag_name
         expect(assigns(:blog_posts)).to eq([blog_post])
       end
 
+      it "assigns to @page_title" do
+        get :filter, :tag => tag_name
+        expect(assigns(:page_title)).to eq("#{tag.name} related posts")
+      end
+
       it "renders the index template" do
-        get :filter, :tag => tag
+        get :filter, :tag => tag_name
         expect(response).to render_template('blog_posts/index')
       end
     end
@@ -79,6 +85,11 @@ describe BlogPostsController, :type => :controller do
       it "assigns to @blog_post" do
         get :show, :slug => slug
         expect(assigns(:blog_post)).to eq(blog_post)
+      end
+
+      it "assigns to @page_title" do
+        get :show, :slug => slug
+        expect(assigns(:page_title)).to eq(blog_post.title)
       end
 
       it "sets the blog post presenter"do

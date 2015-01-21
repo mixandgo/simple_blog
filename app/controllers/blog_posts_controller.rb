@@ -9,11 +9,13 @@ class BlogPostsController < ApplicationController
 
   def filter
     @blog_posts = BlogPost.tagged_with(@tag, :on => :tags)
+    @page_title = "#{@tag.name} #{t(".page_title_text")}"
     render :index
   end
 
   def show
     @blog_post_presenter = BlogPostPresenter.new(@blog_post)
+    @page_title = @blog_post.title
   end
 
   private

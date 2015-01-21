@@ -43,6 +43,8 @@ en:
       destroy:
         flash_notice: "Blog image was deleted succesfully."
   blog_posts:
+    filter:
+      page_title_text: "related posts"
     index:
       page_heading: "Blog"
       no_published_posts: "There are no published posts available."

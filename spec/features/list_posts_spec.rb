@@ -4,7 +4,7 @@ feature 'List posts' do
   background do
     create_a_blog_post(:title => 'Blog post title',
                        :body => 'Blog post body',
-                       :tags => 'first_tag, second_tag',
+                       :tags => 'first tag, second tag',
                        :description => 'Blog post description',
                        :keywords => 'first_keyword, second_keyword')
   end
@@ -33,21 +33,27 @@ feature 'List posts' do
 
   scenario 'posts show tags on index page' do
     visit blog_posts_path
-    expect(page).to have_content('first_tag')
+    expect(page).to have_content('first tag')
   end
 
   scenario 'filtering by tag returns only posts with that tag' do
     create_a_blog_post(:title => 'Differnt tag blog post title', :tags => 'different tag')
     visit blog_posts_path
-    click_link('first_tag', :match => :first)
+    click_link('first tag', :match => :first)
     expect(page).to have_content('Blog Post Title')
     expect(page).not_to have_content('Different Tag Blog Post Title')
   end
 
-  scenario "filtering by tag shouldn't filter by keyword" do
-    create_a_blog_post(:title => 'Differnt tag blog post title', :keywords => 'first_tag')
+  scenario 'filtering by tag sets the page title to the capitalize tag' do
     visit blog_posts_path
-    click_link('first_tag', :match => :first)
+    click_link('first tag', :match => :first)
+    expect(page).to have_title("First tag")
+  end
+
+  scenario "filtering by tag shouldn't filter by keyword" do
+    create_a_blog_post(:title => 'Differnt tag blog post title', :keywords => 'first_ ')
+    visit blog_posts_path
+    click_link('first tag', :match => :first)
     expect(page).to have_content('Blog Post Title')
     expect(page).not_to have_content('Different Tag Blog Post Title')
   end

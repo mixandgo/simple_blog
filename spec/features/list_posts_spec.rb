@@ -6,7 +6,7 @@ feature 'List posts' do
                        :body => 'Blog post body',
                        :tags => 'first tag, second tag',
                        :description => 'Blog post description',
-                       :keywords => 'first_keyword, second_keyword')
+                       :keywords => 'first keyword, second keyword')
   end
 
   scenario 'should only show articles of the current locale' do
@@ -51,7 +51,7 @@ feature 'List posts' do
   end
 
   scenario "filtering by tag shouldn't filter by keyword" do
-    create_a_blog_post(:title => 'Differnt tag blog post title', :keywords => 'first_ ')
+    create_a_blog_post(:title => 'Differnt tag blog post title', :keywords => 'first tag')
     visit blog_posts_path
     click_link('first tag', :match => :first)
     expect(page).to have_content('Blog Post Title')

@@ -54,7 +54,7 @@ describe BlogPostsController, :type => :controller do
       end
 
       it "assigns to @page_title" do
-        get :filter, :tag => tag_name
+        get :filter, :tag => "cool tag"
         expect(assigns(:page_title)).to eq("Cool tag related posts")
       end
 

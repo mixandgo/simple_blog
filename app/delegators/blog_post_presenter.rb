@@ -39,7 +39,7 @@ class BlogPostPresenter < SimpleDelegator
   end
 
   def meta_tag(name, content, type="name")
-    "<meta #{type}='#{name}' content='#{content}'/>"
+    %Q{<meta #{type}="#{name}" content="#{content}"/>}
   end
 
   def set_hash_meta_tags(tags, type = "name")

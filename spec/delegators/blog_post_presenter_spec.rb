@@ -11,12 +11,12 @@ describe BlogPostPresenter do
   describe "#seo_tags" do
     it "returns a description meta tag" do
       expect(decorator.seo_tags()).
-        to match("<meta name='description' content='#{blog.description}'/>")
+        to match(%Q{<meta name="description" content="#{blog.description}"/>})
     end
 
     it "returns a keywords meta tag" do
       expect(decorator.seo_tags()).
-        to match("<meta name='keywords' content='#{blog.keyword_list}'/>")
+        to match(%Q{<meta name="keywords" content="#{blog.keyword_list}"/>})
     end
   end
 
@@ -32,33 +32,33 @@ describe BlogPostPresenter do
 
     it "returns the twitter card summary meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:card' content='summary_large_image'/>")
+        to match(%Q{<meta name="twitter:card" content="summary_large_image"/>})
     end
 
     it "returns the twitter card title meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:title' content='#{blog.pretty_title}'/>")
+        to match(%Q{<meta name="twitter:title" content="#{blog.pretty_title}"/>})
     end
 
     it "retuns the twitter card description meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:description' content='#{blog.description}'/>")
+        to match(%Q{<meta name="twitter:description" content="#{blog.description}"/>})
     end
 
     it "returns the twitter card url meta tag" do
       expected_path = blog_post_url(blog)
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:url' content='#{expected_path}'/>")
+        to match(%Q{<meta name="twitter:url" content="#{expected_path}"/>})
     end
 
     it "returns the twitter site meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:site' content='#{twitter_site_name}'/>")
+        to match(%Q{<meta name="twitter:site" content="#{twitter_site_name}"/>})
     end
 
     it "returns the twitter image meta tag" do
       expect(decorator.twitter_card()).
-        to match("<meta name='twitter:image:src' content='http://mydomain.com#{image.url}'/>")
+        to match(%Q{<meta name="twitter:image:src" content="http://mydomain.com#{image.url}"/>})
     end
   end
 
@@ -74,33 +74,33 @@ describe BlogPostPresenter do
 
     it "returns the open graph type meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='og:type' content='article'/>")
+        to match(%Q{<meta property="og:type" content="article"/>})
     end
 
     it "returns the open graph title meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='og:title' content='#{blog.pretty_title}'/>")
+        to match(%Q{<meta property="og:title" content="#{blog.pretty_title}"/>})
     end
 
     it "retuns the open graph description meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='og:description' content='#{blog.description}'/>")
+        to match(%Q{<meta property="og:description" content="#{blog.description}"/>})
     end
 
     it "returns the open graph url meta tag" do
       expected_path = blog_post_url(blog)
       expect(decorator.facebook_card()).
-        to match("<meta property='og:url' content='#{expected_path}'/>")
+        to match(%Q{<meta property="og:url" content="#{expected_path}"/>})
     end
 
     it "returns the facebook app id meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='fb:app_id' content='#{fb_app_id}'/>")
+        to match(%Q{<meta property="fb:app_id" content="#{fb_app_id}"/>})
     end
 
     it "returns the open graph image meta tag" do
       expect(decorator.facebook_card()).
-        to match("<meta property='og:image' content='http://mydomain.com#{image.url}'/>")
+        to match(%Q{<meta property="og:image" content="http://mydomain.com#{image.url}"/>})
     end
   end
 

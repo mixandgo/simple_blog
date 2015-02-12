@@ -24,6 +24,11 @@ en:
         delete: "Delete post"
         are_you_sure: "Are you sure"
         submit: "Update post"
+        analytics_links: "Links with Google Analytics"
+        custom_links_explanation: "*values should have underscore and be lowercase. They will be added as is to the url."
+        source_placeholder: "Enter the url source(facebook, twitter, newsletter..)"
+        medium_placeholder: "Enter the url medium(backlink, email, facebook...)"
+        new_link: "Create Custom GA Link"
       new:
         title: "New Blog Post"
         subtitle: "Admin"

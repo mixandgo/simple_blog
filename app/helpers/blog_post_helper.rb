@@ -13,4 +13,10 @@ module BlogPostHelper
     strip_tags(text).strip
   end
 
+  def link_to_with_analytics(blog_post, source, medium)
+    return '' unless blog_post.published?
+    campaign = "blog_post_#{blog_post.published_at.strftime('%d_%m_%Y')}"
+    link_to(source.titleize, blog_post_url(blog_post, :utm_source => source, :utm_medium => medium, :utm_campaign => campaign))
+  end
+
 end

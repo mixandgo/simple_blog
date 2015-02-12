@@ -1,13 +1,13 @@
 <%= form_for @blog_post, :url => admin_blog_post_path(@blog_post.id), :method => :put, :role => "form" do |f| %>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= t('.title') %>: <%= @blog_post.title %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= t('.title') %>: <%= @blog_post.title %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <div class="col-md-9">
 
@@ -31,5 +31,52 @@
         </li>
       </ul>
     </div>
+
+    <% if @blog_post.published? %>
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <li class="nav-header"><%= t('.analytics_links') %></li>
+          <li>
+            <%= link_to_with_analytics(@blog_post, "newsletter", "email") %>
+          </li>
+          <li>
+            <%= link_to_with_analytics(@blog_post, "facebook", "direct_facebook") %>
+          </li>
+          <li>
+            <%= link_to_with_analytics(@blog_post, "twitter", "direct_twitter") %>
+          </li>
+          <li>
+            <%= link_to_with_analytics(@blog_post, "reddit", "direct_reddit") %>
+          </li>
+          <li>
+            <%= link_to_with_analytics(@blog_post, "google_plus", "direct_google_plus") %>
+          </li>
+          <li>
+            <%= link_to_with_analytics(@blog_post, "ruby5", "backlink") %>
+          </li>
+          <li>
+            <%= link_to_with_analytics(@blog_post, "ruby_weekly", "backlink") %>
+          </li>
+        </ul>
+        <ul class="nav nav-list js-link-creator">
+          <li class="nav-header">
+            <%= t('.custom_links') %>
+            <div class="small">
+              <%= t('.custom_links_explanation') %>
+            </div>
+          </li>
+          <li>
+            <%= text_field_tag("source", "", :placeholder => t(".source_placeholder"), :id => "simple-blog-post-form-custom-source", :class=> "js-custom-source form-control") %>
+          </li>
+          <li>
+            <%= text_field_tag("medium", "", :placeholder => t(".medium_placeholder"), :id => "simple-blog-post-form-custom-medium", :class=> "js-custom-medium form-control") %>
+          </li>
+          <li>
+            <%= button_tag t(".new_link"), :class => "js-new-link btn btn-primary", :data => {:link => "#{link_to_with_analytics(@blog_post, '---Source---', '---Medium---')}"} %>
+          </li>
+          <li class="js-custom-link"></li>
+        </ul>
+      </div>
+    <% end %>
   </div>
 <% end %>

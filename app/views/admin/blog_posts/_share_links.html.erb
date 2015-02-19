@@ -22,7 +22,7 @@
       </li>
       <li>
 	      <h4>
-          Twitter
+          <%= t(".twitter") %>
         </h4>
         <div class="analytics-link">
           <%= text_field_tag("twitter", blog_post_url_with_analytics(blog_post, "twitter", "direct_twitter"), :readonly => true) %>
@@ -31,7 +31,7 @@
       </li>
       <li>
 	      <h4>
-          Reddit
+          <%= t(".reddit") %>
         </h4>
         <div class="analytics-link">
           <%= text_field_tag("reddit", blog_post_url_with_analytics(blog_post, "reddit", "direct_reddit"), :readonly => true) %>
@@ -40,7 +40,7 @@
       </li>
       <li>
 	      <h4>
-          Google Plus
+          <%= t(".google_plus") %>
         </h4>
         <div class="analytics-link">
           <%= text_field_tag("google_plus", blog_post_url_with_analytics(blog_post, "google_plus", "direct_google_plus"), :readonly => true) %>
@@ -49,7 +49,7 @@
       </li>
       <li>
 	      <h4>
-          Ruby 5
+          <%= t(".ruby_5") %>
         </h4>
         <div class="analytics-link">
           <%= text_field_tag("ruby5", blog_post_url_with_analytics(blog_post, "ruby5", "backlink"), :readonly => true) %>
@@ -58,7 +58,7 @@
       </li>
       <li>
         <h4>
-          Ruby Weekly
+          <%= t(".ruby_weekly") %>
         </h4>
         <div class="analytics-link">
           <%= text_field_tag("ruby_weekly", blog_post_url_with_analytics(blog_post, "ruby_weekly", "backlink"), :readonly => true) %>

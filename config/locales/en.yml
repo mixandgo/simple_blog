@@ -24,6 +24,7 @@ en:
         delete: "Delete post"
         are_you_sure: "Are you sure"
         submit: "Update post"
+      share_links:
         analytics_links: "Links with Google Analytics"
         custom_links_explanation: "*values should have underscore and be lowercase. They will be added as is to the url."
         source_placeholder: "Enter the url source(facebook, twitter, newsletter..)"

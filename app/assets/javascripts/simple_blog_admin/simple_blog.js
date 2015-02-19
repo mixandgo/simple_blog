@@ -81,8 +81,7 @@ function setLinkHandler() {
     var medium = linkCreator.find(".js-custom-medium").val();
     defaultLink = defaultLink.replace("---Source---", source);
     defaultLink = defaultLink.replace("---Medium---", medium);
-    defaultLink = defaultLink.replace("Source", source);
-    linkCreator.find(".js-custom-link").html(defaultLink);
+    linkCreator.find(".js-custom-link").val(defaultLink);
   })
 }
 

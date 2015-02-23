@@ -58,9 +58,7 @@ function extractLast(term) {
   return split(term).pop();
 }
 
-
 function setTitleValidation() {
-
   var warningMessage = "Warning: Blog post title has over 65 characters."
 
   $(".js-simple-blog-form").on("keyup", ".js-simple-blog-title", function(event) {
@@ -74,12 +72,26 @@ function setTitleValidation() {
   })
 }
 
+function setLinkHandler() {
+  $(".js-link-creator").on("click", ".js-new-link", function(event) {
+    event.preventDefault();
+    var defaultLink = $(this).data("link");
+    var linkCreator = $(this).closest(".js-link-creator");
+    var source = linkCreator.find(".js-custom-source").val();
+    var medium = linkCreator.find(".js-custom-medium").val();
+    defaultLink = defaultLink.replace("---Source---", source);
+    defaultLink = defaultLink.replace("---Medium---", medium);
+    linkCreator.find(".js-custom-link").val(defaultLink);
+  })
+}
+
 $(document).ready(function() {
   setAutocomplete('js-simple-blog-tag-list');
   setAutocomplete('js-simple-blog-keyword-list');
   setTitleValidation();
   setKeywordHandler();
   addDatepicker();
+  setLinkHandler();
   if ($(".js-simple-blog-keyword-parser").length > 0) {
     KeywordParser.showTopKeywords($(".js-simple-blog-keyword-parser").val());
   }

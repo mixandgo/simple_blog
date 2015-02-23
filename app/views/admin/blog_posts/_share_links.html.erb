@@ -1,0 +1,90 @@
+<% if blog_post.published? %>
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header"><%= t('.analytics_links') %></li>
+      <li>
+        <h4>
+          <%= t(".newsletter") %>
+        </h4>
+        <div class="analytics-link">
+          <%= text_field_tag("newsletter", blog_post_url_with_analytics(blog_post, "newsletter", "email"), :readonly => true) %>
+        </div>
+        <hr/>
+      </li>
+      <li>
+        <h4>
+          <%= t(".facebook") %>
+        </h4>
+        <div class="analytics-link">
+          <%= text_field_tag("facebook", blog_post_url_with_analytics(blog_post, "facebook", "direct_facebook"), :readonly => true) %>
+        </div>
+        <hr/>
+      </li>
+      <li>
+        <h4>
+          <%= t(".twitter") %>
+        </h4>
+        <div class="analytics-link">
+          <%= text_field_tag("twitter", blog_post_url_with_analytics(blog_post, "twitter", "direct_twitter"), :readonly => true) %>
+        </div>
+        <hr/>
+      </li>
+      <li>
+        <h4>
+          <%= t(".reddit") %>
+        </h4>
+        <div class="analytics-link">
+          <%= text_field_tag("reddit", blog_post_url_with_analytics(blog_post, "reddit", "direct_reddit"), :readonly => true) %>
+        </div>
+        <hr/>
+      </li>
+      <li>
+        <h4>
+          <%= t(".google_plus") %>
+        </h4>
+        <div class="analytics-link">
+          <%= text_field_tag("google_plus", blog_post_url_with_analytics(blog_post, "google_plus", "direct_google_plus"), :readonly => true) %>
+        </div>
+        <hr/>
+      </li>
+      <li>
+        <h4>
+          <%= t(".ruby_5") %>
+        </h4>
+        <div class="analytics-link">
+          <%= text_field_tag("ruby5", blog_post_url_with_analytics(blog_post, "ruby5", "backlink"), :readonly => true) %>
+        </div>
+        <hr/>
+      </li>
+      <li>
+        <h4>
+          <%= t(".ruby_weekly") %>
+        </h4>
+        <div class="analytics-link">
+          <%= text_field_tag("ruby_weekly", blog_post_url_with_analytics(blog_post, "ruby_weekly", "backlink"), :readonly => true) %>
+        </div>
+        <hr/>
+      </li>
+    </ul>
+    <ul class="nav nav-list js-link-creator">
+      <li class="nav-header">
+        <%= t('.custom_links') %>
+        <div class="small">
+          <%= t('.custom_links_explanation') %>
+        </div>
+      </li>
+      <li>
+        <%= text_field_tag("source", "", :placeholder => t(".source_placeholder"), :id => "simple-blog-post-form-custom-source", :class=> "js-custom-source form-control") %>
+      </li>
+      <li>
+        <%= text_field_tag("medium", "", :placeholder => t(".medium_placeholder"), :id => "simple-blog-post-form-custom-medium", :class=> "js-custom-medium form-control") %>
+      </li>
+      <li>
+        <%= button_tag t(".new_link"), :class => "js-new-link btn btn-primary", :data => {:link => "#{blog_post_url_with_analytics(blog_post, '---Source---', '---Medium---')}"} %>
+      </li>
+      <li>
+        <%= text_field_tag("new_link", "", :class => "js-custom-link form-control") %>
+      </li>
+    </ul>
+  </div>
+<% end %>

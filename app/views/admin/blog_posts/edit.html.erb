@@ -1,13 +1,13 @@
 <%= form_for @blog_post, :url => admin_blog_post_path(@blog_post.id), :method => :put, :role => "form" do |f| %>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= t('.title') %>: <%= @blog_post.title %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= t('.title') %>: <%= @blog_post.title %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <div class="col-md-9">
 
@@ -31,5 +31,6 @@
         </li>
       </ul>
     </div>
+    <%= render "share_links", :blog_post => @blog_post %>
   </div>
 <% end %>

@@ -21,7 +21,7 @@ module BlogMarkdown
     end
 
     def markdown_extensions
-      { no_intra_emphasis: true, 
+      { no_intra_emphasis: true,
        autolink: true,
        fenced_code_blocks: true,
        strikethrough: true,
@@ -29,7 +29,6 @@ module BlogMarkdown
        lax_spacing: true,
        space_after_headers: true,
        superscript: true,
-       underline: true,
        underline: true,
        highlight: true,
        quoate: true,

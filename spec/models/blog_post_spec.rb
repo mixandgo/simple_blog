@@ -59,6 +59,24 @@ describe BlogPost, :type => :model do
     end
   end
 
+  describe "unscoped_orderly" do
+    it "returns unpublished blog posts" do
+      unpublished_post = create(:blog_post, :published_at => nil)
+      expect(BlogPost.unscoped_orderly).to eq([unpublished_post])
+    end
+
+    it "returns published blog posts" do
+      published_post = create(:blog_post, :published_at => Time.now)
+      expect(BlogPost.unscoped_orderly).to eq([published_post])
+    end
+
+    it "returns the last created blog post first" do
+      first_post = create(:blog_post)
+      second_post = create(:blog_post)
+      expect(BlogPost.unscoped_orderly).to eq([second_post, first_post])
+    end
+  end
+
   describe "#published?" do
     it "returns true if published_at is not nil" do
       post = build(:blog_post)

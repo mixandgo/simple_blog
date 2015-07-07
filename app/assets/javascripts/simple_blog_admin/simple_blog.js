@@ -1,9 +1,3 @@
-function setKeywordHandler() {
-  $(".js-simple-blog-form").on("blur", ".js-simple-blog-keyword-parser", function(event){
-    KeywordParser.showTopKeywords($(this).val());
-  })
-}
-
 function addDatepicker() {
   $(".js-simple-blog-published-at").datepicker({ dateFormat: "dd/mm/yy" });
 }
@@ -89,10 +83,6 @@ $(document).ready(function() {
   setAutocomplete('js-simple-blog-tag-list');
   setAutocomplete('js-simple-blog-keyword-list');
   setTitleValidation();
-  setKeywordHandler();
   addDatepicker();
   setLinkHandler();
-  if ($(".js-simple-blog-keyword-parser").length > 0) {
-    KeywordParser.showTopKeywords($(".js-simple-blog-keyword-parser").val());
-  }
 });

@@ -33,4 +33,7 @@ Dummy::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # Prevent deprecation warning for ActiveRecord::Base.raise_in_transactional_callbacks
+  config.active_record.raise_in_transactional_callbacks = :true
 end

@@ -162,11 +162,11 @@ module Admin
       let(:blog_post) { double("BlogPost") }
 
       before :each do
-        allow(BlogPost).to receive(:unscoped).and_return [blog_post]
+        allow(BlogPost).to receive(:unscoped_desc).and_return([blog_post])
       end
 
       it "returns all unscoped blog posts" do
-        expect(BlogPost).to receive(:unscoped)
+        expect(BlogPost).to receive(:unscoped_desc)
         get :index
       end
 

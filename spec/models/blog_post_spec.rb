@@ -59,6 +59,15 @@ describe BlogPost, :type => :model do
     end
   end
 
+  describe "unscoped_desc" do
+    it "sorts all blog posts by created_at in descending order" do
+      unscoped_blog_posts = double
+      allow(BlogPost).to receive(:unscoped).and_return(unscoped_blog_posts)
+      expect(unscoped_blog_posts).to receive(:order).with("created_at DESC")
+      BlogPost.unscoped_desc
+    end
+  end
+
   describe "#published?" do
     it "returns true if published_at is not nil" do
       post = build(:blog_post)

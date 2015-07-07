@@ -3,7 +3,7 @@ class Admin::BlogPostsController < Admin::BaseController
   before_filter :find_blog_post!, :only => [:edit, :update, :destroy]
 
   def index
-    @blog_posts = BlogPost.unscoped_orderly
+    @blog_posts = BlogPost.unscoped_desc
   end
 
   def new

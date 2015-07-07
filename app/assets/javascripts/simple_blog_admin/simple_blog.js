@@ -1,9 +1,3 @@
-function setKeywordHandler() {
-  $(".js-simple-blog-form").on("blur", ".js-simple-blog-keyword-parser", function(event){
-    KeywordParser.showTopKeywords($(this).val());
-  })
-}
-
 function addDatepicker() {
   $(".js-simple-blog-published-at").datepicker({ dateFormat: "dd/mm/yy" });
 }

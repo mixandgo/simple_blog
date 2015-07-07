@@ -89,10 +89,6 @@ $(document).ready(function() {
   setAutocomplete('js-simple-blog-tag-list');
   setAutocomplete('js-simple-blog-keyword-list');
   setTitleValidation();
-  setKeywordHandler();
   addDatepicker();
   setLinkHandler();
-  if ($(".js-simple-blog-keyword-parser").length > 0) {
-    KeywordParser.showTopKeywords($(".js-simple-blog-keyword-parser").val());
-  }
 });

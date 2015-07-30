@@ -44,7 +44,7 @@ class Admin::BlogPostsController < Admin::BaseController
 
   def get_tags
     tags = BlogPost.find_tags(tag_params)
-    render json: tags.collect { |tag| {value: tag.name} }
+    render json: tags.collect { |tag| {value: tag.name} }.to_json
   end
 
   private

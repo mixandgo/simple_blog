@@ -1,0 +1,8 @@
+Description:
+    This is used to integrate SimpleBlog with your application
+
+Example:
+    rails generate simple_blog:install
+
+    This will add:
+        what/will/it/create

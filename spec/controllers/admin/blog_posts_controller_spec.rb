@@ -211,7 +211,7 @@ module Admin
       it "returns a json of the tags name" do
         expected_json = [{value: tag.name}].to_json
         get :get_tags
-        expect(response.body).to eq expected_json
+        expect(response.body).to eq(expected_json)
       end
     end
   end

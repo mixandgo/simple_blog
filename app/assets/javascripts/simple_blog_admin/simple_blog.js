@@ -3,33 +3,14 @@ function addDatepicker() {
 }
 
 function setAutocomplete(elementId) {
-  $("."+elementId).on("keydown", function(event) {
-    if (event.keyCode === $.ui.keyCode.TAB && $(this).autocomplete("instance").menu.active) {
-      event.preventDefault();
-    }
-  }).autocomplete({
-    source: function(request, response) {
-      $.getJSON('/admin/blog_posts/get_tags', {
+  $("."+elementId).autocomplete({
+    source: function (request, response) {
+      $.getJSON("/admin/blog_posts/get_tags", {
         term: extractLast(request.term)
       }, response);
     },
-    messages: {
-      // removed the helper message that autocomplete shows by default
-      noResults: '',
-      results: function() {}
-    },
-    search: function() {
-      // custom minLength
-      var term = extractLast(this.value);
-      if (term.length < 2) {
-        return false;
-      }
-    },
-    focus: function() {
-      // prevent value inserted on focus
-      return false;
-    },
-    select: function(event, ui) {
+    minLength: 2,
+    select: function (event, ui) {
       var terms = split(this.value);
       // remove the current input
       terms.pop();
@@ -38,7 +19,6 @@ function setAutocomplete(elementId) {
       // add placeholder to get the comma-and-space at the end
       terms.push("");
       this.value = terms.join(", ");
-
       return false;
     }
   });

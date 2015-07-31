@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 RSpec.describe BlogPostHelper, :type => :helper do
+  describe "blog_post_tags" do
+    let(:blog_post) { build(:blog_post, :tag_list => ["some-tag"]) }
+
+    it "returns a link to the blog post tag page" do
+      expected_link = '<a href="/blog/tag/some-tag">Some Tag</a>'
+      expect(helper.blog_post_tags(blog_post)).to eq(expected_link)
+    end
+  end
+
   describe "blog_post_url_with_analytics" do
     let(:date) { Time.local(2015, 02, 05, 12, 0, 0) }
     let(:blog_post) { build(:blog_post, :title => "Blog Post Title", :published_at => date) }
@@ -15,6 +24,5 @@ RSpec.describe BlogPostHelper, :type => :helper do
       expect(helper.blog_post_url_with_analytics(blog_post, "facebook", "direct_facebook")).
         to eq("http://test.host/blog/blog-post-title?utm_campaign=blog_post_05_02_2015&utm_medium=direct_facebook&utm_source=facebook")
     end
-
   end
 end

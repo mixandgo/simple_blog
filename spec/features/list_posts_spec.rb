@@ -33,21 +33,21 @@ feature 'List posts' do
 
   scenario 'posts show tags on index page' do
     visit blog_posts_path
-    expect(page).to have_content('first tag')
+    expect(page).to have_content('First Tag')
   end
 
   scenario 'filtering by tag returns only posts with that tag' do
     create_a_blog_post(:title => 'Differnt tag blog post title', :tags => 'different tag')
     visit blog_posts_path
-    click_link('first tag', :match => :first)
+    click_link('First Tag', :match => :first)
     expect(page).to have_content('Blog Post Title')
     expect(page).not_to have_content('Different Tag Blog Post Title')
   end
 
   scenario 'filtering by tag sets the page title to the capitalize tag' do
     visit blog_posts_path
-    click_on("first tag")
-    expect(page).to have_title("First tag")
+    click_on("First Tag")
+    expect(page).to have_title("First Tag")
   end
 
   scenario "filtering by tag that doesn't exist should 404" do

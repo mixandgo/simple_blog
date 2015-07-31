@@ -31,10 +31,10 @@ feature 'Edit posts' do
 
   scenario 'update tags' do
     create_a_blog_post(:title => 'Blog Post Title')
-    fill_in 'simple-blog-post-form-tag-list', :with => 'Edited_tag'
+    fill_in 'simple-blog-post-form-tag-list', :with => 'Edited Tag'
     click_on 'Update post'
     visit admin_blog_posts_path
-    expect(page).to have_content('Edited_tag')
+    expect(page).to have_content('edited-tag')
   end
 
   scenario 'update keywords' do

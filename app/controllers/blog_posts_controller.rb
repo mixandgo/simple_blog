@@ -9,7 +9,7 @@ class BlogPostsController < ApplicationController
 
   def filter
     @blog_posts = BlogPost.tagged_with(@tag, :on => :tags)
-    @page_title = "#{@tag.name.capitalize} #{t(".page_title_text")}"
+    @page_title = "#{@tag.name.titleize} #{t(".page_title_text")}"
     render :index
   end
 

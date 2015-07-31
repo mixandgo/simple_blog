@@ -55,7 +55,7 @@ describe BlogPostsController, :type => :controller do
 
       it "assigns to @page_title" do
         get :filter, :tag => "cool tag"
-        expect(assigns(:page_title)).to eq("Cool tag related posts")
+        expect(assigns(:page_title)).to eq("Cool Tag related posts")
       end
 
       it "renders the index template" do

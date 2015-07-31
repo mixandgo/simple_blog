@@ -43,6 +43,11 @@ describe BlogPostsController, :type => :controller do
         allow(BlogPost).to receive(:tagged_with).with(tag, :on => :tags).and_return([blog_post])
       end
 
+      it "replaces dashes with spaces when looking for tags" do
+        expect(ActsAsTaggableOn::Tag).to receive(:find_by!).with(name: "some tag")
+        get :filter, tag: "some-tag"
+      end
+
       it "finds all blog posts filtered by tag" do
         expect(BlogPost).to receive(:tagged_with).with(tag, :on => :tags)
         get :filter, :tag => tag_name

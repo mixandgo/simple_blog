@@ -33,6 +33,10 @@ class BlogPostsController < ApplicationController
     end
 
     def find_tag!
-      @tag = ActsAsTaggableOn::Tag.find_by!(:name => blog_tag_params[:tag])
+      @tag = ActsAsTaggableOn::Tag.find_by!(:name => clean_up_tag)
+    end
+
+    def clean_up_tag
+      blog_tag_params[:tag].gsub("-", " ")
     end
 end

@@ -6,7 +6,7 @@ module BlogPostHelper
   include BlogLanguages
 
   def blog_post_tags(post)
-    raw post.tag_list.map { |tag| link_to(tag, filter_posts_path(tag)) }.join(", ")
+    raw post.tag_list.map { |tag| link_to(tag, filter_posts_path(clean_up_tag(tag))) }.join(", ")
   end
 
   def strip_tags_for_seo(text)
@@ -18,5 +18,11 @@ module BlogPostHelper
     campaign = "blog_post_#{blog_post.published_at.strftime('%d_%m_%Y')}"
     blog_post_url(blog_post, :utm_source => source, :utm_medium => medium, :utm_campaign => campaign)
   end
+
+  private
+
+    def clean_up_tag(tag)
+      tag.gsub(" ", "-")
+    end
 
 end

@@ -45,6 +45,7 @@
             </tr>
           <% end %>
         </table>
+        <%= will_paginate @blog_posts %>
       <% else %>
         <p class="simple-blog-posts-missing"><%= t('.no_published_posts') %></p>
       <% end %>

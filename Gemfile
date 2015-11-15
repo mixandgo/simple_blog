@@ -10,6 +10,8 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
+gem 'will_paginate', '~> 3.0.5'
+
 # To use debugger
 gem 'byebug'
 gem 'pry'

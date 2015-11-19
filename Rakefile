@@ -32,3 +32,5 @@ end
 
 
 task default: :test
+
+task 'test:prepare'

@@ -11,6 +11,7 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'kaminari'
+gem 'kaminari-rspec'
 
 # To use debugger
 gem 'byebug'

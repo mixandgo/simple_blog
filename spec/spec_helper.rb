@@ -45,4 +45,5 @@ RSpec.configure do |config|
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
   config.include Rails.application.routes.url_helpers
+  # config.include KaminariRspec::TestHelpers, :type => :controller
 end

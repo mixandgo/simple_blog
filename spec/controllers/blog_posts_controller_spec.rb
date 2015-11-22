@@ -22,6 +22,12 @@ describe BlogPostsController, :type => :controller do
       get :index
       expect(response).to render_template('blog_posts/index')
     end
+
+    it "paginates" do
+      get :index
+      allow(BlogPost).to receive_message_chain(:order, :page, :per).and_return(blogpost_mock)
+    end
+
   end
 
   describe "#filter" do

@@ -2,9 +2,11 @@ class BlogPostsController < ApplicationController
 
   before_filter :find_tag!, :only => :filter
   before_filter :find_blog_post!, :only => :show
+  # default_scope order('published_at')
 
   def index
-    @blog_posts = BlogPost.paginate(page: params[:page], per_page: 5)
+    @blog_posts = BlogPost.page(params[:page]).per(5)
+    # @blog_posts = BlogPost.order('published_at').page(params[:page]).per(5)
   end
 
   def filter

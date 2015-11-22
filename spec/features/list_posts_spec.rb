@@ -55,4 +55,5 @@ feature 'List posts' do
       visit filter_posts_path(:tag => "not_a_tag")
     }.to raise_exception(ActiveRecord::RecordNotFound)
   end
+
 end

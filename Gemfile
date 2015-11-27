@@ -11,7 +11,11 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'kaminari'
-gem 'kaminari-rspec'
+
+group :test do
+  gem "capybara", "~> 2.2.0"
+  gem 'kaminari-rspec'
+end
 
 # To use debugger
 gem 'byebug'

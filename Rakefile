@@ -32,6 +32,3 @@ end
 
 
 task default: :test
-
-task 'test:prepare'
-task 'spec:all'

@@ -14,7 +14,8 @@
         <% end %>
       </div>
     <% end %>
-    <% paginate @blog_posts %>
+    <% scope = BlogPost.all.page(params[:page]) %>
+    <%= paginate(scope) %>
   <% else %>
     <p class="simple-blog-posts-missing"><%= t('.no_published_posts') %></p>
   <% end %>

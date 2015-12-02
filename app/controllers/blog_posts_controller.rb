@@ -4,7 +4,7 @@ class BlogPostsController < ApplicationController
   before_filter :find_blog_post!, :only => :show
 
   def index
-    @blog_posts = BlogPost.all.page(params[:page]).per(5)
+    @blog_posts = BlogPost.page(params[:page])
   end
 
   def filter

@@ -6,10 +6,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :blog_posts do
       get "/get_tags" => "blog_posts#get_tags", as: :get_tags, on: :collection
-      get 'page/:page', :action => :index, :on => :collection
+      get '/blog/:page', :action => :index, :on => :collection
     end
     resources :blog_images
   end
-
-
 end

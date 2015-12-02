@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe 'Paginate posts index' do
-  subject { page }
   describe 'index is paginated' do
     before do
-      25.times { FactoryGirl.create(:blog_post) }
+      POSTS_PER_PAGE = 25
+      POSTS_PER_PAGE.times { create(:blog_post) }
       visit blog_posts_path
     end
       BlogPost.page(1).each do |post|

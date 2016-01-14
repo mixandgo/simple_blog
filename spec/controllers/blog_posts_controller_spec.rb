@@ -22,6 +22,7 @@ describe BlogPostsController, :type => :controller do
       get :index
       expect(response).to render_template('blog_posts/index')
     end
+
   end
 
   describe "#filter" do

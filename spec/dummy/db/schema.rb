@@ -13,12 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20150115103932) do
 
-  create_table "blog_images", force: true do |t|
+  create_table "blog_images", force: :cascade do |t|
     t.integer "blog_post_id"
     t.string  "image"
   end
 
-  create_table "blog_posts", force: true do |t|
+  create_table "blog_posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.text     "description"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150115103932) do
     t.string   "language"
   end
 
-  create_table "taggings", force: true do |t|
+  create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
     t.string   "taggable_type"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20150115103932) do
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
   add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
 
-  create_table "tags", force: true do |t|
+  create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
   end

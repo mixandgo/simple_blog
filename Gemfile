@@ -10,6 +10,13 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
+gem 'kaminari'
+
+group :test do
+  gem "capybara", "~> 2.2.0"
+  gem 'kaminari-rspec'
+end
+
 # To use debugger
 gem 'byebug'
 gem 'pry'

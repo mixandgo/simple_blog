@@ -174,6 +174,7 @@ module Admin
         get :index
         expect(assigns(:blog_posts)).to eq([blog_post])
       end
+
     end
 
     describe "#destroy" do
